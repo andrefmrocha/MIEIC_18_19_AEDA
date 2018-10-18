@@ -301,3 +301,9 @@ dkms.conf
 *.iml
 out
 gen
+boost
+cute
+.settings
+.project
+*.vpp
+*vpp.lck
