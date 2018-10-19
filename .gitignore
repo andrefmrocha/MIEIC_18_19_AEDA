@@ -307,3 +307,5 @@ cute
 .project
 *.vpp
 *vpp.lck
+AEDA_TENIS.*
+data.zip
