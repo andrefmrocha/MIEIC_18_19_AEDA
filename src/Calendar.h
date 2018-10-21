@@ -10,14 +10,12 @@
 #include <utility>
 #include<vector>
 
-using namespace std;
-
 class Day{
 public:
 	Day(pair<int, int> workHours);
 
 private:
-	vector<bool> schedule;
+	std::vector<bool> schedule;
 };
 
 class Month {
@@ -34,7 +32,7 @@ public:
 	Year(int year);
 
 private:
-	vector<Month> months;
+	std::vector<Month> months;
 };
 
 #endif /* SRC_YEAR_H_ */

@@ -7,6 +7,8 @@
 
 #include "Calendar.h"
 
+using namespace std;
+
 Year::Year(int year)
 {
 	// It is first determined if it is a leap year
