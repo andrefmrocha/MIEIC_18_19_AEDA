@@ -45,9 +45,52 @@ Month::Month(int month, int days)
 }
 
 
+
 Day::Day(pair<int, int> workingHours)
 {
 	int hours = workingHours.second - workingHours.first;
 	hours*=2;
 	this->schedule = vector<bool> (false, hours);
+	this->startingHour = workingHours.first;
 }
+
+bool Day::checkSchedule(int startingHours, int duration) const
+{
+	if(startingHours < this->startingHour)
+	{
+		cout << "The court is not open at this time!" << endl;
+		return false;
+	}
+	startingHours -= this->startingHour;
+	for(int i = startingHours; i < (startingHours+duration); i++)
+	{
+		if(this->schedule[i] == true)
+		{
+			cout << "The court is not available during this time period!" << endl;
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Day::setSchedule(int startingHours, int duration)
+{
+	if(checkSchedule(startingHours, duration))
+	{
+		startingHours -= this->startingHour;
+		for(int i = startingHours; i < (startingHours+duration); i++)
+		{
+			this->schedule[i] = true;
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+
+
+

@@ -9,12 +9,16 @@
 #define SRC_YEAR_H_
 #include <utility>
 #include<vector>
+#include<iostream>
 
 class Day{
 public:
-	Day(pair<int, int> workHours);
+	Day(std::pair<int, int> workHours);
+	bool checkSchedule(int startingHours, int duration) const;
+	bool setSchedule(int startingHours, int duration);
 
 private:
+	int startingHour;
 	std::vector<bool> schedule;
 };
 
