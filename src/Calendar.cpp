@@ -6,7 +6,7 @@
  */
 
 #include "Calendar.h"
-
+#include <cmath>
 using namespace std;
 
 Year::Year(int year)
@@ -29,28 +29,40 @@ Year::Year(int year)
 		else
 		{
 			//Determines the number of days in a normal month
-			int daysInMonth = 31 - ((i -1) % 7) % 2;
+			int daysInMonth = 30 + (i + (int)floor((double)i/8))%2;
 			this->months.push_back(Month(i, daysInMonth));
 		}
 	}
 }
 
+Month& Year::getMonth(int month)
+{
+	return this->months[month - 1];
+}
+
 Month::Month(int month, int days)
 {
 	this->month = month;
-	for(int i = 1;  i < days + 1; i++)
+	for(int i = 0;  i < days + 1; i++)
 	{
-		this->days.push_back(Day(pair<int, int> (8, 10)));
+		this->days.push_back(Day(pair<int, int> (8, 20)));
 	}
 }
 
+Day& Month::getDay(int day)
+{
+	return this->days[day - 1];
+}
 
 
 Day::Day(pair<int, int> workingHours)
 {
 	int hours = workingHours.second - workingHours.first;
 	hours*=2;
-	this->schedule = vector<bool> (false, hours);
+	for(int i = 0;  i < hours; i++)
+	{
+		this->schedule.push_back(false);
+	}
 	this->startingHour = workingHours.first;
 }
 

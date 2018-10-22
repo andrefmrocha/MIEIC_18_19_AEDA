@@ -10,6 +10,7 @@
 #include <utility>
 #include<vector>
 #include<iostream>
+#include <algorithm>
 
 class Day{
 public:
@@ -25,7 +26,7 @@ private:
 class Month {
 public:
 	Month(int month, int days);
-
+	Day& getDay(int day);
 private:
 	int month;
 	std::vector<Day> days;
@@ -34,7 +35,7 @@ private:
 class Year {
 public:
 	Year(int year);
-
+	Month& getMonth(int month);
 private:
 	std::vector<Month> months;
 };
