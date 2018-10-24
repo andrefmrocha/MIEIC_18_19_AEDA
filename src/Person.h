@@ -32,6 +32,7 @@ public:
 	User(std::string name,int age, std::string gender, bool isGold);
 	void makeGold();
 	void stopGold();
+<<<<<<< Updated upstream
 	//Report getReport(int month);
 	//void setReport(Report report, int month);
 private:
@@ -39,14 +40,28 @@ private:
 	//std::vector<Report*> reports;
 	//std::vector<Reservation*> reservations;
 	//std::vector<Invoice*> invoices;
+=======
+//	Report getReport(int month);
+//	void setReport(Report report, int month);
+private:
+	bool isGold();
+//	std::vector<Report*> reports;
+//	std::vector<Reservation*> reservations;
+//	std::vector<Invoice*> invoices;
+>>>>>>> Stashed changes
 };
 
 class Teacher: public Person {
 public:
 	Teacher(std::string name, int age, std::string gender);
 	void makeReport(User user);
+<<<<<<< Updated upstream
 private:
 	//std::vector<Lesson*> lessons;
 };
 
+=======
+};
+//	std::vector<Lesson*> lessons;
+>>>>>>> Stashed changes
 #endif /* SRC_PERSON_H_ */
