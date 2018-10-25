@@ -51,7 +51,7 @@ private:
 class Teacher: public Person {
 public:
 	Teacher(std::string name, int age, std::string gender);
-	void makeReport(User user, int month);
+	void makeReport(User user, int month,int grade, std::string addcomm);
 private:
 	std::vector<Lesson*> lessons;
 };

@@ -55,9 +55,9 @@ void  Person::setGender(string gender)
 Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
 {}
 
-void Teacher::makeReport(User user, int month)
+void Teacher::makeReport(User user, int month,int grade, string addcomm)
 {
-	Report a(user,name,user.getName());
+	Report a(user.getName(), this->getName(),grade, addcomm);
 	user.setReport(a,month);//coloca report no user respetivo
 }
 
@@ -67,7 +67,7 @@ void Teacher::makeReport(User user, int month)
 User::User(string name,int age,string gender, bool isGold):Person(name,age,gender)
 {
 	this->isGold = isGold;
-	reports(); //necessario nalgum momento definir o tamanho do vetor para 12
+	reports.resize(12); //necessario nalgum momento definir o tamanho do vetor para 12
 }
 
 void User::makeGold()

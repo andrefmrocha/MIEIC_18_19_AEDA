@@ -56,7 +56,7 @@ Free::Free(User u,int m,int d,int strHr,double p,unsigned int dur) : Reservation
 
 }
 
-Free::getPrice()
+double Free::getPrice()
 {
 	return price;
 }

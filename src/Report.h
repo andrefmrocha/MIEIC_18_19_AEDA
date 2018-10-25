@@ -8,21 +8,23 @@
 #ifndef SRC_REPORT_H_
 #define SRC_REPORT_H_
 
-#include <string>
-#include <vector>
+
+
 #include "Person.h"
 #include "Reservation.h"
 
 
-class Report {
+class Report{
 private:
 	std::vector<Lesson*> reservations;
 	std::string name;
 	std::string userReport;
 	std::string teacherName;
+	std::string addcomm;
+	int grade;
 public:
-	Report(User user,std::string teacherName,std::string userReport);
-	std::string showReport();
+	Report(User user, std::string teacherName,int grade, std::string addcomm);
+	void showReport(std::ostream & os);
 
 };
 
