@@ -9,7 +9,7 @@
 #define SRC_RESERVATION_H_
 
 
-#include "User.h"
+#include "Person.h"
 
 class Reservation {
 protected:

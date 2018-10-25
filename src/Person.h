@@ -10,6 +10,9 @@
 
 #include <string>
 #include <vector>
+#include "Report.h"
+#include "Reservation.h"
+#include "Invoice.h"
 
 class Person
 {
@@ -26,29 +29,58 @@ private:
 	int age;
 	std::string gender;
 };
-
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
 class User :public Person {
 public:
 	User(std::string name,int age, std::string gender, bool isGold);
 	void makeGold();
 	void stopGold();
-	//Report getReport(int month);
-	//void setReport(Report report, int month);
+	Report getReport(int month);
+	void setReport(Report report, int month);
 private:
 	bool isGold;
-	//std::vector<Report*> reports;
-	//std::vector<Reservation*> reservations;
-	//std::vector<Invoice*> invoices;
-//	Report getReport(int month);
-//	void setReport(Report report, int month);
+	std::vector<Report*> reports;
+	std::vector<Reservation*> reservations;
+	std::vector<Invoice*> invoices;
 };
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
 class Teacher: public Person {
 public:
 	Teacher(std::string name, int age, std::string gender);
 	void makeReport(User user);
 private:
-	//std::vector<Lesson*> lessons;
+	std::vector<Lesson*> lessons;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+//handling error for setReport
+class ReportAlreadyExists
+{
+public:
+	ReportAlreadyExists(int month){ this->month =month;}
+	int month;
+	int getMonth(){return month;}
+};
+
+//handling error for getReport
+class ReportNotAvailable
+{
+public:
+	ReportNotAvailable(int month){ this->month =month;}
+	int month;
+	int getMonth(){return month;}
+};
+
+class IncorrectMonth
+{
+public:
+	IncorrectMonth();
 };
 
 #endif /* SRC_PERSON_H_ */

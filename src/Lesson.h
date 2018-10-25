@@ -9,7 +9,7 @@
 #define SRC_LESSON_H_
 
 #include "Reservation.h"
-#include "Teacher.h"
+#include "Person.h"
 
 class Lesson : public Reservation {
 private:

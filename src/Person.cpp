@@ -55,12 +55,19 @@ void  Person::setGender(string gender)
 Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
 {}
 
+void Teacher::makeReport(User user, int month)
+{
+	Report a(user,name,user.getname());
+	user.setReport(a,month);//coloca report no user respetivo
+}
+
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
 User::User(string name,int age,string gender, bool isGold):Person(name,age,gender)
 {
 	this->isGold = isGold;
+	reports(12);
 }
 
 void User::makeGold()
@@ -73,7 +80,32 @@ void User::stopGold()
 	isGold = false;
 }
 
+Report User::getReport(int month)
+{
+	if(month > 12)
+		throw(IncorrectMonth);
 
+	if(reports.at(month -1) == 0)
+	{
+		throw(ReportNotAvailable(month));
+	}
+	else return reports.at(month -1);
+}
+
+void setReport(Report report, int month)
+{
+	if(month > 12)
+			throw(IncorrectMonth);
+
+	if(reports.at(month-1)!=0)
+	{
+		throw(ReportAlreadyExists(month));
+	}
+	else
+	{
+		reports.at(month-1)=report;
+	}
+}
 
 
 
