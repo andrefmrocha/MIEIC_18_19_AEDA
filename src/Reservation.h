@@ -28,5 +28,22 @@ public:
 
 };
 
+class Lesson : public Reservation {
+private:
+	Teacher teacher;
+public:
+	Lesson(User u,int m,int d,int strHr,double price,unsigned int dr,Teacher t);
+	double getPrice();
+	Teacher getTeacher();
+	void setTeacher(Teacher teacher);
+};
+
+class Free : public Reservation {
+public:
+	Free(User u, int m,int d,int strHr,double p,unsigned int dur);
+	double getPrice();
+};
+
+
 
 #endif /* SRC_RESERVATION_H_ */

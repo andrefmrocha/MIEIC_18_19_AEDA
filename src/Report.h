@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 #include "Person.h"
-#include "Lesson.h"
+#include "Reservation.h"
 
 
 class Report {
