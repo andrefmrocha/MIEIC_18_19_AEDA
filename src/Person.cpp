@@ -57,8 +57,8 @@ Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
 
 void Teacher::makeReport(User user, int month,int grade, string addcomm)
 {
-	Report a(user.getName(), this->getName(),grade, addcomm);
-	user.setReport(a,month);//coloca report no user respetivo
+	//Report a(user.getName(), this->getName(),grade, addcomm); PRECISO VER SE O REPORT INCLUI VETOR DE LESSONS
+	//user.setReport(a,month);//coloca report no user respetivo
 }
 
 ////////////////////////////////////////////////////////////////////////////

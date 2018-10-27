@@ -80,7 +80,9 @@ public:
 class IncorrectMonth
 {
 public:
-	IncorrectMonth();
+	IncorrectMonth(){
+
+	}
 };
 
 #endif /* SRC_PERSON_H_ */
