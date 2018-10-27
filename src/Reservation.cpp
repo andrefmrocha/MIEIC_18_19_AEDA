@@ -30,6 +30,16 @@ int Reservation::getDuration()
 	return duration;
 }
 
+int Reservation::getMonth()
+{
+	return month;
+}
+
+int Reservation::getDay()
+{
+	return day;
+}
+
 Lesson::Lesson(int m,int d,int strHr,double p,unsigned int dr) : Reservation(m,d,strHr,p,dr)
 {}
 
