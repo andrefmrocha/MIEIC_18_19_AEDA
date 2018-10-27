@@ -74,11 +74,11 @@ bool Day::checkSchedule(double startingHours, int duration) const
 		return false;
 	}
 	startingHours -= this->startingHour;
+	startingHours *= 2;
 	for(int i = startingHours; i < (startingHours+duration); i++)
 	{
 		if(this->schedule[i] == true)
 		{
-			cout << "The court is not available during this time period!" << endl;
 			return false;
 		}
 	}
