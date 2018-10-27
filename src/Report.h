@@ -41,6 +41,12 @@ public:
 	int getGrade() const { return grade;}
 };
 
-
+/*
+std::ostream & operator << (std::ostream &os,const InvalidGrade &ig)
+{
+	os << "Invalid grade: " << ig.getGrade() << std::endl;
+	return os;
+}
+*/
 
 #endif /* SRC_REPORT_H_ */
