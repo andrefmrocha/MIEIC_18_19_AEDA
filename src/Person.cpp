@@ -67,13 +67,13 @@ int CheckAvailable(vector<t *> res,double startingHour, double endHour)
 
 	if(startingHour >= resStart && endHour <= resEnd)
 		// tempo da reserva esta em espaço ocupado
-		throw(InsideReservedHours());
+		throw(InsideRes());
 	else if(startingHour <= resStart && endHour >= resStart)
 		//tempo da reserva entra em espaço ocupado
-		throw(FinisheHourtInsideReservedHours());
+		throw(EndHourInsideRes());
 	else if(startingHour >= resStart && endHour >= resEnd)
 		//tempo da reserva esta a meio
-		throw(StartHourtInsideReservedHours());
+		throw(StartHourInsideRes());
 }
 	return 0;
 }
@@ -102,6 +102,12 @@ void Teacher::setLesson(Lesson lesson)
 	if(CheckAvailable(lessons,startingHour,endHour)==0)
 		lessons.push_back(&lesson);
 }
+
+vector<Lesson*> Teacher::getLessons()
+{
+	return lessons;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
@@ -119,6 +125,11 @@ void User::makeGold()
 void User::stopGold()
 {
 	isGold = false;
+}
+
+bool User::getisGold()
+{
+	return isGold;
 }
 
 Report User::getReport(int month)
@@ -167,6 +178,11 @@ void User::setReservation(Reservation reservation)
 
 	if(CheckAvailable(reservations,startingHour,endHour)==0)
 		reservations.push_back(&reservation);
+}
+
+vector<Reservation*> User::getReservations()
+{
+	return reservations;
 }
 
 
