@@ -57,26 +57,7 @@ double calculateEndHour(double startinghour, int duration)
 	return startinghour + 0.5*duration;
 }
 
-template< class t>
-int CheckAvailable(vector<t *> res,double startingHour, double endHour)
-{
-	for(size_t i =0; i < res.size(); i++)
-	{
-	double resStart = res.at(i)->getStartingHour();
-	double resEnd = calculateEndHour(resStart,res.at(i)->getDuration());
 
-	if(startingHour >= resStart && endHour <= resEnd)
-		// tempo da reserva esta em espaço ocupado
-		throw(InsideRes());
-	else if(startingHour <= resStart && endHour >= resStart)
-		//tempo da reserva entra em espaço ocupado
-		throw(EndHourInsideRes());
-	else if(startingHour >= resStart && endHour >= resEnd)
-		//tempo da reserva esta a meio
-		throw(StartHourInsideRes());
-}
-	return 0;
-}
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
@@ -111,9 +92,10 @@ vector<Lesson*> Teacher::getLessons()
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-User::User(string name,int age,string gender, bool isGold):Person(name,age,gender)
+User::User(string name,int age,string gender, bool isGold, string assignedTeacher):Person(name,age,gender)
 {
 	this->isGold = isGold;
+	this->assignedTeacher = assignedTeacher;
 	reports.resize(12);
 }
 
@@ -161,7 +143,7 @@ void User::setReport(Report report, int month)
 }
 
 
-void User::setReservation(Reservation reservation)
+void User::setReservation(Reservation* reservation)
 {
 	/*
 	 * startingHour and endHour are related to reservation to set in vector
@@ -171,13 +153,13 @@ void User::setReservation(Reservation reservation)
 	double startingHour, endHour;
 	int duration;
 
-	duration = reservation.getDuration();
-	startingHour = reservation.getStartingHour();
+	duration = reservation->getDuration();
+	startingHour = reservation->getStartingHour();
 
 	endHour = calculateEndHour(startingHour, duration);
 
 	if(CheckAvailable(reservations,startingHour,endHour)==0)
-		reservations.push_back(&reservation);
+		reservations.push_back(reservation);
 }
 
 vector<Reservation*> User::getReservations()
@@ -185,7 +167,10 @@ vector<Reservation*> User::getReservations()
 	return reservations;
 }
 
-
+string User::getTeacher()
+{
+	return this->assignedTeacher;
+}
 
 
 

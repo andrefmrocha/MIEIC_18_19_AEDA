@@ -33,16 +33,18 @@ private:
 //////////////////////////////////////////////////
 class User :public Person {
 public:
-	User(std::string name,int age, std::string gender, bool isGold);
+	User(std::string name,int age, std::string gender, bool isGold, std::string assignedTeacher);
 	void makeGold();
 	void stopGold();
 	bool getisGold();
 	Report getReport(int month);
 	void setReport(Report report, int month);
-	void setReservation(Reservation reservation);
+	void setReservation(Reservation* reservation);
 	std::vector<Reservation*> getReservations();
+	std::string getTeacher();
 private:
 	bool isGold;
+	std::string assignedTeacher;
 	std::vector<Report*> reports;
 	std::vector<Reservation*> reservations;
 	std::vector<Invoice*> invoices;
@@ -114,6 +116,29 @@ public:
 	StartHourInsideRes(){};
 };
 ///
+
+double calculateEndHour(double startinghour, int duration);
+template< class t>
+int CheckAvailable(std::vector<t *> res,double startingHour, double endHour)
+{
+	for(size_t i =0; i < res.size(); i++)
+	{
+	double resStart = res.at(i)->getStartingHour();
+	double resEnd = calculateEndHour(resStart,res.at(i)->getDuration());
+
+	if(startingHour >= resStart && endHour <= resEnd)
+		// tempo da reserva esta em espaço ocupado
+		throw(InsideRes());
+	else if(startingHour <= resStart && endHour >= resStart)
+		//tempo da reserva entra em espaço ocupado
+		throw(EndHourInsideRes());
+	else if(startingHour >= resStart && endHour >= resEnd)
+		//tempo da reserva esta a meio
+		throw(StartHourInsideRes());
+	}
+	return 0;
+}
+
 
 
 #endif /* SRC_PERSON_H_ */

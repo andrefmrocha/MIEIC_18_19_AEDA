@@ -38,21 +38,66 @@ string CourtReserved::what()const{
 
 void Court::reserveCourt(int m, int d, double sH, int dur)
 {
-	occupied(m, d, sH, dur);
 	this->currentYear.getMonth(m).getDay(d).setSchedule(sH, dur);
 
 }
 
-void Court::reserveClass(int m, int d, double sH, int dur, User user)
+bool Court::reserveClass(int m, int d, double sH, User user, Teacher teacher)
 {
+	int dur = 2;
 	try{
-		reserveCourt(m, d, sH, dur);
+		occupied(m, d, sH, dur);
 	}
 	catch (CourtReserved& court)
 	{
 		cout << court.what();
+		return false;
 	}
+	try
+	{
+		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur));
+	}
+	catch(AlreadyReservedHours &e)
+	{
+		cout << "The user is not available at this time!" << endl;
+		return false;
+	}
+	try
+	{
+		CheckAvailable(teacher.getLessons(),sH, calculateEndHour(sH, dur));
+	}
+	catch(AlreadyReservedHours &e)
+	{
+		cout << "This user's teacher is not available at this time!" << endl;
+		return false;
+	}
+	reserveCourt(m, d, sH, dur);
+	double price = 45;
+	if(user.getisGold())
+	{
+		price*=0.85;
+	}
+	Reservation * lesson = new Lesson(m, d, sH, price, dur);
+	Lesson teacherLesson(m, d, sH, price, dur);
+	user.setReservation(lesson);
+	teacher.setLesson(teacherLesson);
+	return true;
 }
 
-
+bool Court::reserveFree(int m, int d, double sH, int dur, User user)
+{
+	try{
+		occupied(m, d, sH, dur);
+	}
+	catch (CourtReserved& court)
+	{
+		cout << court.what();
+		return false;
+	}
+	double price = 15;
+	price*= dur;
+	Reservation * reserv = new Free(m, d, sH, price, dur);
+	user.setReservation(reserv);
+	return true;
+}
 
