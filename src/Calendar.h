@@ -15,8 +15,8 @@
 class Day{
 public:
 	Day(std::pair<int, int> workHours);
-	bool checkSchedule(int startingHours, int duration) const;
-	bool setSchedule(int startingHours, int duration);
+	bool checkSchedule(double startingHours, int duration) const;
+	void setSchedule(double startingHours, int duration);
 
 private:
 	int startingHour;

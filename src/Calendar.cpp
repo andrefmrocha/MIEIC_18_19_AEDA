@@ -66,7 +66,7 @@ Day::Day(pair<int, int> workingHours)
 	this->startingHour = workingHours.first;
 }
 
-bool Day::checkSchedule(int startingHours, int duration) const
+bool Day::checkSchedule(double startingHours, int duration) const
 {
 	if(startingHours < this->startingHour)
 	{
@@ -85,20 +85,13 @@ bool Day::checkSchedule(int startingHours, int duration) const
 	return true;
 }
 
-bool Day::setSchedule(int startingHours, int duration)
+void Day::setSchedule(double startingHours, int duration)
 {
-	if(checkSchedule(startingHours, duration))
+	startingHours -= this->startingHour;
+	startingHours*=2;
+	for(int i = startingHours; i < (startingHours+duration); i++)
 	{
-		startingHours -= this->startingHour;
-		for(int i = startingHours; i < (startingHours+duration); i++)
-		{
-			this->schedule[i] = true;
-		}
-		return true;
-	}
-	else
-	{
-		return false;
+		this->schedule[i] = true;
 	}
 }
 
