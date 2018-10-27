@@ -84,7 +84,7 @@ public:
 class IncorrectMonth
 {
 public:
-	IncorrectMonth();
+	IncorrectMonth(){};
 };
 
 //handling errors for setReservation
@@ -92,26 +92,26 @@ public:
 class AlreadyReservedHours
 {
 public:
-	AlreadyReservedHours();
+	AlreadyReservedHours(){};
 };
 
 /////
 class InsideRes: public AlreadyReservedHours
 {
 public:
-	InsideRes();
+	InsideRes(){};
 };
 
 class EndHourInsideRes : public AlreadyReservedHours
 {
 public:
-	EndHourInsideRes();
+	EndHourInsideRes(){};
 };
 
 class StartHourInsideRes : public AlreadyReservedHours
 {
 public:
-	StartHourInsideRes();
+	StartHourInsideRes(){};
 };
 ///
 
