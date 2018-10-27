@@ -18,11 +18,12 @@ protected:
 private:
 	int month;
 	int day;
-	int startingHour;
+	double startingHour;
 public:
 	Reservation(int month,int day,int startingHour,double price,unsigned int duration);
 	virtual double getPrice();
-
+	double getStartingHour();
+	int getDuration();
 };
 
 class Lesson : public Reservation {
