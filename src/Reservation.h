@@ -24,6 +24,8 @@ public:
 	virtual double getPrice();
 	double getStartingHour();
 	int getDuration();
+	int getMonth();
+	int getDay();
 };
 
 class Lesson : public Reservation {
