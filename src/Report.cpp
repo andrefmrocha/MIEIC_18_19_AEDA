@@ -11,12 +11,13 @@
 using namespace std;
 
 // exceptions for invalid arguments
-Report::Report(User user,string teacherName,int grade, string addcomm)
+Report::Report(string userName,string teacherName,int grade, string addcomm, vector<Lesson*> reservs)
 {
-	name = user.getName();
+	name = userName;
 	this->teacherName = teacherName;
 	this->grade = grade;
 	this->addcomm = addcomm;
+	this->reservations = reservs;
 }
 
 void Report::showReport(ostream &os)

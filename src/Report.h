@@ -9,8 +9,8 @@
 #define SRC_REPORT_H_
 
 
-
-#include "Person.h"
+#include <string>
+#include <vector>
 #include "Reservation.h"
 
 
@@ -18,12 +18,11 @@ class Report{
 private:
 	std::vector<Lesson*> reservations;
 	std::string name;
-	std::string userReport;
 	std::string teacherName;
 	std::string addcomm;
 	int grade;
 public:
-	Report(User user, std::string teacherName,int grade, std::string addcomm);
+	Report(std::string userName, std::string teacherName,int grade, std::string addcomm,std::vector<Lesson*> reservs);
 	void showReport(std::ostream & os);
 
 };
