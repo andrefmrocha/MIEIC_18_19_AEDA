@@ -20,6 +20,16 @@ double Reservation::getPrice()
 	return price;
 }
 
+double Reservation::getStartingHour()
+{
+	return startingHour;
+}
+
+int Reservation::getDuration()
+{
+	return duration;
+}
+
 Lesson::Lesson(int m,int d,int strHr,double p,unsigned int dr) : Reservation(m,d,strHr,p,dr)
 {}
 
@@ -38,5 +48,7 @@ double Free::getPrice()
 {
 	return price;
 }
+
+
 
 

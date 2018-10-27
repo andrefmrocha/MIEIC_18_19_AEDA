@@ -52,22 +52,63 @@ void  Person::setGender(string gender)
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
+double calculateEndHour(double startinghour, int duration)
+{
+	return startinghour + 0.5*duration;
+}
+
+template< class t>
+int CheckAvailable(vector<t *> res,double startingHour, double endHour)
+{
+	for(size_t i =0; i < res.size(); i++)
+	{
+	double resStart = res.at(i)->getStartingHour();
+	double resEnd = calculateEndHour(resStart,res.at(i)->getDuration());
+
+	if(startingHour >= resStart && endHour <= resEnd)
+		// tempo da reserva esta em espaço ocupado
+		throw(InsideReservedHours());
+	else if(startingHour <= resStart && endHour >= resStart)
+		//tempo da reserva entra em espaço ocupado
+		throw(FinisheHourtInsideReservedHours());
+	else if(startingHour >= resStart && endHour >= resEnd)
+		//tempo da reserva esta a meio
+		throw(StartHourtInsideReservedHours());
+}
+	return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
 Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
 {}
 
-void Teacher::makeReport(User user, int month,int grade, string addcomm)
+void Teacher::setLesson(Lesson lesson)
 {
-	//Report a(user.getName(), this->getName(),grade, addcomm); PRECISO VER SE O REPORT INCLUI VETOR DE LESSONS
-	//user.setReport(a,month);//coloca report no user respetivo
-}
+	/*
+	 * startingHour and endHour are related to reservation to set in vector
+	 * resStart and resEnd are related to the reservations in the vector
+	 */
 
+	double startingHour, endHour;
+	int duration;
+
+	duration = lesson.getDuration();
+	startingHour = lesson.getStartingHour();
+
+	endHour = calculateEndHour(startingHour, duration);
+
+	if(CheckAvailable(lessons,startingHour,endHour)==0)
+		lessons.push_back(&lesson);
+}
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
 User::User(string name,int age,string gender, bool isGold):Person(name,age,gender)
 {
 	this->isGold = isGold;
-	reports.resize(12); //necessario nalgum momento definir o tamanho do vetor para 12
+	reports.resize(12);
 }
 
 void User::makeGold()
@@ -106,6 +147,26 @@ void User::setReport(Report report, int month)
 	{
 		reports.at(month-1)= &report;
 	}
+}
+
+
+void User::setReservation(Reservation reservation)
+{
+	/*
+	 * startingHour and endHour are related to reservation to set in vector
+	 * resStart and resEnd are related to the reservations in the vector
+	 */
+
+	double startingHour, endHour;
+	int duration;
+
+	duration = reservation.getDuration();
+	startingHour = reservation.getStartingHour();
+
+	endHour = calculateEndHour(startingHour, duration);
+
+	if(CheckAvailable(reservations,startingHour,endHour)==0)
+		reservations.push_back(&reservation);
 }
 
 

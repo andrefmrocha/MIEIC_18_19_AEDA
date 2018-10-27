@@ -36,8 +36,11 @@ public:
 	User(std::string name,int age, std::string gender, bool isGold);
 	void makeGold();
 	void stopGold();
+	//bool isGold();
 	Report getReport(int month);
 	void setReport(Report report, int month);
+	void setReservation(Reservation reservation);
+	//Reservation getReservations()
 private:
 	bool isGold;
 	std::vector<Report*> reports;
@@ -51,7 +54,7 @@ private:
 class Teacher: public Person {
 public:
 	Teacher(std::string name, int age, std::string gender);
-	void makeReport(User user, int month,int grade, std::string addcomm);
+	void setLesson(Lesson lesson);
 private:
 	std::vector<Lesson*> lessons;
 };
@@ -80,9 +83,29 @@ public:
 class IncorrectMonth
 {
 public:
-	IncorrectMonth(){
-
-	}
+	IncorrectMonth();
 };
+
+//handling errors for setReservation
+//class mae
+class InsideReservedHours
+{
+public:
+	InsideReservedHours();
+};
+
+class FinisheHourtInsideReservedHours
+{
+public:
+	FinisheHourtInsideReservedHours();
+};
+
+class StartHourtInsideReservedHours
+{
+public:
+	StartHourtInsideReservedHours();
+};
+
+
 
 #endif /* SRC_PERSON_H_ */
