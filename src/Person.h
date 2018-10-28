@@ -132,7 +132,7 @@ int CheckAvailable(std::vector<t *> res,double startingHour, double endHour)
 	else if(startingHour <= resStart && endHour >= resStart)
 		//tempo da reserva entra em espaço ocupado
 		throw(EndHourInsideRes());
-	else if(startingHour >= resStart && endHour >= resEnd)
+	else if(startingHour >= resStart && endHour >= resEnd && startingHour <= resEnd)
 		//tempo da reserva esta a meio
 		throw(StartHourInsideRes());
 	}
