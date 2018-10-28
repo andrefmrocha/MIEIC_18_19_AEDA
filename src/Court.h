@@ -17,8 +17,8 @@
 class Court {
 public:
 	Court(int year);
-	bool reserveClass(int month, int day, double startingHour, User user, Teacher teacher);
-	bool reserveFree(int month, int day, double startingHour, int duration, User user);
+	bool reserveClass(int month, int day, double startingHour, User &user, Teacher &teacher);
+	bool reserveFree(int month, int day, double startingHour, int duration, User &user);
 private:
 	void reserveCourt(int month, int day, double startingHour, int duration);
 	void occupied(int month, int day, double startingHour, int duration);

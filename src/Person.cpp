@@ -80,8 +80,8 @@ void Teacher::setLesson(Lesson lesson)
 
 	endHour = calculateEndHour(startingHour, duration);
 
-	if(CheckAvailable(lessons,startingHour,endHour)==0)
-		lessons.push_back(&lesson);
+//	if(CheckAvailable(lessons,startingHour,endHour)==0)
+	this->lessons.push_back(&lesson);
 }
 
 vector<Lesson*> Teacher::getLessons()

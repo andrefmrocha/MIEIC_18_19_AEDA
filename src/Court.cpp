@@ -42,7 +42,7 @@ void Court::reserveCourt(int m, int d, double sH, int dur)
 
 }
 
-bool Court::reserveClass(int m, int d, double sH, User user, Teacher teacher)
+bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 {
 	int dur = 2;
 	try{
@@ -77,6 +77,7 @@ bool Court::reserveClass(int m, int d, double sH, User user, Teacher teacher)
 	{
 		price*=0.85;
 	}
+
 	Reservation * lesson = new Lesson(m, d, sH, price, dur);
 	Lesson teacherLesson(m, d, sH, price, dur);
 	user.setReservation(lesson);
@@ -84,7 +85,7 @@ bool Court::reserveClass(int m, int d, double sH, User user, Teacher teacher)
 	return true;
 }
 
-bool Court::reserveFree(int m, int d, double sH, int dur, User user)
+bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 {
 	try{
 		occupied(m, d, sH, dur);
@@ -94,8 +95,18 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User user)
 		cout << court.what();
 		return false;
 	}
+	try
+	{
+		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur));
+	}
+	catch(AlreadyReservedHours &e)
+	{
+		cout << "The user is not available at this time!" << endl;
+		return false;
+	}
 	double price = 15;
 	price*= dur;
+	reserveCourt(m, d, sH, dur);
 	Reservation * reserv = new Free(m, d, sH, price, dur);
 	user.setReservation(reserv);
 	return true;
