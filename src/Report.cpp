@@ -10,7 +10,9 @@
 
 using namespace std;
 
-// exceptions for invalid arguments
+
+
+
 Report::Report(string userName,string teacherName,int grade, string addcomm, const vector<Lesson*> &reservs)
 {
 	if (grade > 5 || grade < 1)
@@ -78,5 +80,11 @@ ostream & operator <<(ostream &os,Report r)
 	return os;
 }
 
+
+std::ostream & operator << (std::ostream &os,const InvalidGrade &ig)
+{
+	os << "Invalid grade: " << ig.getGrade() << std::endl;
+	return os;
+}
 
 
