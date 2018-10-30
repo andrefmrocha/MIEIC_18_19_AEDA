@@ -311,3 +311,5 @@ AEDA_TENIS.*
 data.zip
 Debug
 *.pdf
+.idea
+CMakeLists.txt
