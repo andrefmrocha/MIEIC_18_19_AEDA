@@ -313,3 +313,5 @@ Debug
 *.pdf
 .idea
 CMakeLists.txt
+Testing.cpp
+*.json
