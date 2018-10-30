@@ -13,12 +13,15 @@
 #include "Reservation.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 
 class Court {
 public:
 	Court(int year);
 	bool reserveClass(int month, int day, double startingHour, User &user, Teacher &teacher);
 	bool reserveFree(int month, int day, double startingHour, int duration, User &user);
+	void storeInfo(std::ofstream &outfile, int indentation);
+	void indent(std::ofstream&outfile, int identation);
 private:
 	void reserveCourt(int month, int day, double startingHour, int duration);
 	void occupied(int month, int day, double startingHour, int duration);

@@ -112,3 +112,83 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 	return true;
 }
 
+void Court::storeInfo(ofstream &outfile, int indentation)
+{
+	outfile << "{ \n \"months\": [" << endl;
+	indentation++;
+	for(unsigned int i = 1; i < 13; i++)
+	{
+		indent(outfile,indentation);
+		outfile << "{ " << endl;
+		indentation++;
+		indent(outfile, indentation);
+		outfile << "\"month\": " << to_string(this->currentYear.getMonth(i).getMonth()) << "," << endl;
+		indentation++;
+		indent(outfile,indentation);
+		outfile << " \"days\": [" << endl;
+		indentation++;
+		for(unsigned j = 1; j < this->currentYear.getMonth(i).getNoDays(); j++)
+		{
+			indent(outfile,indentation);
+			outfile << endl;
+			indent(outfile,indentation);
+			outfile << "{" << endl;
+			indentation++;
+			indent(outfile,indentation);
+			outfile << "\"startingHour\": " << this->currentYear.getMonth(i).getDay(j).getSH() << "," << endl;
+			indent(outfile,indentation);
+			outfile << "\"schedule\" : [";
+			indentation++;
+			vector<bool>::iterator z = this->currentYear.getMonth(i).getDay(j).getSchedule().begin();
+			for(z ; z!= this->currentYear.getMonth(i).getDay(j).getSchedule().end(); ++z)
+			{
+				if(z+1 == this->currentYear.getMonth(i).getDay(j).getSchedule().end())
+				{
+					outfile << *z;
+				}
+				else
+				{
+					outfile << *z << ",";
+				}
+			}
+			outfile << "]" << endl;
+			indentation--;
+			indentation--;
+			indent(outfile,indentation);
+			if(j + 1 == this->currentYear.getMonth(i).getNoDays())
+			{
+				outfile << "}" << endl;
+			}
+			else
+			{
+				outfile << "}," << endl;
+			}
+			indent(outfile,indentation);
+		}
+		outfile << "]" << endl;
+		indentation--;
+		indent(outfile,indentation);
+		if(i+1 == 13)
+		{
+			outfile<< "}" << endl;
+		}
+		else
+		{
+			outfile<< "}," << endl;
+		}
+		indentation--;
+		indent(outfile,indentation);
+		indentation--;
+	}
+	outfile << "]" << endl;
+	indent(outfile,indentation);
+	outfile << "}" << endl;
+}
+
+void Court::indent(std::ofstream &outfile, int identation)
+{
+	for(int i = 0; i < identation; i++)
+	{
+		outfile << "\t";
+	}
+}
