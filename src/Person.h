@@ -24,6 +24,7 @@ public:
 	void setName(std::string name);
 	void setAge(int age);
 	void setGender(std::string gender);
+	//virtual void loadClass(std::string filename);
 private:
 	std::string name;
 	int age;
@@ -42,6 +43,7 @@ public:
 	void setReservation(Reservation* reservation);
 	std::vector<Reservation*> getReservations();
 	std::string getTeacher();
+	//void loadClass(std::string filename);
 private:
 	bool isGold;
 	std::string assignedTeacher;
@@ -58,6 +60,7 @@ public:
 	Teacher(std::string name, int age, std::string gender);
 	void setLesson(Lesson lesson);
 	std::vector<Lesson*> getLessons();
+	//void loadClass(std::string filename);
 private:
 	std::vector<Lesson*> lessons;
 };
@@ -116,6 +119,17 @@ public:
 	StartHourInsideRes(){};
 };
 ///
+//handling unavailable files
+/*
+class FileUnavailable
+{
+private:
+	std::string filename;
+public:
+	FileUnavailable(std::string filename){this->filename = filename}
+	std::string getFilename(){return filename;}
+};
+*/
 
 double calculateEndHour(double startinghour, int duration);
 template< class t>

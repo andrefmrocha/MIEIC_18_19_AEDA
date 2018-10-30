@@ -11,8 +11,8 @@
 using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////
+//////////////////Person////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
-
 Person::Person(string name,int age,string gender)
 {
 	this->name=name;
@@ -50,7 +50,27 @@ void  Person::setGender(string gender)
 	this->gender=gender;
 }
 
-////////////////////////////////////////////////////////////////////////////
+/*
+void Person::loadClass(string filename)
+{
+	ofstream file;
+
+	file.open((filename + ".json").c_str());
+
+	if(!file.is_open())
+	{
+		throw(FileUnavailable(filename));
+	}
+
+	file << "{" << endl;
+	file << " Name: " << name << endl;
+	file << " Age: "<< age << endl;
+	file << " Gender: "<< gender << endl;
+
+	file.close();
+
+}*/
+
 ////////////////////////////////////////////////////////////////////////////
 double calculateEndHour(double startinghour, int duration)
 {
@@ -60,6 +80,7 @@ double calculateEndHour(double startinghour, int duration)
 
 
 ////////////////////////////////////////////////////////////////////////////
+//////////////////Teacher///////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
 Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
@@ -89,7 +110,32 @@ vector<Lesson*> Teacher::getLessons()
 	return lessons;
 }
 
+/*
+void Teacher::loadClass(std::string filename)
+{
+	Person::loadClass(filename);
+
+	ofstream file;
+
+	file.open((filename + ".json").c_str());
+
+	if(!file.is_open())
+	{
+		throw(FileUnavailable(filename));
+	}
+
+	for(size_t i= 0; i < lessons.size(); i++)
+	{
+		lessons.at(i)->loadClass();
+	}
+
+	file<<"}"<< endl;
+	file.close();
+
+}
+*/
 ////////////////////////////////////////////////////////////////////////////
+//////////////////User//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
 User::User(string name,int age,string gender, bool isGold, string assignedTeacher):Person(name,age,gender)
@@ -172,8 +218,43 @@ string User::getTeacher()
 	return this->assignedTeacher;
 }
 
+/*
+void User::loadClass(std::string filename)
+{
+	Person::loadClass(filename);
 
+	ofstream file;
 
+	file.open((filename + ".json").c_str());
+
+	if(!file.is_open())
+	{
+		throw(FileUnavailable(filename));
+	}
+
+	file << " isGold: "<< isgold() << endl;
+	file << " Assigned Teacher: "<< assignedTeacher << endl;
+
+	for(size_t i =0; i < reports.size(); i++)
+	{
+		reports.at(i)->loadClass();
+	}
+
+	for(size_t i =0; i < reservations.size(); i++)
+	{
+		reservations.at(i)->loadClass();
+	}
+
+	for(size_t i =0; i < invoices.size(); i++)
+	{
+		invoices.at(i)->loadClass();
+	}
+
+	file<<"}"<< endl;
+	file.close();
+
+}
+*/
 
 
 
