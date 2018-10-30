@@ -17,7 +17,8 @@ public:
 	Day(std::pair<int, int> workHours);
 	bool checkSchedule(double startingHours, int duration) const;
 	void setSchedule(double startingHours, int duration);
-
+	std::vector<bool> getSchedule();
+	int getSH() const;
 private:
 	int startingHour;
 	std::vector<bool> schedule;
@@ -27,6 +28,8 @@ class Month {
 public:
 	Month(int month, int days);
 	Day& getDay(int day);
+	int getMonth();
+	int getNoDays();
 private:
 	int month;
 	std::vector<Day> days;

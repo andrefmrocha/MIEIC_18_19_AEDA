@@ -97,5 +97,23 @@ void Day::setSchedule(double startingHours, int duration)
 
 
 
+int Month::getMonth()
+{
+	return month;
+}
 
+std::vector<bool> Day::getSchedule()
+{
+	return this->schedule;
+}
+
+int Month::getNoDays()
+{
+	return this->days.size();
+}
+
+int Day::getSH() const
+{
+	return this->startingHour;
+}
 
