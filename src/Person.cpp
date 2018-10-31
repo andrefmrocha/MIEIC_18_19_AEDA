@@ -10,6 +10,16 @@
 
 using namespace std;
 
+/*
+void indentp(ofstream &outfile, int identation)
+{
+	for(int i = 0; i < identation; i++)
+	{
+		outfile << "\t";
+	}
+}
+*/
+
 ////////////////////////////////////////////////////////////////////////////
 //////////////////Person////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
@@ -51,26 +61,19 @@ void  Person::setGender(string gender)
 }
 
 /*
-void Person::loadClass(string filename)
+void Person::saveClass(ofstream &outfile, int indentation)
 {
-	ofstream file;
-
-	file.open((filename + ".json").c_str());
-
-	if(!file.is_open())
-	{
-		throw(FileUnavailable(filename));
-	}
-
-	file << "{" << endl;
-	file << " Name: " << name << endl;
-	file << " Age: "<< age << endl;
-	file << " Gender: "<< gender << endl;
-
-	file.close();
-
-}*/
-
+	identp(outfile,identation);
+	outfile << "{" << endl;
+	identation++;
+	identp(outfile,identation);
+	outfile << "\"Name\": " << name << endl;
+	identp(outfile,identation);
+	outfile << " \"Age\": "<< age << endl;
+	identp(outfile,identation);
+	outfile << " \"Gender\": "<< gender << endl;
+}
+*/
 ////////////////////////////////////////////////////////////////////////////
 double calculateEndHour(double startinghour, int duration)
 {
@@ -111,26 +114,18 @@ vector<Lesson*> Teacher::getLessons()
 }
 
 /*
-void Teacher::loadClass(std::string filename)
+void Teacher::saveClass(ofstream &outfile, int indentation)
 {
-	Person::loadClass(filename);
-
-	ofstream file;
-
-	file.open((filename + ".json").c_str());
-
-	if(!file.is_open())
-	{
-		throw(FileUnavailable(filename));
-	}
+	Person::saveClass(outfile,identation);
 
 	for(size_t i= 0; i < lessons.size(); i++)
 	{
 		lessons.at(i)->loadClass();
 	}
 
-	file<<"}"<< endl;
-	file.close();
+	identation--;
+	indentp(outfile,identation);
+	outfile<<"}"<< endl;
 
 }
 */
@@ -204,7 +199,7 @@ void User::setReservation(Reservation* reservation)
 
 	endHour = calculateEndHour(startingHour, duration);
 
-	if(CheckAvailable(reservations,startingHour,endHour)==0)
+	if(CheckAvailable(reservations,startingHour,endHour, reservation->getDay(), reservation->getMonth())==0)
 		reservations.push_back(reservation);
 }
 
@@ -219,21 +214,14 @@ string User::getTeacher()
 }
 
 /*
-void User::loadClass(std::string filename)
+void User::saveClass(ofstream &outfile, int indentation)
 {
-	Person::loadClass(filename);
-
-	ofstream file;
-
-	file.open((filename + ".json").c_str());
-
-	if(!file.is_open())
-	{
-		throw(FileUnavailable(filename));
-	}
-
-	file << " isGold: "<< isgold() << endl;
-	file << " Assigned Teacher: "<< assignedTeacher << endl;
+	identp(outfile,identation);
+	outfile << " isGold: "<< isgold() << endl;
+	identp(outfile,identation);
+	outfile << " Assigned Teacher: "<< assignedTeacher << endl;
+	identp(outfile,identation);
+	identation++;
 
 	for(size_t i =0; i < reports.size(); i++)
 	{
@@ -250,8 +238,10 @@ void User::loadClass(std::string filename)
 		invoices.at(i)->loadClass();
 	}
 
-	file<<"}"<< endl;
-	file.close();
+	identation--;
+	identation--;
+	identp(outfile,identation);
+	outfile<<"}"<< endl;
 
 }
 */

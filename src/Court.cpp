@@ -57,7 +57,7 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 	}
 	try
 	{
-		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur));
+		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur),d,m);
 	}
 	catch(AlreadyReservedHours &e)
 	{
@@ -66,7 +66,7 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 	}
 	try
 	{
-		CheckAvailable(teacher.getLessons(),sH, calculateEndHour(sH, dur));
+		CheckAvailable(teacher.getLessons(),sH, calculateEndHour(sH, dur),d,m);
 	}
 	catch(AlreadyReservedHours &e)
 	{
@@ -99,7 +99,7 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 	}
 	try
 	{
-		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur));
+		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur),d,m);
 	}
 	catch(AlreadyReservedHours &e)
 	{

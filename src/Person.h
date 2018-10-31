@@ -24,7 +24,7 @@ public:
 	void setName(std::string name);
 	void setAge(int age);
 	void setGender(std::string gender);
-	//virtual void loadClass(std::string filename);
+	//virtual void saveClass(ofstream &outfile, int indentation);
 private:
 	std::string name;
 	int age;
@@ -43,7 +43,7 @@ public:
 	void setReservation(Reservation* reservation);
 	std::vector<Reservation*> getReservations();
 	std::string getTeacher();
-	//void loadClass(std::string filename);
+	//void saveClass(ofstream &outfile, int indentation);
 private:
 	bool isGold;
 	std::string assignedTeacher;
@@ -60,7 +60,7 @@ public:
 	Teacher(std::string name, int age, std::string gender);
 	void setLesson(Lesson lesson);
 	std::vector<Lesson*> getLessons();
-	//void loadClass(std::string filename);
+	//void saveClass(ofstream &outfile, int indentation);
 private:
 	std::vector<Lesson*> lessons;
 };
@@ -118,37 +118,28 @@ class StartHourInsideRes : public AlreadyReservedHours
 public:
 	StartHourInsideRes(){};
 };
-///
-//handling unavailable files
-/*
-class FileUnavailable
-{
-private:
-	std::string filename;
-public:
-	FileUnavailable(std::string filename){this->filename = filename}
-	std::string getFilename(){return filename;}
-};
-*/
 
 double calculateEndHour(double startinghour, int duration);
 template< class t>
-int CheckAvailable(std::vector<t *> res,double startingHour, double endHour)
+int CheckAvailable(std::vector<t *> res,double startingHour, double endHour,int day, int month)
 {
 	for(size_t i =0; i < res.size(); i++)
 	{
-	double resStart = res.at(i)->getStartingHour();
-	double resEnd = calculateEndHour(resStart,res.at(i)->getDuration());
+		if(res.at(i)->getDay() == day && res.at(i)->getMonth() == month)
+		{
+		double resStart = res.at(i)->getStartingHour();
+		double resEnd = calculateEndHour(resStart,res.at(i)->getDuration());
 
-	if(startingHour >= resStart && endHour <= resEnd)
-		// tempo da reserva esta em espaço ocupado
-		throw(InsideRes());
-	else if(startingHour <= resStart && endHour >= resStart)
-		//tempo da reserva entra em espaço ocupado
-		throw(EndHourInsideRes());
-	else if(startingHour >= resStart && endHour >= resEnd && startingHour <= resEnd)
-		//tempo da reserva esta a meio
-		throw(StartHourInsideRes());
+		if(startingHour >= resStart && endHour <= resEnd)
+			// tempo da reserva esta em espaço ocupado
+			throw(InsideRes());
+		else if(startingHour <= resStart && endHour >= resStart)
+			//tempo da reserva entra em espaço ocupado
+			throw(EndHourInsideRes());
+		else if(startingHour >= resStart && endHour >= resEnd && startingHour <= resEnd)
+			//tempo da reserva esta a meio
+			throw(StartHourInsideRes());
+		}
 	}
 	return 0;
 }
