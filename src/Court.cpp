@@ -200,54 +200,56 @@ void Court::readInfo(std::ifstream &infile)
 	string savingString;
 	while (getline(infile, savingString))
 	{
-		if(savingString.find('{') != string::npos)
+		if (savingString.find('{') != string::npos)
 			continue;
-		if(savingString.find("months") != string::npos)
+		if (savingString.find("months") != string::npos)
 			break;
 	}
+
 	Year year;
 	vector<Month> months;
 	while (getline(infile, savingString))
 	{
-	    months.clear();
+		months.clear();
 		vector<Day> days;
-        Month savingMonth;
-        bool flag;
-        while (getline(infile, savingString))
+		Month savingMonth;
+		bool flag;
+		while (getline(infile, savingString))
 		{
-            if (savingString.find("\"month\":") != string::npos)
+			if (savingString.find("\"month\":") != string::npos)
 			{
-                flag = true;
-				savingString = savingString.substr(savingString.find("\"month\":") + 9, 2);
-				if(savingString.find(',') != string::npos)
+				flag = true;
+				savingString = savingString.substr(
+						savingString.find("\"month\":") + 9, 2);
+				if (savingString.find(',') != string::npos)
 				{
 					savingString = savingString.substr(0, 1);
 				}
 				savingMonth.setMonth(stoi(savingString));
-                continue;
+				continue;
 			}
-			else if(savingString.find("\"days\"") != string::npos)
+			else if (savingString.find("\"days\"") != string::npos)
 			{
-			    days.clear();
+				days.clear();
 				while (getline(infile, savingString))
 				{
-                    Day savingDay;
-                    vector<bool> savingSchedule;
-                    if(savingString.find("\"startingHour\"") != string::npos)
+					Day savingDay;
+					vector<bool> savingSchedule;
+					if (savingString.find("\"startingHour\"") != string::npos)
 					{
-                        savingString  = savingString.substr(savingString.find("\"startingHour\"") + 16);
-                        if(savingString.find(',') != string::npos)
+						savingString = savingString.substr(savingString.find("\"startingHour\"") + 16);
+						if (savingString.find(',') != string::npos)
 						{
-                            savingString = savingString.substr(0, 1);
-                        }
-                        savingDay.setSH(stoi(savingString));
-                    }
-					else if(savingString.find("\"schedule\"") != string::npos)
+							savingString = savingString.substr(0, 1);
+						}
+						savingDay.setSH(stoi(savingString));
+					}
+					else if (savingString.find("\"schedule\"")!= string::npos)
 					{
-                        savingString = savingString.substr(savingString.find("\"schedule\"") + 13);
-						for(auto i: savingString)
+						savingString = savingString.substr(savingString.find("\"schedule\"") + 13);
+						for (auto i : savingString)
 						{
-							if(i == ']')
+							if (i == ']')
 							{
 								break;
 							}
@@ -260,42 +262,28 @@ void Court::readInfo(std::ifstream &infile)
 								savingSchedule.push_back(false);
 							}
 							else
-                            {
-							    savingSchedule.push_back(true);
-                            }
+							{
+								savingSchedule.push_back(true);
+							}
 						}
-<<<<<<< HEAD
 						savingDay.setSchedule(savingSchedule);
+						days.push_back(savingDay);
+					}
+					else if (savingString.find('}') != string::npos && savingString.find("},") == string::npos)
+					{
+						savingDay.setSchedule(savingSchedule);
+						days.push_back(savingDay);
+						break;
 					}
 				}
-				days.push_back(savingDay);
 			}
-			savingMonth.setDays(days);
+			if (flag) {
+				flag = false;
+				savingMonth.setDays(days);
+				months.push_back(savingMonth);
+			}
 		}
-		months.push_back(savingMonth);
 	}
-	year.setMonths(months);
-}
-=======
-                        savingDay.setSchedule(savingSchedule);
-                        days.push_back(savingDay);
-                    }
-                    else if(savingString.find('}') != string::npos && savingString.find("},") == string::npos)
-                    {
-                        savingDay.setSchedule(savingSchedule);
-                        days.push_back(savingDay);
-                        break;
-                    }
-                }
-            }
-            if(flag)
-            {
-                flag = false;
-                savingMonth.setDays(days);
-                months.push_back(savingMonth);
-            }
-        }
-    }
 	this->currentYear.setMonths(months);
 }
->>>>>>> master
+
