@@ -209,37 +209,42 @@ void Court::readInfo(std::ifstream &infile)
 	vector<Month> months;
 	while (getline(infile, savingString))
 	{
+	    months.clear();
 		vector<Day> days;
-		Month savingMonth;
-		while (getline(infile, savingString))
+        Month savingMonth;
+        bool flag;
+        while (getline(infile, savingString))
 		{
-			if (savingString.find("\"month\":") != string::npos)
+            if (savingString.find("\"month\":") != string::npos)
 			{
+                flag = true;
 				savingString = savingString.substr(savingString.find("\"month\":") + 9, 2);
 				if(savingString.find(',') != string::npos)
 				{
 					savingString = savingString.substr(0, 1);
 				}
 				savingMonth.setMonth(stoi(savingString));
+                continue;
 			}
-			if(savingString.find("\"days\"") != string::npos)
+			else if(savingString.find("\"days\"") != string::npos)
 			{
-				Day savingDay;
+			    days.clear();
 				while (getline(infile, savingString))
 				{
-					if(savingString.find("\"startingHour\"") != string::npos)
+                    Day savingDay;
+                    vector<bool> savingSchedule;
+                    if(savingString.find("\"startingHour\"") != string::npos)
 					{
-						savingString  = savingString.substr(savingString.find("\"startingHour\"") + 16);
-						if(savingString.find(',') != string::npos)
+                        savingString  = savingString.substr(savingString.find("\"startingHour\"") + 16);
+                        if(savingString.find(',') != string::npos)
 						{
-							savingString = savingString.substr(0, 1);
-						}
-						savingDay.setSH(stoi(savingString));
-					}
-					if(savingString.find("\"schedule\"") != string::npos)
+                            savingString = savingString.substr(0, 1);
+                        }
+                        savingDay.setSH(stoi(savingString));
+                    }
+					else if(savingString.find("\"schedule\"") != string::npos)
 					{
-						savingString = savingString.substr(savingString.find("\"schedule\"") + 13);
-						vector<bool> savingSchedule;
+                        savingString = savingString.substr(savingString.find("\"schedule\"") + 13);
 						for(auto i: savingString)
 						{
 							if(i == ']')
@@ -250,19 +255,33 @@ void Court::readInfo(std::ifstream &infile)
 							{
 								continue;
 							}
-							else
+							else if (i == '0')
 							{
-								savingSchedule.push_back(i);
+								savingSchedule.push_back(false);
 							}
+							else
+                            {
+							    savingSchedule.push_back(true);
+                            }
 						}
-						savingDay.setSchedule(savingSchedule);
-					}
-				}
-				days.push_back(savingDay);
-			}
-			savingMonth.setDays(days);
-		}
-		months.push_back(savingMonth);
-	}
-	year.setMonths(months);
+                        savingDay.setSchedule(savingSchedule);
+                        days.push_back(savingDay);
+                    }
+                    else if(savingString.find('}') != string::npos && savingString.find("},") == string::npos)
+                    {
+                        savingDay.setSchedule(savingSchedule);
+                        days.push_back(savingDay);
+                        break;
+                    }
+                }
+            }
+            if(flag)
+            {
+                flag = false;
+                savingMonth.setDays(days);
+                months.push_back(savingMonth);
+            }
+        }
+    }
+	this->currentYear.setMonths(months);
 }
