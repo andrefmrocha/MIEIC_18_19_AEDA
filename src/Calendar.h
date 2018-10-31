@@ -14,9 +14,12 @@
 
 class Day{
 public:
+    Day(){};
 	Day(std::pair<int, int> workHours);
 	bool checkSchedule(double startingHours, int duration) const;
 	void setSchedule(double startingHours, int duration);
+	void setSchedule(std::vector<bool> schedule);
+	void setSH(int sH);
 	std::vector<bool> getSchedule();
 	int getSH() const;
 private:
@@ -26,10 +29,13 @@ private:
 
 class Month {
 public:
+    Month(){};
 	Month(int month, int days);
 	Day& getDay(int day);
 	int getMonth();
 	int getNoDays();
+	void setDays(std::vector<Day> days);
+	void setMonth(int month);
 private:
 	int month;
 	std::vector<Day> days;
@@ -37,8 +43,10 @@ private:
 
 class Year {
 public:
+    Year(){};
 	Year(int year);
 	Month& getMonth(int month);
+	void setMonths(std::vector<Month> months);
 private:
 	std::vector<Month> months;
 };

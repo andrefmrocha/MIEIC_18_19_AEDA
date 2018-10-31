@@ -14,6 +14,8 @@ Court::Court(int year):currentYear(Year(year))
 	this->maxUsers = 4;
 }
 
+Court::Court() {}
+
 
 void Court::occupied(int month, int day, double startingHour, int duration)
 {
@@ -123,7 +125,6 @@ void Court::storeInfo(ofstream &outfile, int indentation)
 		indentation++;
 		indent(outfile, indentation);
 		outfile << "\"month\": " << to_string(this->currentYear.getMonth(i).getMonth()) << "," << endl;
-		indentation++;
 		indent(outfile,indentation);
 		outfile << " \"days\": [" << endl;
 		indentation++;
@@ -137,18 +138,19 @@ void Court::storeInfo(ofstream &outfile, int indentation)
 			indent(outfile,indentation);
 			outfile << "\"startingHour\": " << this->currentYear.getMonth(i).getDay(j).getSH() << "," << endl;
 			indent(outfile,indentation);
-			outfile << "\"schedule\" : [";
+			outfile << "\"schedule\": [";
 			indentation++;
-			vector<bool>::iterator z = this->currentYear.getMonth(i).getDay(j).getSchedule().begin();
-			for(z ; z!= this->currentYear.getMonth(i).getDay(j).getSchedule().end(); ++z)
+//			vector<bool>::iterator z = this->currentYear.getMonth(i).getDay(j).getSchedule().begin();
+
+			for(unsigned int z = 0 ; z < this->currentYear.getMonth(i).getDay(j).getSchedule().size(); ++z)
 			{
-				if(z+1 == this->currentYear.getMonth(i).getDay(j).getSchedule().end())
+				if(z+1 == this->currentYear.getMonth(i).getDay(j).getSchedule().size())
 				{
-					outfile << *z;
+					outfile << this->currentYear.getMonth(i).getDay(j).getSchedule()[z];
 				}
 				else
 				{
-					outfile << *z << ",";
+					outfile << this->currentYear.getMonth(i).getDay(j).getSchedule()[z] << ",";
 				}
 			}
 			outfile << "]" << endl;
@@ -178,7 +180,7 @@ void Court::storeInfo(ofstream &outfile, int indentation)
 		}
 		indentation--;
 		indent(outfile,indentation);
-		indentation--;
+//		indentation--;
 	}
 	outfile << "]" << endl;
 	indent(outfile,indentation);
@@ -191,4 +193,76 @@ void Court::indent(std::ofstream &outfile, int identation)
 	{
 		outfile << "\t";
 	}
+}
+
+void Court::readInfo(std::ifstream &infile)
+{
+	string savingString;
+	while (getline(infile, savingString))
+	{
+		if(savingString.find('{') != string::npos)
+			continue;
+		if(savingString.find("months") != string::npos)
+			break;
+	}
+	Year year;
+	vector<Month> months;
+	while (getline(infile, savingString))
+	{
+		vector<Day> days;
+		Month savingMonth;
+		while (getline(infile, savingString))
+		{
+			if (savingString.find("\"month\":") != string::npos)
+			{
+				savingString = savingString.substr(savingString.find("\"month\":") + 9, 2);
+				if(savingString.find(',') != string::npos)
+				{
+					savingString = savingString.substr(0, 1);
+				}
+				savingMonth.setMonth(stoi(savingString));
+			}
+			if(savingString.find("\"days\"") != string::npos)
+			{
+				Day savingDay;
+				while (getline(infile, savingString))
+				{
+					if(savingString.find("\"startingHour\"") != string::npos)
+					{
+						savingString  = savingString.substr(savingString.find("\"startingHour\"") + 16);
+						if(savingString.find(',') != string::npos)
+						{
+							savingString = savingString.substr(0, 1);
+						}
+						savingDay.setSH(stoi(savingString));
+					}
+					if(savingString.find("\"schedule\"") != string::npos)
+					{
+						savingString = savingString.substr(savingString.find("\"schedule\"") + 13);
+						vector<bool> savingSchedule;
+						for(auto i: savingString)
+						{
+							if(i == ']')
+							{
+								break;
+							}
+							else if (i == ',')
+							{
+								continue;
+							}
+							else
+							{
+								savingSchedule.push_back(i);
+							}
+						}
+						savingDay.setSchedule(savingSchedule);
+					}
+				}
+				days.push_back(savingDay);
+			}
+			savingMonth.setDays(days);
+		}
+		months.push_back(savingMonth);
+	}
+	year.setMonths(months);
 }

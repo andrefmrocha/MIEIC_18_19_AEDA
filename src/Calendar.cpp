@@ -35,6 +35,12 @@ Year::Year(int year)
 	}
 }
 
+void Year::setMonths(std::vector<Month> months)
+{
+    this->months = months;
+}
+
+
 Month& Year::getMonth(int month)
 {
 	return this->months[month - 1];
@@ -54,6 +60,16 @@ Day& Month::getDay(int day)
 	return this->days[day - 1];
 }
 
+
+void Month::setDays(std::vector<Day> days)
+{
+    this->days = days;
+}
+
+void Month::setMonth(int month)
+{
+	this->month = month;
+}
 
 Day::Day(pair<int, int> workingHours)
 {
@@ -95,7 +111,10 @@ void Day::setSchedule(double startingHours, int duration)
 	}
 }
 
-
+void Day::setSchedule(std::vector<bool> schedule)
+{
+    this->schedule = schedule;
+}
 
 int Month::getMonth()
 {
@@ -117,3 +136,7 @@ int Day::getSH() const
 	return this->startingHour;
 }
 
+void Day::setSH(int sH)
+{
+	this->startingHour = sH;
+}
