@@ -26,6 +26,7 @@ public:
 	int getDuration();
 	int getMonth();
 	int getDay();
+	bool operator ==(Reservation &r) const;
 };
 
 class Lesson : public Reservation {
