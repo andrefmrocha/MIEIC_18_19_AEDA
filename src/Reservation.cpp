@@ -39,6 +39,10 @@ int Reservation::getDay()
 {
 	return day;
 }
+bool Reservation::operator ==(Reservation &r) const
+	{
+		return (this->day == r.getDay() && this->month == r.getMonth() && this->startingHour == r.getStartingHour());
+	}
 
 Lesson::Lesson(int m,int d,int strHr,double p,unsigned int dr) : Reservation(m,d,strHr,p,dr)
 {}
