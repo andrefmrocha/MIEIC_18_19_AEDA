@@ -67,9 +67,12 @@ public:
 	void setLesson(Lesson lesson);
 	std::vector<Lesson*> getLessons();
 	void saveClass(std::ofstream &outfile, int &indentation);
+	void addStudent();
+	int getnStudents();
 	//void loadClass(std::ifstream &inpfile);
 private:
 	std::vector<Lesson*> lessons;
+	int nStudents;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

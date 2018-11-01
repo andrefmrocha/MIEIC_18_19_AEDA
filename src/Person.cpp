@@ -120,7 +120,9 @@ double calculateEndHour(double startinghour, int duration)
 ////////////////////////////////////////////////////////////////////////////
 
 Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
-{}
+{
+	nStudents = 0;
+}
 
 void Teacher::setLesson(Lesson lesson)
 {
@@ -146,6 +148,15 @@ vector<Lesson*> Teacher::getLessons()
 	return lessons;
 }
 
+int Teacher::getnStudents()
+{
+	return nStudents;
+}
+
+void Teacher::addStudent()
+{
+	nStudents++;
+}
 
 void Teacher::saveClass(ofstream &outfile, int &indentation)
 {
