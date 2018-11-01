@@ -8,12 +8,14 @@
 #ifndef SRC_PERSON_H_
 #define SRC_PERSON_H_
 
-#include <string>
-#include <vector>
-#include <fstream>
 #include "Report.h"
 #include "Reservation.h"
 #include "Invoice.h"
+
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iostream>
 
 class Person
 {
@@ -26,6 +28,7 @@ public:
 	void setAge(int age);
 	void setGender(std::string gender);
 	virtual void saveClass(std::ofstream &outfile, int &indentation);
+	//virtual void loadClass(std::ifstream &inpfile);
 	bool operator == (const Person &p1);
 private:
 	std::string name;
@@ -46,6 +49,7 @@ public:
 	std::vector<Reservation*> getReservations();
 	std::string getTeacher();
 	void saveClass(std::ofstream &outfile, int &indentation);
+	//void loadClass(std::ifstream &inpfile);
 private:
 	bool isGold;
 	std::string assignedTeacher;
@@ -63,6 +67,7 @@ public:
 	void setLesson(Lesson lesson);
 	std::vector<Lesson*> getLessons();
 	void saveClass(std::ofstream &outfile, int &indentation);
+	//void loadClass(std::ifstream &inpfile);
 private:
 	std::vector<Lesson*> lessons;
 };

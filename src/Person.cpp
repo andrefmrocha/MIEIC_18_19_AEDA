@@ -6,7 +6,8 @@
  */
 
 #include "Person.h"
-#include <iostream>
+
+
 
 using namespace std;
 
@@ -78,6 +79,34 @@ bool Person::operator == (const Person & p1)
 	return this->getName() == p1.getName();
 }
 
+/*
+void Person::loadClass(std::ifstream &inpfile)
+{
+	string savingString;
+
+	while(getline(inpfile, savingString))
+	{
+		if(savingString.find("{") !=-1  || savingString.find("[") !=-1)
+			continue;
+		else
+			if(savingString.find("\"Name\": ") != -1)
+			{
+				savingString = savingString.substr(savingString.find(":")+2, savingString.find(","));
+				this->name =savingString;
+			}
+			if(savingString.find("\"Age\"") != -1)
+			{
+				savingString = savingString.substr(savingString.find(":")+2 , savingString.find(","));
+				this->age= stoi(savingString);
+			}
+			if(savingString.find("\"Gender\": ") != -1)
+			{
+				savingString = savingString.substr(savingString.find(":")+2 , savingString.find(","));
+				 this->gender = savingString;
+			}
+	}
+
+}*/
 ////////////////////////////////////////////////////////////////////////////
 double calculateEndHour(double startinghour, int duration)
 {
@@ -142,6 +171,27 @@ void Teacher::saveClass(ofstream &outfile, int &indentation)
 	outfile<<"}"<< endl;
 
 }
+
+/*
+void Teacher::loadClass(std::ifstream &inpfile)
+{
+	Person::loadClass(inpfile);
+
+	string savingString;
+
+	while(getline(inpfile, savingString) && savingString.find("]") != -1)
+	{
+		string aux;
+		while(aux != "")
+		{
+		aux = savingString.substr(0, savingString.find(","));
+		//loadlessons
+		}
+
+	}
+
+}*/
+
 
 ////////////////////////////////////////////////////////////////////////////
 //////////////////User//////////////////////////////////////////////////////
@@ -289,6 +339,50 @@ void User::saveClass(ofstream &outfile, int &indentation)
 
 }
 
+/*
+void User::loadClass(std::ifstream &inpfile)
+{
+	Person::loadClass(inpfile);
+
+	string savingString;
+
+	while(getline(inpfile, savingString) && savingString.find("]") != -1)
+	{
+		string aux;
+		while(aux != "")
+		{
+		aux = savingString.substr(0, savingString.find(","));
+		//loadReport e pushback
+		}
+
+	}
+
+	while(getline(inpfile, savingString) && savingString.find("]") != -1)
+	{
+		string aux;
+		while(aux != "")
+		{
+		aux = savingString.substr(0, savingString.find(","));
+		//loadReservations e pushback
+		}
+
+	}
+
+	while(getline(inpfile, savingString) && savingString.find("]") != -1)
+	{
+		string aux;
+		while(aux != "")
+		{
+		aux = savingString.substr(0, savingString.find(","));
+		//loadinvoices e pushback
+		}
+
+	}
+
+
+
+}
+*/
 
 
 
