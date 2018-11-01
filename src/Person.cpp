@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void indentp(std::ofstream &outfile, int indentation)
+void indentp(std::ofstream &outfile, int &indentation)
 {
 	for(int i = 0; i < indentation; i++)
 	{
@@ -60,17 +60,17 @@ void  Person::setGender(string gender)
 }
 
 
-void Person::saveClass(ofstream &outfile, int indentation)
+void Person::saveClass(ofstream &outfile, int &indentation)
 {
 	indentp(outfile,indentation);
 	outfile << "{" << endl;
 	indentation++;
 	indentp(outfile,indentation);
-	outfile << "\"Name\": " << name << endl;
+	outfile << "\"Name\": " << "\"" << name<<  "\"" << "," <<  endl;
 	indentp(outfile,indentation);
-	outfile << " \"Age\": "<< age << endl;
+	outfile << " \"Age\": "<< "\"" << age  << "\"" << "," <<  endl;
 	indentp(outfile,indentation);
-	outfile << " \"Gender\": "<< gender << endl;
+	outfile << " \"Gender\": "<< "\"" << gender  << "\""  << "," << endl;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -113,17 +113,21 @@ vector<Lesson*> Teacher::getLessons()
 }
 
 
-void Teacher::saveClass(ofstream &outfile, int indentation)
+void Teacher::saveClass(ofstream &outfile, int &indentation)
 {
 	Person::saveClass(outfile,indentation);
 
 	indentation++;
 	indentp(outfile,indentation);
+	outfile<< "\"lessons\": ";
 	outfile << "["<< endl;
 	for(size_t i= 0; i < lessons.size(); i++)
 	{
-		//lessons.at(i)->loadClass();
+		int in  = indentation;
+		//reservations.at(i)->loadClass();
+		indentp(outfile,in);
 		outfile << " , ";
+		in++;
 	}
 	indentp(outfile,indentation);
 	outfile << "]"<< endl;
@@ -219,44 +223,56 @@ string User::getTeacher()
 }
 
 
-void User::saveClass(ofstream &outfile, int indentation)
+void User::saveClass(ofstream &outfile, int &indentation)
 {
 	Person::saveClass(outfile, indentation);
 
 	indentp(outfile,indentation);
-	outfile << " isGold: "<< isGold << endl;
+	outfile << "\"isGold\": "<< "\""<< isGold << "\""<< "," << endl;
 	indentp(outfile,indentation);
-	outfile << " Assigned Teacher: "<< assignedTeacher << endl;
-	indentp(outfile,indentation);
+	outfile << "\"Assigned Teacher\": "<< "\""<< assignedTeacher <<"\"" << "," <<  endl;
 	indentation++;
 
 	indentp(outfile,indentation);
+	outfile<< "\"reports\": ";
 	outfile << "["<< endl;
 	for(size_t i =0; i < reports.size(); i++)
 	{
-		cout << reports.size();
+		int in = indentation;
+		if(reports.at(i) != 0)
+		{
 		//reports.at(i)->loadClass();
+		indentp(outfile,in);
 		outfile << " , ";
+		in++;
+		}
 	}
-	indentp(outfile,indentation);
 	outfile << "]"<< endl;
 
 	indentp(outfile,indentation);
+	outfile<< "\"reservations\": ";
 	outfile << "["<< endl;
 	for(size_t i =0; i < reservations.size(); i++)
 	{
+		int in  = indentation;
 		//reservations.at(i)->loadClass();
+		indentp(outfile,in);
 		outfile << " , ";
+		in++;
 	}
 	indentp(outfile,indentation);
 	outfile << "]"<< endl;
 
 	indentp(outfile,indentation);
+	outfile<< "\"invoices\": ";
 	outfile << "["<< endl;
 	for(size_t i =0; i < invoices.size(); i++)
 	{
+		int in  = indentation;
 		//invoices.at(i)->loadClass();
+		indentp(outfile,in);
 		outfile << " , ";
+		in++;
 	}
 	indentp(outfile,indentation);
 	outfile << "]"<< endl;

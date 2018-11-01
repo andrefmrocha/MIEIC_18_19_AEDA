@@ -25,7 +25,7 @@ public:
 	void setName(std::string name);
 	void setAge(int age);
 	void setGender(std::string gender);
-	virtual void saveClass(std::ofstream &outfile, int indentation);
+	virtual void saveClass(std::ofstream &outfile, int &indentation);
 private:
 	std::string name;
 	int age;
@@ -44,7 +44,7 @@ public:
 	void setReservation(Reservation* reservation);
 	std::vector<Reservation*> getReservations();
 	std::string getTeacher();
-	void saveClass(std::ofstream &outfile, int indentation);
+	void saveClass(std::ofstream &outfile, int &indentation);
 private:
 	bool isGold;
 	std::string assignedTeacher;
@@ -61,7 +61,7 @@ public:
 	Teacher(std::string name, int age, std::string gender);
 	void setLesson(Lesson lesson);
 	std::vector<Lesson*> getLessons();
-	void saveClass(std::ofstream &outfile, int indentation);
+	void saveClass(std::ofstream &outfile, int &indentation);
 private:
 	std::vector<Lesson*> lessons;
 };
