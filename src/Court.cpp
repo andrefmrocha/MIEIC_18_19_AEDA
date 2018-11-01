@@ -287,3 +287,7 @@ void Court::readInfo(std::ifstream &infile)
 	this->currentYear.setMonths(months);
 }
 
+int Court::getMaxUsers() const
+{
+	return maxUsers;
+}
