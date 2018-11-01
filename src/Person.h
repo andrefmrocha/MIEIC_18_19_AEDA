@@ -19,7 +19,7 @@ class Person
 {
 public:
 	Person(std::string name,int age, std::string gender);
-	std::string getName();
+	std::string getName() const;
 	int getAge();
 	std::string getGender();
 	void setName(std::string name);

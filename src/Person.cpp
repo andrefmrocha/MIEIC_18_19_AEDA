@@ -29,7 +29,7 @@ Person::Person(string name,int age,string gender)
 	this->gender=gender;
 }
 
-string Person::getName()
+string Person::getName() const
 {
 	return name;
 }
