@@ -26,6 +26,7 @@ public:
 	void setAge(int age);
 	void setGender(std::string gender);
 	virtual void saveClass(std::ofstream &outfile, int &indentation);
+	bool operator == (const Person &p1);
 private:
 	std::string name;
 	int age;

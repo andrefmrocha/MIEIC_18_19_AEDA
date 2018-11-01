@@ -73,6 +73,11 @@ void Person::saveClass(ofstream &outfile, int &indentation)
 	outfile << " \"Gender\": "<< "\"" << gender  << "\""  << "," << endl;
 }
 
+bool Person::operator == (const Person & p1)
+{
+	return this->getName() == p1.getName();
+}
+
 ////////////////////////////////////////////////////////////////////////////
 double calculateEndHour(double startinghour, int duration)
 {
