@@ -10,15 +10,14 @@
 
 using namespace std;
 
-/*
-void indentp(ofstream &outfile, int identation)
+void indentp(std::ofstream &outfile, int indentation)
 {
-	for(int i = 0; i < identation; i++)
+	for(int i = 0; i < indentation; i++)
 	{
 		outfile << "\t";
 	}
 }
-*/
+
 
 ////////////////////////////////////////////////////////////////////////////
 //////////////////Person////////////////////////////////////////////////////
@@ -60,20 +59,20 @@ void  Person::setGender(string gender)
 	this->gender=gender;
 }
 
-/*
+
 void Person::saveClass(ofstream &outfile, int indentation)
 {
-	identp(outfile,identation);
+	indentp(outfile,indentation);
 	outfile << "{" << endl;
-	identation++;
-	identp(outfile,identation);
+	indentation++;
+	indentp(outfile,indentation);
 	outfile << "\"Name\": " << name << endl;
-	identp(outfile,identation);
+	indentp(outfile,indentation);
 	outfile << " \"Age\": "<< age << endl;
-	identp(outfile,identation);
+	indentp(outfile,indentation);
 	outfile << " \"Gender\": "<< gender << endl;
 }
-*/
+
 ////////////////////////////////////////////////////////////////////////////
 double calculateEndHour(double startinghour, int duration)
 {
@@ -113,22 +112,28 @@ vector<Lesson*> Teacher::getLessons()
 	return lessons;
 }
 
-/*
+
 void Teacher::saveClass(ofstream &outfile, int indentation)
 {
-	Person::saveClass(outfile,identation);
+	Person::saveClass(outfile,indentation);
 
+	indentation++;
+	indentp(outfile,indentation);
+	outfile << "["<< endl;
 	for(size_t i= 0; i < lessons.size(); i++)
 	{
-		lessons.at(i)->loadClass();
+		//lessons.at(i)->loadClass();
+		outfile << " , ";
 	}
+	indentp(outfile,indentation);
+	outfile << "]"<< endl;
 
-	identation--;
-	indentp(outfile,identation);
+	indentation--;
+	indentp(outfile,indentation);
 	outfile<<"}"<< endl;
 
 }
-*/
+
 ////////////////////////////////////////////////////////////////////////////
 //////////////////User//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
@@ -213,38 +218,56 @@ string User::getTeacher()
 	return this->assignedTeacher;
 }
 
-/*
+
 void User::saveClass(ofstream &outfile, int indentation)
 {
-	identp(outfile,identation);
-	outfile << " isGold: "<< isgold() << endl;
-	identp(outfile,identation);
-	outfile << " Assigned Teacher: "<< assignedTeacher << endl;
-	identp(outfile,identation);
-	identation++;
+	Person::saveClass(outfile, indentation);
 
+	indentp(outfile,indentation);
+	outfile << " isGold: "<< isGold << endl;
+	indentp(outfile,indentation);
+	outfile << " Assigned Teacher: "<< assignedTeacher << endl;
+	indentp(outfile,indentation);
+	indentation++;
+
+	indentp(outfile,indentation);
+	outfile << "["<< endl;
 	for(size_t i =0; i < reports.size(); i++)
 	{
-		reports.at(i)->loadClass();
+		cout << reports.size();
+		//reports.at(i)->loadClass();
+		outfile << " , ";
 	}
+	indentp(outfile,indentation);
+	outfile << "]"<< endl;
 
+	indentp(outfile,indentation);
+	outfile << "["<< endl;
 	for(size_t i =0; i < reservations.size(); i++)
 	{
-		reservations.at(i)->loadClass();
+		//reservations.at(i)->loadClass();
+		outfile << " , ";
 	}
+	indentp(outfile,indentation);
+	outfile << "]"<< endl;
 
+	indentp(outfile,indentation);
+	outfile << "["<< endl;
 	for(size_t i =0; i < invoices.size(); i++)
 	{
-		invoices.at(i)->loadClass();
+		//invoices.at(i)->loadClass();
+		outfile << " , ";
 	}
+	indentp(outfile,indentation);
+	outfile << "]"<< endl;
 
-	identation--;
-	identation--;
-	identp(outfile,identation);
+	indentation--;
+	indentation--;
+	indentp(outfile,indentation);
 	outfile<<"}"<< endl;
 
 }
-*/
+
 
 
 
