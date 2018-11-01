@@ -44,10 +44,12 @@ public:
 	void stopGold();
 	bool getisGold();
 	Report getReport(int month);
-	void setReport(Report report, int month);
-	void setReservation(Reservation* reservation);
+	std::vector<Invoice*> getInvoices();
 	std::vector<Reservation*> getReservations();
 	std::string getTeacher();
+	void setInvoice(Invoice invoice, int month);
+	void setReport(Report report, int month);
+	void setReservation(Reservation* reservation);
 	void saveClass(std::ofstream &outfile, int &indentation);
 	//void loadClass(std::ifstream &inpfile);
 private:
@@ -81,10 +83,22 @@ private:
 //handling error for setReport
 class ReportAlreadyExists
 {
+private:
+	int month;
 public:
 	ReportAlreadyExists(int month){ this->month =month;}
-	int month;
 	int getMonth(){return month;}
+	std::string what() const;
+};
+
+class InvoiceAlreadyExists
+{
+private:
+	int month;
+public:
+	InvoiceAlreadyExists(int month){ this->month =month;}
+	int getMonth(){return month;}
+	std::string what() const;
 };
 
 //handling error for getReport
@@ -94,12 +108,15 @@ public:
 	ReportNotAvailable(int month){ this->month =month;}
 	int month;
 	int getMonth(){return month;}
+	std::string what() const;
 };
 
+//setReport getReport setInvoice
 class IncorrectMonth
 {
 public:
 	IncorrectMonth(){};
+	std::string what() const;
 };
 
 //handling errors for setReservation
@@ -108,28 +125,50 @@ class AlreadyReservedHours
 {
 public:
 	AlreadyReservedHours(){};
+	virtual std::string what() const{}
+
 };
+
 
 /////
 class InsideRes: public AlreadyReservedHours
 {
+private:
+	double resStart,endHour;
 public:
-	InsideRes(){};
+	InsideRes(double resStart, double endHour){
+		this->resStart = resStart;
+		this->endHour=endHour;
+	}
+	std::string what() const;
 };
 
 class EndHourInsideRes : public AlreadyReservedHours
 {
+private:
+	double resStart,resEnd;
 public:
-	EndHourInsideRes(){};
+	EndHourInsideRes(double resStart, double resEnd){
+		this->resStart = resStart;
+		this->resEnd=resEnd;
+	}
+	std::string what() const;
 };
 
 class StartHourInsideRes : public AlreadyReservedHours
 {
+private:
+	double StartingHour, endHour;
 public:
-	StartHourInsideRes(){};
+	StartHourInsideRes(double StartingHour, double endHour){
+		this->StartingHour = StartingHour;
+		this->endHour=endHour;
+	}
+	std::string what() const;
 };
 
 double calculateEndHour(double startinghour, int duration);
+
 template< class t>
 int CheckAvailable(std::vector<t *> res,double startingHour, double endHour,int day, int month)
 {
@@ -137,18 +176,19 @@ int CheckAvailable(std::vector<t *> res,double startingHour, double endHour,int 
 	{
 		if(res.at(i)->getDay() == day && res.at(i)->getMonth() == month)
 		{
+			//res- values from reservation already made
 		double resStart = res.at(i)->getStartingHour();
 		double resEnd = calculateEndHour(resStart,res.at(i)->getDuration());
 
 		if(startingHour >= resStart && endHour <= resEnd)
 			// tempo da reserva esta em espaço ocupado
-			throw(InsideRes());
+			throw(InsideRes(resStart,endHour));
 		else if(startingHour <= resStart && endHour >= resStart)
 			//tempo da reserva entra em espaço ocupado
-			throw(EndHourInsideRes());
+			throw(EndHourInsideRes(resStart,resEnd));
 		else if(startingHour >= resStart && endHour >= resEnd && startingHour <= resEnd)
 			//tempo da reserva esta a meio
-			throw(StartHourInsideRes());
+			throw(StartHourInsideRes(startingHour, endHour));
 		}
 	}
 	return 0;

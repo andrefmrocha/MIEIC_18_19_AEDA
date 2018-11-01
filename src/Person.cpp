@@ -213,6 +213,7 @@ User::User(string name,int age,string gender, bool isGold, string assignedTeache
 	this->isGold = isGold;
 	this->assignedTeacher = assignedTeacher;
 	reports.resize(12);
+	invoices.resize(12);
 }
 
 void User::makeGold()
@@ -258,6 +259,20 @@ void User::setReport(Report report, int month)
 	}
 }
 
+void User::setInvoice(Invoice invoice, int month)
+{
+	if(month > 12)
+				throw(IncorrectMonth());
+
+		if(invoices.at(month-1)!=0)
+		{
+			throw(InvoiceAlreadyExists(month));
+		}
+		else
+		{
+			invoices.at(month-1)= &invoice;
+		}
+}
 
 void User::setReservation(Reservation* reservation)
 {
@@ -288,6 +303,10 @@ string User::getTeacher()
 	return this->assignedTeacher;
 }
 
+vector<Invoice*> User::getInvoices()
+{
+	return invoices;
+}
 
 void User::saveClass(ofstream &outfile, int &indentation)
 {
@@ -334,11 +353,14 @@ void User::saveClass(ofstream &outfile, int &indentation)
 	outfile << "["<< endl;
 	for(size_t i =0; i < invoices.size(); i++)
 	{
-		int in  = indentation;
+		int in = indentation;
+		if(invoices.at(i) != 0)
+		{
 		//invoices.at(i)->loadClass();
 		indentp(outfile,in);
 		outfile << " , ";
 		in++;
+		}
 	}
 	indentp(outfile,indentation);
 	outfile << "]"<< endl;
@@ -394,6 +416,44 @@ void User::loadClass(std::ifstream &inpfile)
 
 }
 */
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//Handling exceptions
+string ReportAlreadyExists::what() const
+{
+	return "The Report of month " + to_string(month) + " is already associated with the user";
+}
+
+string InvoiceAlreadyExists::what() const
+{
+	return "The Invoice of month " + to_string(month) + " is already associated with the user";
+}
+
+
+string ReportNotAvailable::what() const
+{
+	return "There is no report available of month " + to_string(month)  + " associated with the user";
+}
+
+string IncorrectMonth::what() const
+{
+	return "Incorrect month ";
+}
+
+string InsideRes::what() const
+{
+	return "Schedule unavailable. A reservation is already made between " + to_string(resStart) + " and " + to_string(endHour);
+}
+
+string EndHourInsideRes::what() const
+{
+	return "Schedule unavailable. A reservation is already made  between " + to_string(resStart) + " and " + to_string(resEnd);
+}
+
+string StartHourInsideRes::what() const
+{
+	return "Schedule unavailable. A reservation is already made  between " + to_string(StartingHour) + " and " + to_string(endHour);
+}
 
 
 
