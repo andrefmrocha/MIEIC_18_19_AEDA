@@ -253,7 +253,7 @@ Invoice User::getInvoice(int month)
 
 		if(invoices.at(month -1) == 0)
 		{
-			throw(ReportNotAvailable(month));
+			throw(InvoiceNotAvailable(month));
 		}
 		else
 			return *invoices.at(month -1);

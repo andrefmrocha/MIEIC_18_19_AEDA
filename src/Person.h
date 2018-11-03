@@ -112,6 +112,15 @@ public:
 	std::string what() const;
 };
 
+class InvoiceNotAvailable
+{
+public:
+	InvoiceNotAvailable(int month){ this->month =month;}
+	int month;
+	int getMonth(){return month;}
+	std::string what() const;
+};
+
 //setReport getReport setInvoice
 class IncorrectMonth
 {
