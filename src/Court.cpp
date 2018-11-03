@@ -86,7 +86,7 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 	}
 
 	Reservation * lesson = new Lesson(m, d, sH, price, dur);
-	Lesson teacherLesson(m, d, sH, price, dur);
+	Lesson* teacherLesson = new Lesson(m, d, sH, price, dur);
 	user.setReservation(lesson);
 	teacher.setLesson(teacherLesson);
 	return true;

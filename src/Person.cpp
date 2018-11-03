@@ -124,7 +124,7 @@ Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
 	nStudents = 0;
 }
 
-void Teacher::setLesson(Lesson lesson)
+void Teacher::setLesson(Lesson* lesson)
 {
 	/*
 	 * startingHour and endHour are related to reservation to set in vector
@@ -134,13 +134,13 @@ void Teacher::setLesson(Lesson lesson)
 	double startingHour, endHour;
 	int duration;
 
-	duration = lesson.getDuration();
-	startingHour = lesson.getStartingHour();
+	duration = lesson->getDuration();
+	startingHour = lesson->getStartingHour();
 
 	endHour = calculateEndHour(startingHour, duration);
 
 //	if(CheckAvailable(lessons,startingHour,endHour)==0)
-	this->lessons.push_back(&lesson);
+	this->lessons.push_back(lesson);
 }
 
 vector<Lesson*> Teacher::getLessons()
