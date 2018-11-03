@@ -447,6 +447,10 @@ string ReportNotAvailable::what() const
 	return "There is no report available of month " + to_string(month)  + " associated with the user";
 }
 
+string InvoiceNotAvailable::what() const
+{
+	return "There is no invoice available of month " + to_string(month)  + " associated with the user";
+}
 string IncorrectMonth::what() const
 {
 	return "Incorrect month ";
