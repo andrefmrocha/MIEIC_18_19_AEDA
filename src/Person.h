@@ -66,7 +66,7 @@ private:
 class Teacher: public Person {
 public:
 	Teacher(std::string name, int age, std::string gender);
-	void setLesson(Lesson lesson);
+	void setLesson(Lesson* lesson);
 	std::vector<Lesson*> getLessons();
 	void saveClass(std::ofstream &outfile, int &indentation);
 	void addStudent();

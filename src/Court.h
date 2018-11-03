@@ -25,6 +25,7 @@ public:
 	void indent(std::ofstream&outfile, int identation);
 	void readInfo(std::ifstream &infile);
 	int getMaxUsers()const;
+	void setMaxUsers(int users);
 private:
 	void reserveCourt(int month, int day, double startingHour, int duration);
 	void occupied(int month, int day, double startingHour, int duration);

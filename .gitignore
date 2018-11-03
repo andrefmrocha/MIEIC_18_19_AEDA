@@ -315,3 +315,4 @@ Debug
 CMakeLists.txt
 Testing.cpp
 *.json
+cmake-build-debug

@@ -44,6 +44,11 @@ void Court::reserveCourt(int m, int d, double sH, int dur)
 
 }
 
+void Court::setMaxUsers(int users)
+{
+	this->maxUsers = users;
+}
+
 bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 {
 	int dur = 2;
@@ -81,7 +86,7 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 	}
 
 	Reservation * lesson = new Lesson(m, d, sH, price, dur);
-	Lesson teacherLesson(m, d, sH, price, dur);
+	Lesson* teacherLesson = new Lesson(m, d, sH, price, dur);
 	user.setReservation(lesson);
 	teacher.setLesson(teacherLesson);
 	return true;
@@ -89,6 +94,11 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 
 bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 {
+	if(dur > 4 )
+	{
+		cout << "You cannot reserve the court for more than 2 hours!" << endl;
+		return false;
+	}
 	try{
 		occupied(m, d, sH, dur);
 	}
@@ -116,7 +126,12 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 
 void Court::storeInfo(ofstream &outfile, int indentation)
 {
-	outfile << "{ \n \"months\": [" << endl;
+    indent(outfile, indentation);
+	outfile << "{ " << endl;
+	indent(outfile, indentation);
+	outfile << "\"maxUsers\": "<< this->maxUsers <<"," << endl;
+	indent(outfile, indentation);
+	outfile<< "\"months\": [" << endl;
 	indentation++;
 	for(unsigned int i = 1; i < 13; i++)
 	{
@@ -183,8 +198,9 @@ void Court::storeInfo(ofstream &outfile, int indentation)
 //		indentation--;
 	}
 	outfile << "]" << endl;
-	indent(outfile,indentation);
-	outfile << "}" << endl;
+    indentation--;
+    indent(outfile,indentation);
+	outfile << "}";
 }
 
 void Court::indent(std::ofstream &outfile, int identation)
@@ -200,14 +216,18 @@ void Court::readInfo(std::ifstream &infile)
 	string savingString;
 	while (getline(infile, savingString))
 	{
+		if(savingString.find("maxUsers") != string::npos)
+		{
+			this->maxUsers = stoi(savingString.substr(savingString.find("maxUsers") + 11,1));
+		}
 		if (savingString.find('{') != string::npos)
 			continue;
 		if (savingString.find("months") != string::npos)
 			break;
 	}
-
 	Year year;
 	vector<Month> months;
+	int monthCounter = 0;
 	while (getline(infile, savingString))
 	{
 		months.clear();
@@ -218,6 +238,7 @@ void Court::readInfo(std::ifstream &infile)
 		{
 			if (savingString.find("\"month\":") != string::npos)
 			{
+				monthCounter++;
 				flag = true;
 				savingString = savingString.substr(
 						savingString.find("\"month\":") + 9, 2);
@@ -282,7 +303,12 @@ void Court::readInfo(std::ifstream &infile)
 				savingMonth.setDays(days);
 				months.push_back(savingMonth);
 			}
+			if(monthCounter == 12)
+			{
+				break;
+			}
 		}
+		break;
 	}
 	this->currentYear.setMonths(months);
 }
