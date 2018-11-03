@@ -20,7 +20,8 @@ class Invoice {
 public:
 	Invoice(std::string name, std::string teacherName, std::vector<Reservation *> reservs);
 	double getPrice() const;
-	friend std::ostream& operator<<(std::ostream out, Invoice inv);
+	std::vector<Reservation *> getReservs();
+	friend std::ostream& operator<<(std::ostream &out, Invoice inv);
 };
 
 

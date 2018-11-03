@@ -27,12 +27,18 @@ double Invoice::getPrice() const
 	return this->totalPrice;
 }
 
-ostream & operator<<(ostream out, Invoice inv)
+vector<Reservation*> Invoice::getReservs()
+{
+	return reservs;
+}
+ostream & operator<<(ostream &out, Invoice inv)
 {
 	out << "Discrimination of every use of the court by the user:" << endl;
-	for(unsigned int i = 0; i < inv.reservs.size(); i++)
+	for(unsigned int i = 0; i < inv.getReservs().size(); i++)
 	{
-		out << i << " - " << inv.reservs[i]->getDay() << "/" << inv.reservs[i]->getMonth() << " : " << inv.reservs[i]->getPrice() << endl;
+		out << i << " - " << inv.getReservs()[i]->getDay() << "/" << inv.getReservs()[i]->getMonth() << " : " << inv.getReservs()[i]->getPrice() << endl;
 	}
 	out << "Final price:" << inv.getPrice();
+	return out;
 }
+
