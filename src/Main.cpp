@@ -21,12 +21,12 @@ using namespace std;
 int MainIntro()
 {
 	cout << "-------------Tenis Company---------------"<< endl;
-	cout << "-----------------------------------------"<< endl;
-	cout << "Choose option: --------------------------"<< endl;
-	cout << "-----------------------------------------"<< endl;
-	cout << "1.Load Company --------------------------"<< endl;
-	cout << "2.New Company  --------------------------"<< endl;
-	cout << "3.Exit-----------------------------------"<< endl;
+	cout << "                                         "<< endl;
+	cout << "Choose option:                           "<< endl;
+	cout << "                                         "<< endl;
+	cout << "1.Load Company                           "<< endl;
+	cout << "2.New Company                            "<< endl;
+	cout << "3.Exit                                   "<< endl;
 	cout<< "------------------------------------------"<< endl;
 
 	int flag;
@@ -47,13 +47,16 @@ int MainIntro()
 int Menu(const int cardValue)
 {
 	cout << "-------------Company" << cardValue << "---------------" << endl;
-	cout << "-----------------------------------------"<< endl;
-	cout << "Choose option: --------------------------"<< endl;
-	cout << "-----------------------------------------"<< endl;
-	cout << "1.Add Person ----------------------------"<< endl;
-	cout << "2.Add Reservation -----------------------"<< endl;
-	cout << "3.Increment day--------------------------"<<endl;
-	//cout << "4.Go back--------------------------------"<<endl;
+	cout << "                                         "<< endl;
+	cout << "Choose option:                           "<< endl;
+	cout << "                                         "<< endl;
+	cout << "1.Add Person                             "<< endl;
+	cout << "2.Add Reservation                        "<< endl;
+	cout << "3.Increment day                          "<<endl;
+    cout << "4.Exit                                   "<<endl;
+    cout << "-----------------------------------------"<< endl;
+
+	//cout << "5.Go back--------------------------------"<<endl;
 
 
 	int flag;
@@ -89,7 +92,8 @@ int main()
 	//double price;
 	//duration -- unsigned int --problem?
 	int duration;
-
+    /////////////////
+    int save;
 
 	////////////////////////////////////
 	int flag = MainIntro();
@@ -142,7 +146,7 @@ int main()
 				{
 
 				cout << "Name: " << endl;
-				cin >> name;
+				cin>>name;
 				cout << "Age: " << endl;
 				cin >> age;
 				cout << "Gender" << endl;
@@ -154,7 +158,11 @@ int main()
 
 					cin >> isGold;
 
-					if (!(C.registerUser(name, age, isGold, gender)))
+					if(C.getTeachers().empty())
+					{
+						cout << "Can't added Users.Company needs teachers first."<< endl;cout << "                                         "<< endl;
+					}
+					else if (!(C.registerUser(name, age, isGold, gender)))
 						cout << "Error adding User. Try again" << endl;
 
 				} else if (flagP == 2) {
@@ -222,6 +230,19 @@ int main()
 			{
 				//Date++;
 				break;
+			}
+			case 4:
+			{
+                 cout << "Save and exit? " << endl;
+                 cout << "1.Yes 0.No" << endl;
+                 cin>> save;
+
+                 if(save == 1)
+                 {
+                     //save function
+                 }
+                 return 0;
+
 			}
 			}
 
