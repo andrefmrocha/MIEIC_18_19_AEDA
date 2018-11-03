@@ -67,11 +67,11 @@ void Person::saveClass(ofstream &outfile, int &indentation)
 	outfile << "{" << endl;
 	indentation++;
 	indentp(outfile,indentation);
-	outfile << "\"Name\": " << "\"" << name<<  "\"" << "," <<  endl;
+	outfile << "\"name\": " << "\"" << name<<  "\"" << "," <<  endl;
 	indentp(outfile,indentation);
-	outfile << " \"Age\": "<< "\"" << age  << "\"" << "," <<  endl;
+	outfile << "\"age\": "<< "\"" << age  << "\"" << "," <<  endl;
 	indentp(outfile,indentation);
-	outfile << " \"Gender\": "<< "\"" << gender  << "\""  << "," << endl;
+	outfile << "\"gender\": "<< "\"" << gender  << "\""  << "," << endl;
 }
 
 bool Person::operator == (const Person & p1)
@@ -162,18 +162,20 @@ void Teacher::saveClass(ofstream &outfile, int &indentation)
 {
 	Person::saveClass(outfile,indentation);
 
-	indentation++;
 	indentp(outfile,indentation);
 	outfile<< "\"lessons\": ";
 	outfile << "["<< endl;
 	for(size_t i= 0; i < lessons.size(); i++)
 	{
-		int in  = indentation;
-		//reservations.at(i)->loadClass();
-		indentp(outfile,in);
-		outfile << " , ";
-		in++;
+		indentation++;
+		if(lessons.at(i) != 0)
+		{
+		indentp(outfile,indentation);
+		//reports.at(i)->loadClass();
+		outfile << " , " <<endl;
+		}
 	}
+	indentation--;
 	indentp(outfile,indentation);
 	outfile << "]"<< endl;
 
@@ -315,57 +317,54 @@ void User::saveClass(ofstream &outfile, int &indentation)
 	indentp(outfile,indentation);
 	outfile << "\"isGold\": "<< "\""<< isGold << "\""<< "," << endl;
 	indentp(outfile,indentation);
-	outfile << "\"Assigned Teacher\": "<< "\""<< assignedTeacher <<"\"" << "," <<  endl;
-	indentation++;
-
+	outfile << "\"assigned Teacher\": "<< "\""<< assignedTeacher <<"\"" << "," <<  endl;
 	indentp(outfile,indentation);
 	outfile<< "\"reports\": ";
 	outfile << "["<< endl;
+	int in=indentation+1;
 	for(size_t i =0; i < reports.size(); i++)
 	{
-		int in = indentation;
 		if(reports.at(i) != 0)
 		{
-		//reports.at(i)->loadClass();
 		indentp(outfile,in);
-		outfile << " , ";
-		in++;
+		//reports.at(i)->loadClass();
+		outfile << " , " <<endl;
 		}
 	}
-	outfile << "]"<< endl;
+	indentp(outfile,indentation);
+	outfile << "]"<<","<<endl;
 
 	indentp(outfile,indentation);
 	outfile<< "\"reservations\": ";
 	outfile << "["<< endl;
 	for(size_t i =0; i < reservations.size(); i++)
 	{
-		int in  = indentation;
-		//reservations.at(i)->loadClass();
+		if(reservations.at(i) != 0)
+		{
 		indentp(outfile,in);
-		outfile << " , ";
-		in++;
+		//reports.at(i)->loadClass();
+		outfile << " , " <<endl;
+		}
 	}
 	indentp(outfile,indentation);
-	outfile << "]"<< endl;
+	outfile << "]"<< ","<<endl;
 
 	indentp(outfile,indentation);
 	outfile<< "\"invoices\": ";
 	outfile << "["<< endl;
 	for(size_t i =0; i < invoices.size(); i++)
 	{
-		int in = indentation;
 		if(invoices.at(i) != 0)
 		{
-		//invoices.at(i)->loadClass();
 		indentp(outfile,in);
-		outfile << " , ";
-		in++;
+		//reports.at(i)->loadClass();
+		outfile << " , " <<endl;
 		}
 	}
+
 	indentp(outfile,indentation);
 	outfile << "]"<< endl;
 
-	indentation--;
 	indentation--;
 	indentp(outfile,indentation);
 	outfile<<"}"<< endl;
