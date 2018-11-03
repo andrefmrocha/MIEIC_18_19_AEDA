@@ -44,6 +44,7 @@ public:
 	void stopGold();
 	bool getisGold();
 	Report getReport(int month);
+	Invoice getInvoice(int month);
 	std::vector<Invoice*> getInvoices();
 	std::vector<Reservation*> getReservations();
 	std::string getTeacher();

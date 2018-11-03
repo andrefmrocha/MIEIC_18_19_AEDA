@@ -246,6 +246,19 @@ Report User::getReport(int month)
 		return *reports.at(month -1);
 }
 
+Invoice User::getInvoice(int month)
+{
+	if(month > 12)
+			throw(IncorrectMonth());
+
+		if(invoices.at(month -1) == 0)
+		{
+			throw(ReportNotAvailable(month));
+		}
+		else
+			return *invoices.at(month -1);
+}
+
 void User::setReport(Report report, int month)
 {
 	if(month > 12)
