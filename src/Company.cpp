@@ -31,6 +31,30 @@ void Company::createCourt()
 
 }
 
+vector<Court> Company::getCourts()
+{
+	return tennisCourts;
+}
+
+vector<User> Company::getUsers()
+{
+	return users;
+}
+
+vector<Teacher> Company::getTeachers()
+{
+	return teachers;
+}
+
+int Company::getUser(string userName)
+{
+	for(int i = 0; i< users.size();i++)
+	{
+		if(users[i].getName() == userName)
+			return i;
+	}
+	return -1;
+}
 
 bool Company::makeLesson(int month,int day,double startingHour,string userName,string teacherName)
 {
@@ -39,7 +63,7 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 	size_t teacher_i=0;
 	for(size_t j =0;j<users.size();j++)
 	{
-		if(users[j]->getName() == userName)
+		if(users[j].getName() == userName)
 		{
 			flag=false;
 			user_i=j;
@@ -61,7 +85,7 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 		throw(NoTeacherRegistered(teacherName));
 	for(size_t j =0; j<tennisCourts.size();j++)
 	{
-		if(tennisCourts[j].reserveClass(month,day,startingHour,*users[user_i],teachers[teacher_i]))
+		if(tennisCourts[j].reserveClass(month,day,startingHour,users[user_i],teachers[teacher_i]))
 			return true;
 	}
 	return false;
@@ -73,7 +97,7 @@ bool Company::makeFree(int month,int day,double startingHour, int duration,strin
 		size_t user_i=0;
 		for(size_t j =0;j<users.size();j++)
 		{
-			if(users[j]->getName() == username)
+			if(users[j].getName() == username)
 			{
 				flag=false;
 				user_i=j;
@@ -83,7 +107,7 @@ bool Company::makeFree(int month,int day,double startingHour, int duration,strin
 		throw(NoUserRegistered(username));
 	for(size_t j =0; j<tennisCourts.size();j++)
 		{
-			if(tennisCourts[j].reserveFree(month,day,startingHour,duration,*users[user_i]))
+			if(tennisCourts[j].reserveFree(month,day,startingHour,duration,users[user_i]))
 				return true;
 		}
 		return false;
@@ -94,10 +118,9 @@ bool Company::registerUser(string name, int age,bool isGold,string gender)
 	if (age <0)
 		throw(InvalidAge(age));
 	bool flag =false;
-	cout << users.size() << endl;
-	for(size_t i =0; i<users.size();i++)
+	for(size_t i = 0; i<users.size();i++)
 	{
-		if(users[i]->getName() == name){
+		if(users[i].getName() == name){
 			flag=true;
 			break;
 		}
@@ -110,10 +133,8 @@ bool Company::registerUser(string name, int age,bool isGold,string gender)
 		if (teachers[i2].getnStudents() >= teachers[i].getnStudents())
 			i2 = i;
 	}
-	teachers[i2].addStudent();
 	User newuser(name,age,gender,isGold,teachers[i2].getName());
-	users.push_back(&newuser);
-
+	users.push_back(newuser);
 	return true;
 }
 
@@ -144,7 +165,7 @@ bool Company::makeUserReport(int month,string userName,string teacherName, int g
 	size_t teacher_i=0;
 	for(size_t j =0;j<users.size();j++)
 	{
-		if(users[j]->getName() == userName)
+		if(users[j].getName() == userName)
 		{
 			flag=false;
 		user_i=j;
@@ -167,12 +188,13 @@ bool Company::makeUserReport(int month,string userName,string teacherName, int g
 
 	try
 	{
-		Report newr(userName,teacherName,grade,addcomm,users[user_i]->getReservations());
-		users[user_i]->setReport(newr,month);
+		Report newr(userName,teacherName,grade,addcomm,users[user_i].getReservations());
+		users[user_i].setReport(newr,month);
 	}
 	catch(InvalidGrade &ig)
 	{
 		cout << ig ;
+		return false;
 	}
 	catch (ReportAlreadyExists &r)
 	{
@@ -188,18 +210,18 @@ bool Company::makeUserInvoice(string userName,int month, vector<Reservation *> r
 		size_t user_i=0;
 		for(size_t j =0;j<users.size();j++)
 		{
-			if(users[j]->getName() == userName)
+			if(users[j].getName() == userName)
 			{
 				flag=false;
-			user_i=j;
+				user_i=j;
 			}
 		}
 		if(flag)
 			throw(NoUserRegistered(userName));
-		Invoice newinvoice(users[user_i]->getName(),users[user_i]->getTeacher(),users[user_i]->getReservations());
+		Invoice newinvoice(users[user_i].getName(),users[user_i].getTeacher(),users[user_i].getReservations());
 		try
 		{
-			users[user_i]->setInvoice(newinvoice,month);
+			users[user_i].setInvoice(newinvoice,month);
 		}
 		catch(IncorrectMonth &e)
 		{
@@ -214,7 +236,49 @@ bool Company::makeUserInvoice(string userName,int month, vector<Reservation *> r
 		return true;
 }
 
+bool Company::showReport(string name, int month)
+{
+		int i = getUser(name);
+		if (i == -1)
+			throw(NoUserRegistered(name));
+		try
+		{
+			cout << users[i].getReport(month);
+		}
+		catch (IncorrectMonth &e)
+		{
+			cout << e.what() << endl;
+			return false;
+		}
+		catch (ReportNotAvailable &e)
+		{
+			cout << e.what() << endl;
+			return false;
+		}
+		return true;
+}
 
+bool Company::showInvoice(string name,int month)
+{
+		int i = getUser(name);
+		if (i == -1)
+			throw(NoUserRegistered(name));
+		try
+		{
+			cout << users[i].getInvoice(month);
+		}
+		catch (IncorrectMonth &e)
+		{
+			cout << e.what() << endl;
+			return false;
+		}
+		catch (InvoiceNotAvailable &e)
+		{
+			cout << e.what() << endl;
+			return false;
+		}
+		return true;
+}
 string NoUserRegistered::what() const
 {
 	return "The user with name: " + name + ", is not registered in the system. Please register first.";
