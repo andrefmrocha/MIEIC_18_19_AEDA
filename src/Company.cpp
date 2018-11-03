@@ -30,7 +30,8 @@ void Company::createCourt()
 	tennisCourts.push_back(newcourt);
 
 }
-//Needs: check error using reserveClass function
+
+
 bool Company::makeLesson(int month,int day,double startingHour,string userName,string teacherName)
 {
 	bool flag=true;
@@ -60,12 +61,12 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 		throw(NoTeacherRegistered(teacherName));
 	for(size_t j =0; j<tennisCourts.size();j++)
 	{
-		//if(tennisCourts[j].reserveClass(month,day,startingHour,users[user_i],teachers[teacher_i]))
+		if(tennisCourts[j].reserveClass(month,day,startingHour,*users[user_i],teachers[teacher_i]))
 			return true;
 	}
 	return false;
 }
-//Needs: check error using reserveFree function
+
 bool Company::makeFree(int month,int day,double startingHour, int duration,string username)
 {
 	bool flag=true;
@@ -82,53 +83,60 @@ bool Company::makeFree(int month,int day,double startingHour, int duration,strin
 		throw(NoUserRegistered(username));
 	for(size_t j =0; j<tennisCourts.size();j++)
 		{
-			//if(tennisCourts[j].reserveFree(month,day,startingHour,duration,users[user_i]))
+			if(tennisCourts[j].reserveFree(month,day,startingHour,duration,*users[user_i]))
 				return true;
 		}
 		return false;
 }
 
-//Needs: teacher method to assign, create exceptions
 bool Company::registerUser(string name, int age,bool isGold,string gender)
 {
-	/*if (age <0)
-		throw(InvalidAge(int age));
+	if (age <0)
+		throw(InvalidAge(age));
 	bool flag =false;
+	cout << users.size() << endl;
 	for(size_t i =0; i<users.size();i++)
 	{
-		if(users[i]->getName() == name)
+		if(users[i]->getName() == name){
 			flag=true;
+			break;
+		}
 	}
 	if(flag)
 		throw (AlreadyRegisteredUser(name));
-	//here check which teacher to assign
-	User newuser(name,age,gender);
+	size_t i2=0;
+	for(size_t i = 1; i < teachers.size();i++)
+	{
+		if (teachers[i2].getnStudents() >= teachers[i].getnStudents())
+			i2 = i;
+	}
+	teachers[i2].addStudent();
+	User newuser(name,age,gender,isGold,teachers[i2].getName());
 	users.push_back(&newuser);
-	*/
+
 	return true;
 }
 
-//Needs: create exceptions
+
 bool Company::registerTeacher(string teacherName, int age,string gender)
 {
-	/*if (age <0)
-		throw(InvalidAge(int age));
+	if (age <0)
+		throw(InvalidAge(age));
 	bool flag =false;
-	for(size_t i =0; i<users.size();i++)
+	for(size_t i =0; i<teachers.size();i++)
 	{
-		if(users[i]->getName() == name)
+		if(teachers[i].getName() == teacherName)
 			flag=true;
 	}
 	if(flag)
-		throw (AlreadyRegisteredUser(name));
+		throw (AlreadyRegisteredTeacher(teacherName));
 
-	Teacher newteacher(name,age,gender);
+	Teacher newteacher(teacherName,age,gender);
 	teachers.push_back(newteacher);
-	*/
+
 	return true;
 }
 
-//Needs: get vector of lessons from user's reservation, needs what() for ReportAlreadyExists exception
 bool Company::makeUserReport(int month,string userName,string teacherName, int grade,string addcomm)
 {
 	bool flag=true;
@@ -156,29 +164,25 @@ bool Company::makeUserReport(int month,string userName,string teacherName, int g
 	}
 	if(flag)
 		throw(NoTeacherRegistered(teacherName));
-	/*
+
 	try
 	{
-		Report newr(userName,teacherName,grade,addcomm,COLOCAR_VETOR_LESSONS);
+		Report newr(userName,teacherName,grade,addcomm,users[user_i]->getReservations());
+		users[user_i]->setReport(newr,month);
 	}
 	catch(InvalidGrade &ig)
 	{
 		cout << ig ;
 	}
-	try
-	{
-		users[user_i]->setReport(newr,month);
-	}
 	catch (ReportAlreadyExists &r)
 	{
 		cout << r.what() << endl;
 		return false;
-	}*/
+	}
 	return true;
 }
 
-//Needs: setInvoice for user
-bool Company::makeUserInvoice(string userName,vector<Reservation *> reservs)
+bool Company::makeUserInvoice(string userName,int month, vector<Reservation *> reservs)
 {
 	bool flag=true;
 		size_t user_i=0;
@@ -193,7 +197,20 @@ bool Company::makeUserInvoice(string userName,vector<Reservation *> reservs)
 		if(flag)
 			throw(NoUserRegistered(userName));
 		Invoice newinvoice(users[user_i]->getName(),users[user_i]->getTeacher(),users[user_i]->getReservations());
-		//users[user_i]->setInvoice(newinvoice);
+		try
+		{
+			users[user_i]->setInvoice(newinvoice,month);
+		}
+		catch(IncorrectMonth &e)
+		{
+			cout << e.what() << endl;
+			return false;
+		}
+		catch(InvoiceAlreadyExists &e)
+		{
+			cout << e.what()<<endl;
+			return false;
+		}
 		return true;
 }
 
@@ -206,4 +223,19 @@ string NoUserRegistered::what() const
 string NoTeacherRegistered::what() const
 {
 	return "The teacher with name: " + name + ", is not registered in the system. Please register first.";
+}
+
+string InvalidAge::what() const
+{
+	return "This age is invalid: " + to_string(this->age);
+}
+
+string AlreadyRegisteredUser::what() const
+{
+	return "There is already a registered user with the name: " + this->name;
+}
+
+string AlreadyRegisteredTeacher::what() const
+{
+	return "There is already a registered teacher with the name: " + this->name;
 }

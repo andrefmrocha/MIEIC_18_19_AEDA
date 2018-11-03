@@ -28,7 +28,7 @@ public:
 	bool registerUser(std::string name, int age,bool isGold,std::string gender);
 	bool registerTeacher(std::string teacherName,int age,std::string gender);
 	bool makeUserReport(int month,std::string userName,std::string teacherName, int grade,std::string addcomm);
-	bool makeUserInvoice(std::string userName, std::vector<Reservation *> reservs);
+	bool makeUserInvoice(std::string userName, int month, std::vector<Reservation *> reservs);
 	//bool updateInfoUser (std::string name, int age, bool isGold, std::string gender);
 	//bool updateInfoTeacher (std::string teacherName,int age ,std::string gender);
 	//std::ostream& operator <<(std::ostream & os, Company c);
@@ -53,6 +53,33 @@ private:
 	std::string name;
 public:
 	NoTeacherRegistered(std::string name) {this->name = name;}
+	std::string what()const;
+};
+
+class InvalidAge
+{
+private:
+	int age;
+public:
+	InvalidAge(int age) { this->age=age;}
+	std::string what()const;
+};
+
+class AlreadyRegisteredUser
+{
+private:
+	std::string name;
+public:
+	AlreadyRegisteredUser(std::string name) { this->name=name;}
+	std::string what()const;
+};
+
+class AlreadyRegisteredTeacher
+{
+private:
+	std::string name;
+public:
+	AlreadyRegisteredTeacher(std::string name) { this->name=name;}
 	std::string what()const;
 };
 
