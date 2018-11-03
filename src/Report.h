@@ -16,19 +16,19 @@
 
 class Report{
 private:
-	std::vector<Lesson*> reservations;
+	std::vector<Reservation*> reservations;
 	std::string name;
 	std::string teacherName;
 	std::string addcomm;
 	int grade;
 public:
-	Report(std::string userName, std::string teacherName,int grade, std::string addcomm,const std::vector<Lesson*> &reservs);
+	Report(std::string userName, std::string teacherName,int grade, std::string addcomm,const std::vector<Reservation*> &reservs);
 	friend std::ostream & operator <<(std::ostream & os,Report r);
 	std::string getName();
 	std::string getTeacherName();
 	std::string getAddComm();
 	int getGrade();
-	std::vector<Lesson*> getLessons();
+	std::vector<Reservation*> getLessons();
 
 };
 

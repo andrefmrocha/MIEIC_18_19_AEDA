@@ -13,7 +13,7 @@ using namespace std;
 
 
 
-Report::Report(string userName,string teacherName,int grade, string addcomm, const vector<Lesson*> &reservs)
+Report::Report(string userName,string teacherName,int grade, string addcomm, const vector<Reservation*> &reservs)
 {
 	if (grade > 5 || grade < 1)
 		throw (InvalidGrade(grade));
@@ -41,7 +41,7 @@ int Report::getGrade()
 {
 	return grade;
 }
-vector<Lesson*> Report::getLessons()
+vector<Reservation*> Report::getLessons()
 {
 	return reservations;
 }
