@@ -94,7 +94,7 @@ int main()
 	int duration;
     /////////////////
     int save;
-
+    unsigned int year, day,month;
 	////////////////////////////////////
 	int flag = MainIntro();
 
@@ -102,7 +102,13 @@ int main()
 	{
 	case 1:
 	{
-		//new company
+		cout << "Please enter date (day month year): "<< endl;
+		cin>> day;
+		cin>> month;
+		cin>> year;
+
+		Date D(d,m,year);
+
 		int flagMenu = 0;
 
 		Company C(cardValue, 2018);
@@ -228,7 +234,7 @@ int main()
 			}
 			case 3:
 			{
-				//Date++;
+				//D++;
 				break;
 			}
 			case 4:
