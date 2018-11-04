@@ -77,9 +77,6 @@ void Reservation::indent(std::ofstream &outfile, int indent)
 void Reservation::storeInfo(std::ofstream &outfile, int indent)
 {
 	Reservation::indent(outfile, indent);
-	outfile << "{" << endl;
-	indent++;
-	Reservation::indent(outfile, indent);
 	outfile << "\"price\": " << this->price << "," << endl;
 	Reservation::indent(outfile, indent);
 	outfile << "\"duration\": " << this->duration<< "," << endl;
@@ -148,4 +145,25 @@ void Reservation::readInfo(std::ifstream &infile)
 			break;
 		}
 	}
+}
+
+
+void Free::storeInfo(std::ofstream &outfile, int indent)
+{
+    Reservation::indent(outfile, indent);
+    outfile << "{" << endl;
+    indent++;
+    Reservation::indent(outfile, indent);
+    outfile << "\"type\": " << "\"free\", " << endl;
+    Reservation::storeInfo(outfile, indent);
+}
+
+void Lesson::storeInfo(std::ofstream &outfile, int indent)
+{
+    Reservation::indent(outfile, indent);
+    outfile << "{" << endl;
+    indent++;
+    Reservation::indent(outfile, indent);
+    outfile << "\"type\": " << "\"lesson\", " << endl;
+    Reservation::storeInfo(outfile, indent);
 }

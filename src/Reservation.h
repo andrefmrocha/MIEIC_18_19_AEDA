@@ -28,7 +28,7 @@ public:
 	int getMonth();
 	int getDay();
 	bool operator ==(Reservation &r) const;
-	void storeInfo(std::ofstream &outfile, int indent);
+	virtual void storeInfo(std::ofstream &outfile, int indent);
 	void indent(std::ofstream &outfile, int indent);
 	void readInfo(std::ifstream &infile);
 };
@@ -38,6 +38,7 @@ public:
 	Lesson(){};
 	Lesson(int m,int d,int strHr,double price,unsigned int dr);
 	double getPrice();
+	void storeInfo(std::ofstream &outfile,int indent);
 };
 
 class Free : public Reservation {
@@ -45,6 +46,7 @@ public:
 	Free(){};
 	Free(int m,int d,int strHr,double p,unsigned int dur);
 	double getPrice();
+	void storeInfo(std::ofstream &outfile,int indent);
 };
 
 
