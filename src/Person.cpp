@@ -23,6 +23,12 @@ void indentp(std::ofstream &outfile, int &indentation)
 ////////////////////////////////////////////////////////////////////////////
 //////////////////Person////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
+
+Person::Person()
+{
+
+}
+
 Person::Person(string name,int age,string gender)
 {
 	this->name=name;
@@ -86,25 +92,30 @@ void Person::loadClass(std::ifstream &inpfile)
 
 	while(getline(inpfile, savingString))
 	{
-		if(savingString.find("{") !=-1)
+		if(savingString.find("{") !=string::npos)
 			continue;
 		else
-			if(savingString.find("\"Name\": ") != -1)
+		{
+			if(savingString.find("\"name\": ") != string::npos)
 			{
-				savingString = savingString.substr(savingString.find(":")+2, savingString.find(","));
+				savingString = savingString.substr(savingString.find(":")+3);
+				savingString = savingString.substr(0, savingString.find(",")-1);
 				this->name =savingString;
 			}
-			if(savingString.find("\"Age\"") != -1)
+			if(savingString.find("\"age\"") != string::npos)
 			{
-				savingString = savingString.substr(savingString.find(":")+2 , savingString.find(","));
+				savingString = savingString.substr(savingString.find(":")+3);
+				savingString = savingString.substr(0, savingString.find(",")-1);
 				this->age= stoi(savingString);
 			}
-			if(savingString.find("\"Gender\": ") != -1)
+			if(savingString.find("\"gender\": ") != string::npos)
 			{
-				savingString = savingString.substr(savingString.find(":")+2 , savingString.find(","));
+				savingString = savingString.substr(savingString.find(":")+3);
+				savingString = savingString.substr(0, savingString.find(",")-1);
 				 this->gender = savingString;
 				 break;
 			}
+		}
 	}
 
 }
@@ -119,6 +130,10 @@ double calculateEndHour(double startinghour, int duration)
 ////////////////////////////////////////////////////////////////////////////
 //////////////////Teacher///////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
+Teacher::Teacher()
+{
+
+}
 
 Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
 {
@@ -214,6 +229,11 @@ void Teacher::loadClass(std::ifstream &inpfile)
 ////////////////////////////////////////////////////////////////////////////
 //////////////////User//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
+User::User()
+{
+
+}
+
 
 User::User(string name,int age,string gender, bool isGold, string assignedTeacher):Person(name,age,gender)
 {
@@ -394,11 +414,12 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 void User::loadClass(std::ifstream &inpfile)
 {
 	Person::loadClass(inpfile);
-
+	bool flag = false;
 	string savingString;
 
 
-
+	while(getline(inpfile, savingString) && flag)
+	{
 		if(savingString.find("\"isGold\": ") != string::npos)
 		{
 			int i= stoi(savingString.substr(savingString.find("\"isGold\": "), savingString.find(",")));
@@ -456,6 +477,8 @@ void User::loadClass(std::ifstream &inpfile)
 				invoices.push_back(I);
 				getline(inpfile, savingString); //}
 			}
+			flag =true;
+	}
 	}
 
 }
