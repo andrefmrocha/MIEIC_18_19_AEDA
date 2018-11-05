@@ -147,6 +147,15 @@ void Reservation::readInfo(std::ifstream &infile)
 	}
 }
 
+void Free::readInfo(std::ifstream &infile)
+{
+	Reservation::readInfo(infile);
+}
+
+void Lesson::readInfo(std::ifstream &infile)
+{
+	Reservation::readInfo(infile);
+}
 
 void Free::storeInfo(std::ofstream &outfile, int indent)
 {

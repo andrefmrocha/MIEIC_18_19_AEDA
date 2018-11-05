@@ -61,7 +61,7 @@ void  Person::setGender(string gender)
 }
 
 
-void Person::saveClass(ofstream &outfile, int &indentation)
+void Person::storeInfo(ofstream &outfile, int &indentation)
 {
 	indentp(outfile,indentation);
 	outfile << "{" << endl;
@@ -79,14 +79,14 @@ bool Person::operator == (const Person & p1)
 	return this->getName() == p1.getName();
 }
 
-/*
+
 void Person::loadClass(std::ifstream &inpfile)
 {
 	string savingString;
 
 	while(getline(inpfile, savingString))
 	{
-		if(savingString.find("{") !=-1  || savingString.find("[") !=-1)
+		if(savingString.find("{") !=-1)
 			continue;
 		else
 			if(savingString.find("\"Name\": ") != -1)
@@ -103,10 +103,11 @@ void Person::loadClass(std::ifstream &inpfile)
 			{
 				savingString = savingString.substr(savingString.find(":")+2 , savingString.find(","));
 				 this->gender = savingString;
+				 break;
 			}
 	}
 
-}*/
+}
 ////////////////////////////////////////////////////////////////////////////
 double calculateEndHour(double startinghour, int duration)
 {
@@ -158,24 +159,23 @@ void Teacher::addStudent()
 	nStudents++;
 }
 
-void Teacher::saveClass(ofstream &outfile, int &indentation)
+void Teacher::storeInfo(ofstream &outfile, int &indentation)
 {
-	Person::saveClass(outfile,indentation);
+	Person::storeInfo(outfile,indentation);
 
 	indentp(outfile,indentation);
 	outfile<< "\"lessons\": ";
 	outfile << "["<< endl;
 	for(size_t i= 0; i < lessons.size(); i++)
 	{
-		indentation++;
+		int in=indentation+1;;
 		if(lessons.at(i) != 0)
 		{
 		indentp(outfile,indentation);
-		//reports.at(i)->loadClass();
+		lessons.at(i)->storeInfo(outfile,in);
 		outfile << " , " <<endl;
 		}
 	}
-	indentation--;
 	indentp(outfile,indentation);
 	outfile << "]"<< endl;
 
@@ -185,25 +185,30 @@ void Teacher::saveClass(ofstream &outfile, int &indentation)
 
 }
 
-/*
+
 void Teacher::loadClass(std::ifstream &inpfile)
 {
 	Person::loadClass(inpfile);
 
 	string savingString;
 
-	while(getline(inpfile, savingString) && savingString.find("]") != -1)
-	{
-		string aux;
-		while(aux != "")
+	getline(inpfile, savingString); //lessons
+
+		if(savingString.find("lessons") != string::npos)
 		{
-		aux = savingString.substr(0, savingString.find(","));
-		//loadlessons
+		while(getline(inpfile, savingString) && savingString.find("]") )
+		{
+			getline(inpfile, savingString); //linha type
+			Lesson *A = new Lesson();
+			getline(inpfile, savingString);
+			A->readInfo(inpfile);
+			lessons.push_back(A);
+			getline(inpfile, savingString); //}
+
+		}
 		}
 
-	}
-
-}*/
+}
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -323,16 +328,16 @@ vector<Invoice*> User::getInvoices()
 	return invoices;
 }
 
-void User::saveClass(ofstream &outfile, int &indentation)
+void User::storeInfo(ofstream &outfile, int &indentation)
 {
-	Person::saveClass(outfile, indentation);
+	Person::storeInfo(outfile, indentation);
 
 	indentp(outfile,indentation);
 	outfile << "\"isGold\": "<< "\""<< isGold << "\""<< "," << endl;
 	indentp(outfile,indentation);
 	outfile << "\"assigned Teacher\": "<< "\""<< assignedTeacher <<"\"" << "," <<  endl;
 	indentp(outfile,indentation);
-	outfile<< "\"reports\": ";
+	/*outfile<< "\"reports\": ";
 	outfile << "["<< endl;
 	int in=indentation+1;
 	for(size_t i =0; i < reports.size(); i++)
@@ -345,17 +350,18 @@ void User::saveClass(ofstream &outfile, int &indentation)
 		}
 	}
 	indentp(outfile,indentation);
-	outfile << "]"<<","<<endl;
+	outfile << "]"<<","<<endl;*/
 
 	indentp(outfile,indentation);
 	outfile<< "\"reservations\": ";
 	outfile << "["<< endl;
+	int in=indentation+1;
 	for(size_t i =0; i < reservations.size(); i++)
 	{
 		if(reservations.at(i) != 0)
 		{
 		indentp(outfile,in);
-		//reports.at(i)->loadClass();
+		reservations.at(i)->storeInfo(outfile,in);
 		outfile << " , " <<endl;
 		}
 	}
@@ -370,7 +376,7 @@ void User::saveClass(ofstream &outfile, int &indentation)
 		if(invoices.at(i) != 0)
 		{
 		indentp(outfile,in);
-		//reports.at(i)->loadClass();
+		invoices.at(i)->storeInfo(outfile,in);
 		outfile << " , " <<endl;
 		}
 	}
@@ -384,50 +390,76 @@ void User::saveClass(ofstream &outfile, int &indentation)
 
 }
 
-/*
+
 void User::loadClass(std::ifstream &inpfile)
 {
 	Person::loadClass(inpfile);
 
 	string savingString;
 
-	while(getline(inpfile, savingString) && savingString.find("]") != -1)
-	{
-		string aux;
-		while(aux != "")
+
+
+		if(savingString.find("\"isGold\": ") != string::npos)
 		{
-		aux = savingString.substr(0, savingString.find(","));
+			int i= stoi(savingString.substr(savingString.find("\"isGold\": "), savingString.find(",")));
+			if(i == 1)
+				this->isGold = true;
+			else
+				this->isGold = false;
+		}
+
+		if(savingString.find("\"assigned Teacher\": ") != string::npos)
+		{
+			this->assignedTeacher = (savingString.substr(savingString.find("\"assigned Teacher\": "), savingString.find(",")));
+		}
+
+
+		/*while(getline(inpfile, savingString) && savingString.find("]") != -1)
+		{
+		 savingString.substr(0, savingString.find(","));
 		//loadReport e pushback
 		}
 
-	}
+		}*/
 
-	while(getline(inpfile, savingString) && savingString.find("]") != -1)
+	if(savingString.find("\"reservations\": ") != string::npos)
 	{
-		string aux;
-		while(aux != "")
-		{
-		aux = savingString.substr(0, savingString.find(","));
-		//loadReservations e pushback
-		}
 
+		while(getline(inpfile, savingString) && savingString.find("]"))
+		{
+			getline(inpfile, savingString);// type
+		if(savingString.find("\"free\"")!= string::npos)
+		{
+			Free *F = new Free();
+			F->readInfo(inpfile);
+			reservations.push_back(F);
+			getline(inpfile, savingString); //}
+
+		}
+		else if(savingString.find("\"lesson\"") != string::npos)
+		{
+			Lesson *L = new Lesson();
+			L->readInfo(inpfile);
+			reservations.push_back(L);
+			getline(inpfile, savingString); //}
+		}
+		}
 	}
 
-	while(getline(inpfile, savingString) && savingString.find("]") != -1)
+
+	if(savingString.find("\"invoices\": ") != string::npos)
 	{
-		string aux;
-		while(aux != "")
-		{
-		aux = savingString.substr(0, savingString.find(","));
-		//loadinvoices e pushback
-		}
-
+			while(getline(inpfile, savingString) && savingString.find("]"))
+			{
+				Invoice *I = new Invoice();
+				I->readInfo(inpfile);
+				invoices.push_back(I);
+				getline(inpfile, savingString); //}
+			}
 	}
-
-
 
 }
-*/
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //Handling exceptions

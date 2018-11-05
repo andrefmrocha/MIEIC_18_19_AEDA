@@ -20,6 +20,7 @@
 class Person
 {
 public:
+	Person();
 	Person(std::string name,int age, std::string gender);
 	std::string getName() const;
 	int getAge();
@@ -27,8 +28,8 @@ public:
 	void setName(std::string name);
 	void setAge(int age);
 	void setGender(std::string gender);
-	virtual void saveClass(std::ofstream &outfile, int &indentation);
-	//virtual void loadClass(std::ifstream &inpfile);
+	virtual void storeInfo(std::ofstream &outfile, int &indentation);
+	virtual void loadClass(std::ifstream &inpfile);
 	bool operator == (const Person &p1);
 private:
 	std::string name;
@@ -39,6 +40,7 @@ private:
 //////////////////////////////////////////////////
 class User :public Person {
 public:
+	User();
 	User(std::string name,int age, std::string gender, bool isGold, std::string assignedTeacher);
 	void makeGold();
 	void stopGold();
@@ -51,8 +53,8 @@ public:
 	void setInvoice(Invoice invoice, int month);
 	void setReport(Report report, int month);
 	void setReservation(Reservation* reservation);
-	void saveClass(std::ofstream &outfile, int &indentation);
-	//void loadClass(std::ifstream &inpfile);
+	void storeInfo(std::ofstream &outfile, int &indentation);
+	void loadClass(std::ifstream &inpfile);
 private:
 	bool isGold;
 	std::string assignedTeacher;
@@ -66,13 +68,14 @@ private:
 
 class Teacher: public Person {
 public:
+	Teacher();
 	Teacher(std::string name, int age, std::string gender);
 	void setLesson(Lesson* lesson);
 	std::vector<Lesson*> getLessons();
-	void saveClass(std::ofstream &outfile, int &indentation);
+	void storeInfo(std::ofstream &outfile, int &indentation);
 	void addStudent();
 	int getnStudents();
-	//void loadClass(std::ifstream &inpfile);
+	void loadClass(std::ifstream &inpfile);
 private:
 	std::vector<Lesson*> lessons;
 	int nStudents;

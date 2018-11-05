@@ -30,7 +30,7 @@ public:
 	bool operator ==(Reservation &r) const;
 	virtual void storeInfo(std::ofstream &outfile, int indent);
 	void indent(std::ofstream &outfile, int indent);
-	void readInfo(std::ifstream &infile);
+	virtual void readInfo(std::ifstream &infile);
 };
 
 class Lesson : public Reservation {
@@ -39,6 +39,7 @@ public:
 	Lesson(int m,int d,int strHr,double price,unsigned int dr);
 	double getPrice();
 	void storeInfo(std::ofstream &outfile,int indent);
+	void readInfo(std::ifstream &infile);
 };
 
 class Free : public Reservation {
@@ -47,6 +48,7 @@ public:
 	Free(int m,int d,int strHr,double p,unsigned int dur);
 	double getPrice();
 	void storeInfo(std::ofstream &outfile,int indent);
+	void readInfo(std::ifstream &infile);
 };
 
 
