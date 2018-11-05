@@ -411,10 +411,11 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 }
 
 
+
 void User::loadClass(std::ifstream &inpfile)
 {
 	Person::loadClass(inpfile);
-	bool flag = false;
+	bool flag = true;
 	string savingString;
 
 
@@ -422,7 +423,10 @@ void User::loadClass(std::ifstream &inpfile)
 	{
 		if(savingString.find("\"isGold\": ") != string::npos)
 		{
-			int i= stoi(savingString.substr(savingString.find("\"isGold\": "), savingString.find(",")));
+			savingString = savingString.substr(savingString.find(":")+3 );
+			savingString = savingString.substr(0,savingString.find(",")-1 );
+
+			int i = stoi(savingString );
 			if(i == 1)
 				this->isGold = true;
 			else
@@ -431,7 +435,9 @@ void User::loadClass(std::ifstream &inpfile)
 
 		if(savingString.find("\"assigned Teacher\": ") != string::npos)
 		{
-			this->assignedTeacher = (savingString.substr(savingString.find("\"assigned Teacher\": "), savingString.find(",")));
+			savingString = savingString.substr(savingString.find(":")+3 );
+			savingString = savingString.substr(0,savingString.find(",")-1 );
+			this->assignedTeacher =  savingString;
 		}
 
 
@@ -477,11 +483,12 @@ void User::loadClass(std::ifstream &inpfile)
 				invoices.push_back(I);
 				getline(inpfile, savingString); //}
 			}
-			flag =true;
+			flag =false;
 	}
 	}
 
 }
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////

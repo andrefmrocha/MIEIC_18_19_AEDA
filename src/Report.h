@@ -29,6 +29,9 @@ public:
 	std::string getAddComm();
 	int getGrade();
 	std::vector<Reservation*> getLessons();
+	//void indent(std::ofstream &outfile, int indent);
+	//void readInfo(std::ifstream &infile);
+	//void storeInfo(std::ofstream &outfile, int indent);
 
 };
 
