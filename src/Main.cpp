@@ -49,12 +49,10 @@ int Menu(const int cardValue) {
 	cout << "                                         " << endl;
 	cout << "1.Add Person                             " << endl;
 	cout << "2.Add Reservation                        " << endl;
-	cout << "3.Increment day                          " << endl;
-	cout << "4.Exit                                   " << endl;
+	cout << "3.Show Person                            " << endl;
+	cout << "4.Increment day                          " << endl;
+	cout << "5.Exit                                   " << endl;
 	cout << "-----------------------------------------" << endl;
-
-	//cout << "5.Go back--------------------------------"<<endl;
-
 
 	int flag;
 	cin >> flag;
@@ -198,13 +196,17 @@ int DevelopCompany(Company &C,Date &D, int cardValue) {
 				}
 
 				break;
-
 			}
-			case 3: {
-				++D;
+			case 3:
+			{
+				//show teachers and user information
 				break;
 			}
 			case 4: {
+				++D;
+				break;
+			}
+			case 5: {
 				cout << "Save and exit? " << endl;
 				cout << "1.Yes 0.No" << endl;
 				cin >> save;

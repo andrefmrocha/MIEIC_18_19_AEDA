@@ -119,6 +119,14 @@ void Person::loadClass(std::ifstream &inpfile)
 	}
 
 }
+
+void Person::show()
+{
+	cout << "Name: " << name << endl;
+	cout << "Age: " << age << endl;
+	cout << "Gender: " << gender << endl;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 double calculateEndHour(double startinghour, int duration)
 {
@@ -225,7 +233,11 @@ void Teacher::loadClass(std::ifstream &inpfile)
 
 }
 
-
+void Teacher::show()
+{
+	Person::show();
+	cout << "Number of students: "<< nStudents << endl;
+}
 ////////////////////////////////////////////////////////////////////////////
 //////////////////User//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
@@ -441,12 +453,9 @@ void User::loadClass(std::ifstream &inpfile)
 		}
 
 
-		/*while(getline(inpfile, savingString) && savingString.find("]") != -1)
-		{
-		 savingString.substr(0, savingString.find(","));
-		//loadReport e pushback
-		}
-
+		/*
+		 *
+		 * missing reports
 		}*/
 
 	if(savingString.find("\"reservations\": ") != string::npos)
@@ -489,7 +498,22 @@ void User::loadClass(std::ifstream &inpfile)
 
 }
 
+void User::show()
+{
+	string a;
 
+	Person::show();
+	if(isGold)
+	{
+		a = "yes";
+	}
+	else
+		a = "no";
+
+	cout << "isGold: " << a<< endl;
+	cout <<"Assigned Teacher: "<< assignedTeacher << endl;
+
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //Handling exceptions

@@ -30,6 +30,7 @@ public:
 	void setGender(std::string gender);
 	virtual void storeInfo(std::ofstream &outfile, int &indentation);
 	virtual void loadClass(std::ifstream &inpfile);
+	virtual void show();
 	bool operator == (const Person &p1);
 private:
 	std::string name;
@@ -55,6 +56,7 @@ public:
 	void setReservation(Reservation* reservation);
 	void storeInfo(std::ofstream &outfile, int &indentation);
 	void loadClass(std::ifstream &inpfile);
+	void show();
 private:
 	bool isGold;
 	std::string assignedTeacher;
@@ -76,6 +78,7 @@ public:
 	void addStudent();
 	int getnStudents();
 	void loadClass(std::ifstream &inpfile);
+	void show();
 private:
 	std::vector<Lesson*> lessons;
 	int nStudents;
