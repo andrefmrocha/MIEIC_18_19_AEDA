@@ -284,7 +284,7 @@ Invoice User::getInvoice(int month)
 			return *invoices.at(month -1);
 }
 
-void User::setReport(Report report, int month)
+void User::setReport(Report* report, int month)
 {
 	if(month > 12)
 			throw(IncorrectMonth());
@@ -295,11 +295,11 @@ void User::setReport(Report report, int month)
 	}
 	else
 	{
-		reports.at(month-1)= &report;
+		reports.at(month-1)= report;
 	}
 }
 
-void User::setInvoice(Invoice invoice, int month)
+void User::setInvoice(Invoice* invoice, int month)
 {
 	if(month > 12)
 				throw(IncorrectMonth());
@@ -310,7 +310,7 @@ void User::setInvoice(Invoice invoice, int month)
 		}
 		else
 		{
-			invoices.at(month-1)= &invoice;
+			invoices.at(month-1)= invoice;
 		}
 }
 

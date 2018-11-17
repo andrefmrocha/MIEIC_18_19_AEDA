@@ -50,8 +50,8 @@ public:
 	std::vector<Invoice*> getInvoices();
 	std::vector<Reservation*> getReservations();
 	std::string getTeacher();
-	void setInvoice(Invoice invoice, int month);
-	void setReport(Report report, int month);
+	void setInvoice(Invoice* invoice, int month);
+	void setReport(Report* report, int month);
 	void setReservation(Reservation* reservation);
 	void storeInfo(std::ofstream &outfile, int &indentation);
 	void loadClass(std::ifstream &inpfile);
