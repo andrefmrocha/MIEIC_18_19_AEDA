@@ -87,9 +87,9 @@ std::ostream & operator << (std::ostream &os,const InvalidGrade &ig)
 	return os;
 }
 
-/*
 
-void Report::indent(std::ofstream &outfile, int indent)
+
+void Report::indentation(std::ofstream &outfile, int indent)
 {
 	for(int i = 0; i < indent; i++)
 	{
@@ -97,7 +97,7 @@ void Report::indent(std::ofstream &outfile, int indent)
 	}
 }
 
-void Report::storeInfo(std::ofstream &outfile, int indent)
+void Report::storeInfo(ofstream &outfile, int indent)
 {
 	indentation(outfile, indent);
 	outfile << "{" << endl;
@@ -144,14 +144,14 @@ void Report::readInfo(std::ifstream &infile)
 				{
 					Reservation * free = new Free();
 					free->readInfo(infile);
-					reservs.push_back(free);
+					reservations.push_back(free);
 				}
 
 				if(savingString.find("lesson") != string::npos)
 				{
 					Reservation * free = new Lesson();
 					free->readInfo(infile);
-					reservs.push_back(free);
+					reservations.push_back(free);
 				}
 
 				if(savingString.find(']') != string::npos)
@@ -189,4 +189,4 @@ void Report::readInfo(std::ifstream &infile)
 			this->grade = stoi(savingString);
 		}
 	}
-}*/
+}
