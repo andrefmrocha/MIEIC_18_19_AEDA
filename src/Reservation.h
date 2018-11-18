@@ -21,7 +21,7 @@ private:
 	double startingHour;
 public:
 	Reservation(){};
-	Reservation(int month,int day,int startingHour,double price,unsigned int duration);
+	Reservation(int month,int day,double startingHour,double price,unsigned int duration);
 	virtual double getPrice();
 	double getStartingHour();
 	int getDuration();
@@ -36,7 +36,7 @@ public:
 class Lesson : public Reservation {
 public:
 	Lesson(){};
-	Lesson(int m,int d,int strHr,double price,unsigned int dr);
+	Lesson(int m,int d,double strHr,double price,unsigned int dr);
 	double getPrice();
 	void storeInfo(std::ofstream &outfile,int indent);
 	void readInfo(std::ifstream &infile);
@@ -45,7 +45,7 @@ public:
 class Free : public Reservation {
 public:
 	Free(){};
-	Free(int m,int d,int strHr,double p,unsigned int dur);
+	Free(int m,int d,double strHr,double p,unsigned int dur);
 	double getPrice();
 	void storeInfo(std::ofstream &outfile,int indent);
 	void readInfo(std::ifstream &infile);

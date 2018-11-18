@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-Reservation::Reservation(int month,int day,int startingHour,double price,unsigned int duration) : price(price)
+Reservation::Reservation(int month,int day,double startingHour,double price,unsigned int duration) : price(price)
 {
 	this->month = month;
 	this->day = day;
@@ -46,7 +46,7 @@ bool Reservation::operator ==(Reservation &r) const
 		return (this->day == r.getDay() && this->month == r.getMonth() && this->startingHour == r.getStartingHour());
 	}
 
-Lesson::Lesson(int m,int d,int strHr,double p,unsigned int dr) : Reservation(m,d,strHr,p,dr)
+Lesson::Lesson(int m,int d,double strHr,double p,unsigned int dr) : Reservation(m,d,strHr,p,dr)
 {}
 
 double Lesson::getPrice()
@@ -55,7 +55,7 @@ double Lesson::getPrice()
 }
 
 
-Free::Free(int m,int d,int strHr,double p,unsigned int dur) : Reservation(m,d,strHr,p,dur)
+Free::Free(int m,int d,double strHr,double p,unsigned int dur) : Reservation(m,d,strHr,p,dur)
 {
 
 }
