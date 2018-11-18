@@ -146,6 +146,18 @@ void Date::readInfo(std::ifstream &infile)
     }
 }
 
+unsigned int Date::getDay() {
+	return day;
+}
+
+unsigned int Date::getMonth() {
+	return month;
+}
+
+unsigned int Date::getYear() {
+	return year;
+}
+
 std::string BadDate::what()
 {
 	return "Data does not exist!";

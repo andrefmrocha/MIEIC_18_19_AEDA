@@ -21,6 +21,10 @@ public:
 	void storeInfo(std::ofstream &outfile, int indentation);
 	void indent(std::ofstream&outfile, int identation);
 	void readInfo(std::ifstream &infile);
+	unsigned int getDay();
+	unsigned int getMonth();
+	unsigned int getYear();
+
 };
 
 #endif /* SRC_DATE_H_ */
