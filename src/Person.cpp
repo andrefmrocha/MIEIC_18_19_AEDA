@@ -238,6 +238,15 @@ void Teacher::show()
 	Person::show();
 	cout << "Number of students: "<< nStudents << endl;
 }
+
+void Teacher::cleanVectors()
+{
+	vector<Lesson*> lessons;
+	this->lessons= lessons;
+}
+
+
+
 ////////////////////////////////////////////////////////////////////////////
 //////////////////User//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
@@ -557,5 +566,29 @@ string StartHourInsideRes::what() const
 	return "Schedule unavailable. A reservation is already made  between " + to_string(StartingHour) + " and " + to_string(endHour);
 }
 
+void User::cleanVectors()
+{
+	vector<Reservation* >reservations;
+	this->reservations = reservations;
+	vector<Invoice*> invoices;
+	invoices.resize(12);
+	this->invoices = invoices;
+}
 
+/*
+void User::showReports()
+{
+	for(size_t i =0; i< reports.size(); i++)
+	{
+		reports.at(i)->showReport();
+	}
+}
 
+void User::showInvoices()
+{
+	for(size_t i =0; i< invoices.size(); i++)
+	{
+		invoices.at(i)->showReport();
+	}
+}
+*/
