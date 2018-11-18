@@ -142,6 +142,7 @@ void Date::readInfo(std::ifstream &infile)
         {
             savingString = savingString.substr(savingString.find("year") + 7);
             this->year = (unsigned  int) stoul(savingString);
+            break;
         }
     }
 }
