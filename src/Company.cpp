@@ -455,3 +455,4 @@ string AlreadyRegisteredTeacher::what() const
 {
 	return "There is already a registered teacher with the name: " + this->name;
 }
+
