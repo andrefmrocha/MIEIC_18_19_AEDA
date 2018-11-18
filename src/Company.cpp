@@ -9,9 +9,10 @@
 
 using namespace std;
 
-Company::Company(double cardValue, int year) : year(year)
+Company::Company(double cardValue, Date d)
 {
 	this->cardValue = cardValue;
+	date=d;
 }
 
 int Company::getMaxUser() const
@@ -158,7 +159,7 @@ bool Company::registerTeacher(string teacherName, int age,string gender)
 	return true;
 }
 
-bool Company::makeUserReport(int month,string userName,string teacherName, int grade,string addcomm)
+bool Company::makeUserReport(int month,string userName,string teacherName)
 {
 	bool flag=true;
 	size_t user_i=0;
@@ -186,15 +187,16 @@ bool Company::makeUserReport(int month,string userName,string teacherName, int g
 	if(flag)
 		throw(NoTeacherRegistered(teacherName));
 
+	vector<Reservation*> lessons;
+	for(size_t i =0; i< users[user_i].getReservations().size();i++) {
+		if(users[user_i].getReservations()[i]->getPrice() > 30)
+			lessons.push_back(users[user_i].getReservations()[i]);
+	}
+
 	try
 	{
-		Report newr(userName,teacherName,grade,addcomm,users[user_i].getReservations());
+		Report* newr= new Report(userName,teacherName,lessons);
 		users[user_i].setReport(newr,month);
-	}
-	catch(InvalidGrade &ig)
-	{
-		cout << ig ;
-		return false;
 	}
 	catch (ReportAlreadyExists &r)
 	{
@@ -218,7 +220,7 @@ bool Company::makeUserInvoice(string userName,int month, vector<Reservation *> r
 		}
 		if(flag)
 			throw(NoUserRegistered(userName));
-		Invoice newinvoice(users[user_i].getName(),users[user_i].getTeacher(),users[user_i].getReservations());
+		Invoice* newinvoice = new Invoice(users[user_i].getName(),users[user_i].getTeacher(),users[user_i].getReservations());
 		try
 		{
 			users[user_i].setInvoice(newinvoice,month);
@@ -279,6 +281,156 @@ bool Company::showInvoice(string name,int month)
 		}
 		return true;
 }
+
+void Company::indentation(std::ofstream &outfile, int indent)
+{
+    for(int i = 0; i < indent; i++)
+    {
+        outfile << "\t";
+    }
+}
+
+void Company::storeInfo(std::ofstream &outfile, int indent) {
+	indentation(outfile, indent);
+	outfile << "{" << endl;
+	indent++;
+	indentation(outfile, indent);
+	outfile << "\"tennisCourts\": [" << endl;
+	indent++;
+	for(unsigned int i = 0; i < this->tennisCourts.size(); i++)
+	{
+		this->tennisCourts[i].storeInfo(outfile, indent);
+		if(i+1 != this->tennisCourts.size())
+			outfile << "," << endl;
+		else
+		{
+			outfile << endl;
+		}
+	}
+	indent--;
+	indentation(outfile, indent);
+	outfile << "]," << endl;
+	indentation(outfile, indent);
+	outfile << "\"users\": [" << endl;
+	indent++;
+	for(unsigned int i = 0; i < this->users.size(); i++)
+	{
+		this->users[i].storeInfo(outfile, indent);
+		if(i+1 != this->users.size()) {
+			indentation(outfile, indent);
+			outfile << "," << endl;
+		}
+		else
+		{
+			//outfile << endl;
+		}
+	}
+	indent--;
+	indentation(outfile, indent);
+	outfile << "]," << endl;
+	indentation(outfile, indent);
+	outfile << "\"teachers\": [" << endl;
+	indent++;
+	for(unsigned int i = 0; i < this->teachers.size(); i++)
+	{
+		this->teachers[i].storeInfo(outfile, indent);
+		if(i+1 != this->teachers.size()) {
+			indentation(outfile, indent);
+			outfile << "," << endl;
+		}
+		else
+		{
+			//outfile << endl;
+		}
+	}
+	indent--;
+	indentation(outfile, indent);
+	outfile << "]," << endl;
+	indentation(outfile, indent);
+	outfile << "\"cardValue\": " << this->cardValue <<  "," << endl;
+	indentation(outfile, indent);
+	outfile << "\"Date\": " << endl;
+	indent++;
+	date.storeInfo(outfile,indent);
+	outfile << endl;
+	indent--;
+	indentation(outfile, indent);
+	outfile << "}";
+}
+
+void Company::readInfo(std::ifstream &infile) {
+	string savingString;
+	while (getline(infile, savingString)) {
+		if (savingString.find("tennisCourts") != string::npos) {
+			while (getline(infile, savingString)) {
+				Court c;
+				c.readInfo(infile);
+				tennisCourts.push_back(c);
+				if (savingString.find(']') != string::npos) {
+					break;
+				}
+			}
+		}
+
+		if (savingString.find("users") != string::npos) {
+			while (getline(infile, savingString)) {
+				User u;
+				u.loadClass(infile);
+				users.push_back(u);
+				if (savingString.find(']') != string::npos) {
+					break;
+				}
+			}
+		}
+
+		if (savingString.find("teachers") != string::npos) {
+			while (getline(infile, savingString)) {
+				Teacher t;
+				t.loadClass(infile);
+				teachers.push_back(t);
+				if (savingString.find(']') != string::npos) {
+					break;
+				}
+			}
+		}
+
+		if (savingString.find("cardValue") != string::npos) {
+			savingString = savingString.substr(savingString.find("cardValue") + 11);
+			savingString = savingString.substr(0, savingString.find(','));
+			this->cardValue = stod(savingString);
+		}
+
+		if (savingString.find("year") != string::npos) {
+			savingString = savingString.substr(savingString.find("year") + 7);
+			savingString = savingString.substr(0, savingString.find_last_of(','));
+			this->year = stoi(savingString);
+		}
+
+		if (savingString.find("Date") != string::npos) {
+			Date d;
+			d.readInfo(infile);
+			this->date = d;
+		}
+	}
+}
+
+Company Company::operator++() {
+	++this->date;
+	if(date.getDay() == 1) {
+		for(size_t i = 0; i < users.size();i++) {
+			 /* if(date.getMonth() == 1) {
+			 * users[i].clearReservations();
+			 * users[i].clearInvoices();
+			 * }*/
+			makeUserReport(date.getMonth(),users[i].getName(),users[i].getTeacher());
+			makeUserInvoice(users[i].getName(),date.getMonth(),users[i].getReservations());
+		}
+	}
+	return *this;
+}
+
+//Exception Handling
+
 string NoUserRegistered::what() const
 {
 	return "The user with name: " + name + ", is not registered in the system. Please register first.";

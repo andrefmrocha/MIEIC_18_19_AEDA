@@ -10,6 +10,7 @@
 
 #include "Calendar.h"
 #include "Court.h"
+#include "Date.h"
 
 class Company
 {
@@ -18,41 +19,29 @@ private:
 	std::vector<User> users;
 	std::vector<Teacher> teachers;
 	double cardValue;
-	const int year;
+	int year;
+	Date date; // set it to static
 public:
-	Company(double cardValue,int year);
-	//tested
+    Company() {};
+	Company(double cardValue, Date d);
 	int getMaxUser()const;
-	//tested
 	void createCourt();
-	//tested
 	std::vector<Court> getCourts();
-	//tested
 	std::vector <User> getUsers();
-	//tested
 	std::vector<Teacher> getTeachers();
-	//tested
 	int getUser(std::string userName);
-	//tested
 	bool makeLesson(int month,int day,double startingHour,std::string userName,std::string teacherName);
-	//tested
 	bool makeFree(int month,int day, double startingHour,int duration, std::string username);
-	//tested
 	bool registerUser(std::string name, int age,bool isGold,std::string gender);
-	//tested
 	bool registerTeacher(std::string teacherName,int age,std::string gender);
-	//partially tested, needs to verify that invoice is saved properly
-	bool makeUserReport(int month,std::string userName,std::string teacherName, int grade,std::string addcomm);
-	//partially tested, needs to verify that invoice is saved properly
+	bool makeUserReport(int month,std::string userName,std::string teacherName);
 	bool makeUserInvoice(std::string userName, int month, std::vector<Reservation *> reservs);
-	//needs reports to be properly saved to be tested
 	bool showReport(std::string name, int month);
-	//needs invoices to be prpperly saved to be tested
 	bool showInvoice(std::string name,int month);
-	//to implement
 	void storeInfo(std::ofstream &outfile,int identation);
-	//to implemente
-	void indent(std::ofstream &outfile,int identation);
+	void indentation(std::ofstream &outfile,int identation);
+	void readInfo(std::ifstream &infile);
+	Company operator++();
 };
 
 class NoUserRegistered
