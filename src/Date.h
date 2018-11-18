@@ -27,11 +27,12 @@ public:
 
 };
 
-#endif /* SRC_DATE_H_ */
-
 
 class BadDate
 {
 public:
 	std::string what();
 };
+
+#endif /* SRC_DATE_H_ */
+

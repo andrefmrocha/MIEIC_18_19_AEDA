@@ -31,7 +31,7 @@ public:
 	virtual void storeInfo(std::ofstream &outfile, int &indentation);
 	virtual void loadClass(std::ifstream &inpfile);
 	virtual void show();
-	virtual void cleanVectors();
+	virtual void cleanVectors(){};
 	bool operator == (const Person &p1);
 private:
 	std::string name;
@@ -58,9 +58,10 @@ public:
 	void storeInfo(std::ofstream &outfile, int &indentation);
 	void loadClass(std::ifstream &inpfile);
 	void show();
-	void showReports();
-	void showInvoices();
+	void showReports(int month);
+	void showInvoices(int month);
 	void cleanVectors();
+	void cleanReports();
 private:
 	bool isGold;
 	std::string assignedTeacher;

@@ -241,8 +241,7 @@ void Teacher::show()
 
 void Teacher::cleanVectors()
 {
-	vector<Lesson*> lessons;
-	this->lessons= lessons;
+	lessons.clear();
 }
 
 
@@ -378,7 +377,8 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 	indentp(outfile,indentation);
 	outfile << "\"assigned Teacher\": "<< "\""<< assignedTeacher <<"\"" << "," <<  endl;
 	indentp(outfile,indentation);
-	/*outfile<< "\"reports\": ";
+
+	outfile<< "\"reports\": ";
 	outfile << "["<< endl;
 	int in=indentation+1;
 	for(size_t i =0; i < reports.size(); i++)
@@ -386,17 +386,16 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 		if(reports.at(i) != 0)
 		{
 		indentp(outfile,in);
-		//reports.at(i)->loadClass();
+		reports.at(i)->storeInfo(outfile,in);
 		outfile << " , " <<endl;
 		}
 	}
 	indentp(outfile,indentation);
-	outfile << "]"<<","<<endl;*/
+	outfile << "]"<<","<<endl;
 
 	indentp(outfile,indentation);
 	outfile<< "\"reservations\": ";
 	outfile << "["<< endl;
-	int in=indentation+1;
 	for(size_t i =0; i < reservations.size(); i++)
 	{
 		if(reservations.at(i) != 0)
@@ -433,79 +432,71 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 
 
 
-void User::loadClass(std::ifstream &inpfile)
-{
+void User::loadClass(std::ifstream &inpfile) {
 	Person::loadClass(inpfile);
 	bool flag = true;
 	string savingString;
 
+	while (getline(inpfile, savingString) && flag) {
+		if (savingString.find("\"isGold\": ") != string::npos) {
+			savingString = savingString.substr(savingString.find(":") + 3);
+			savingString = savingString.substr(0, savingString.find(",") - 1);
 
-	while(getline(inpfile, savingString) && flag)
-	{
-		if(savingString.find("\"isGold\": ") != string::npos)
-		{
-			savingString = savingString.substr(savingString.find(":")+3 );
-			savingString = savingString.substr(0,savingString.find(",")-1 );
-
-			int i = stoi(savingString );
-			if(i == 1)
+			int i = stoi(savingString);
+			if (i == 1)
 				this->isGold = true;
 			else
 				this->isGold = false;
 		}
 
-		if(savingString.find("\"assigned Teacher\": ") != string::npos)
-		{
-			savingString = savingString.substr(savingString.find(":")+3 );
-			savingString = savingString.substr(0,savingString.find(",")-1 );
-			this->assignedTeacher =  savingString;
+		if (savingString.find("\"assigned Teacher\": ") != string::npos) {
+			savingString = savingString.substr(savingString.find(":") + 3);
+			savingString = savingString.substr(0, savingString.find(",") - 1);
+			this->assignedTeacher = savingString;
 		}
 
-
-		/*
-		 *
-		 * missing reports
-		}*/
-
-	if(savingString.find("\"reservations\": ") != string::npos)
-	{
-
-		while(getline(inpfile, savingString) && !savingString.find("]"))
-		{
-			//getline(inpfile, savingString);// type
-		if(savingString.find("\"free\"")!= string::npos)
-		{
-			Free *F = new Free();
-			F->readInfo(inpfile);
-			reservations.push_back(F);
-			getline(inpfile, savingString); //}
-
-		}
-		else if(savingString.find("\"lesson\"") != string::npos)
-		{
-			Lesson *L = new Lesson();
-			L->readInfo(inpfile);
-			reservations.push_back(L);
-			getline(inpfile, savingString); //}
-		}
-		}
-	}
-
-
-	if(savingString.find("\"invoices\": ") != string::npos)
-	{
-			while(getline(inpfile, savingString) && !savingString.find("]"))
-			{
-				Invoice *I = new Invoice();
+		if (savingString.find("\"reports\": ") != string::npos) {
+			while (getline(inpfile, savingString) && !savingString.find("]")) {
+				Report *I = new Report();
 				I->readInfo(inpfile);
-				invoices.push_back(I);
-				//getline(inpfile, savingString); //}
+				reports.push_back(I);
+				//getline(inpfile, savingString);
 			}
-			flag =false;
-	}
+			flag = false;
+		}
 	}
 
+	if (savingString.find("\"reservations\": ") != string::npos) {
+
+		while (getline(inpfile, savingString) && !savingString.find("]")) {
+			//getline(inpfile, savingString);// type
+			if (savingString.find("\"free\"") != string::npos) {
+				Free *F = new Free();
+				F->readInfo(inpfile);
+				reservations.push_back(F);
+				getline(inpfile, savingString);
+			}
+			else if (savingString.find("\"lesson\"") != string::npos) {
+				Lesson *L = new Lesson();
+				L->readInfo(inpfile);
+				reservations.push_back(L);
+				getline(inpfile, savingString); //}
+			}
+		}
+	}
+
+	if (savingString.find("\"invoices\": ") != string::npos) {
+		while (getline(inpfile, savingString) && !savingString.find("]")) {
+			Invoice *I = new Invoice();
+			I->readInfo(inpfile);
+			invoices.push_back(I);
+			//getline(inpfile, savingString);
+		}
+		flag = false;
+	}
 }
+
+
 
 void User::show()
 {
@@ -523,6 +514,33 @@ void User::show()
 	cout <<"Assigned Teacher: "<< assignedTeacher << endl;
 
 }
+
+void User::cleanVectors()
+{
+	reservations.clear();
+	invoices.clear();
+	invoices.resize(12);
+
+}
+
+void User::cleanReports()
+{
+	reports.clear();
+}
+
+/*
+void User::showReports(int month)
+{
+	reports.at(month-1)->showReport();
+}
+
+void User::showInvoices(int month)
+{
+	invoices.at(month-1)->showReport();
+}
+*/
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //Handling exceptions
@@ -566,29 +584,3 @@ string StartHourInsideRes::what() const
 	return "Schedule unavailable. A reservation is already made  between " + to_string(StartingHour) + " and " + to_string(endHour);
 }
 
-void User::cleanVectors()
-{
-	vector<Reservation* >reservations;
-	this->reservations = reservations;
-	vector<Invoice*> invoices;
-	invoices.resize(12);
-	this->invoices = invoices;
-}
-
-/*
-void User::showReports()
-{
-	for(size_t i =0; i< reports.size(); i++)
-	{
-		reports.at(i)->showReport();
-	}
-}
-
-void User::showInvoices()
-{
-	for(size_t i =0; i< invoices.size(); i++)
-	{
-		invoices.at(i)->showReport();
-	}
-}
-*/
