@@ -461,9 +461,9 @@ void User::loadClass(std::ifstream &inpfile)
 	if(savingString.find("\"reservations\": ") != string::npos)
 	{
 
-		while(getline(inpfile, savingString) && savingString.find("]"))
+		while(getline(inpfile, savingString) && !savingString.find("]"))
 		{
-			getline(inpfile, savingString);// type
+			//getline(inpfile, savingString);// type
 		if(savingString.find("\"free\"")!= string::npos)
 		{
 			Free *F = new Free();
@@ -485,12 +485,12 @@ void User::loadClass(std::ifstream &inpfile)
 
 	if(savingString.find("\"invoices\": ") != string::npos)
 	{
-			while(getline(inpfile, savingString) && savingString.find("]"))
+			while(getline(inpfile, savingString) && !savingString.find("]"))
 			{
 				Invoice *I = new Invoice();
 				I->readInfo(inpfile);
 				invoices.push_back(I);
-				getline(inpfile, savingString); //}
+				//getline(inpfile, savingString); //}
 			}
 			flag =false;
 	}
