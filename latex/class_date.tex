@@ -1,0 +1,118 @@
+\hypertarget{class_date}{}\section{Date Class Reference}
+\label{class_date}\index{Date@{Date}}
+
+
+{\ttfamily \#include $<$Date.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_date_a4e59ed4ba66eec61c27460c5d09fa1bd}\label{class_date_a4e59ed4ba66eec61c27460c5d09fa1bd}} 
+\mbox{\hyperlink{class_date_a4e59ed4ba66eec61c27460c5d09fa1bd}{Date}} ()
+\begin{DoxyCompactList}\small\item\em Class Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_date_a28c6604a0f8ed8216becf24abc20cf5b}{Date}} (unsigned int day, unsigned int month, unsigned int year)
+\begin{DoxyCompactList}\small\item\em Class Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_date}{Date}} \mbox{\hyperlink{class_date_a0c5386da90c6834a3e7a110b02e2abaa}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em incrementation of the date \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_date_a9385a826469d0978e3491bdff9739f6f}{store\+Info}} (std\+::ofstream \&outfile, int indentation)
+\begin{DoxyCompactList}\small\item\em Store in the information of the \mbox{\hyperlink{class_date}{Date}} to a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_date_af439b0bc0daf90fddce7c74017407a16}{indent}} (std\+::ofstream \&outfile, int identation)
+\begin{DoxyCompactList}\small\item\em Indenting the file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_date_ad23dffa000ed62018a399c519acb06db}{read\+Info}} (std\+::ifstream \&infile)
+\begin{DoxyCompactList}\small\item\em Reading the information of a \mbox{\hyperlink{class_date}{Date}} from a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to save the current date of the company system 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_date_a28c6604a0f8ed8216becf24abc20cf5b}\label{class_date_a28c6604a0f8ed8216becf24abc20cf5b}} 
+\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\subsubsection{\texorpdfstring{Date()}{Date()}}
+{\footnotesize\ttfamily Date\+::\+Date (\begin{DoxyParamCaption}\item[{unsigned int}]{day,  }\item[{unsigned int}]{month,  }\item[{unsigned int}]{year }\end{DoxyParamCaption})}
+
+
+
+Class Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em day} & -\/ current day \\
+\hline
+{\em month} & -\/ current month \\
+\hline
+{\em year} & -\/ current year \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_date_af439b0bc0daf90fddce7c74017407a16}\label{class_date_af439b0bc0daf90fddce7c74017407a16}} 
+\index{Date@{Date}!indent@{indent}}
+\index{indent@{indent}!Date@{Date}}
+\subsubsection{\texorpdfstring{indent()}{indent()}}
+{\footnotesize\ttfamily void Date\+::indent (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile,  }\item[{int}]{identation }\end{DoxyParamCaption})}
+
+
+
+Indenting the file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outfile} & -\/ the file to write information \\
+\hline
+{\em indent} & -\/ current indentation \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_date_a0c5386da90c6834a3e7a110b02e2abaa}\label{class_date_a0c5386da90c6834a3e7a110b02e2abaa}} 
+\index{Date@{Date}!operator++@{operator++}}
+\index{operator++@{operator++}!Date@{Date}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_date}{Date}} Date\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+incrementation of the date 
+
+\begin{DoxyReturn}{Returns}
+the date itself 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_date_ad23dffa000ed62018a399c519acb06db}\label{class_date_ad23dffa000ed62018a399c519acb06db}} 
+\index{Date@{Date}!read\+Info@{read\+Info}}
+\index{read\+Info@{read\+Info}!Date@{Date}}
+\subsubsection{\texorpdfstring{read\+Info()}{readInfo()}}
+{\footnotesize\ttfamily void Date\+::read\+Info (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{infile }\end{DoxyParamCaption})}
+
+
+
+Reading the information of a \mbox{\hyperlink{class_date}{Date}} from a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em infile} & -\/ file to read the information from \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_date_a9385a826469d0978e3491bdff9739f6f}\label{class_date_a9385a826469d0978e3491bdff9739f6f}} 
+\index{Date@{Date}!store\+Info@{store\+Info}}
+\index{store\+Info@{store\+Info}!Date@{Date}}
+\subsubsection{\texorpdfstring{store\+Info()}{storeInfo()}}
+{\footnotesize\ttfamily void Date\+::store\+Info (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile,  }\item[{int}]{indentation }\end{DoxyParamCaption})}
+
+
+
+Store in the information of the \mbox{\hyperlink{class_date}{Date}} to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outfile} & -\/ the file to write information \\
+\hline
+{\em indent} & -\/ current indentation \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Date.\+h\item 
+Date.\+cpp\end{DoxyCompactItemize}
