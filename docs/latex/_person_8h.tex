@@ -1,0 +1,84 @@
+\hypertarget{_person_8h}{}\section{Person.\+h File Reference}
+\label{_person_8h}\index{Person.\+h@{Person.\+h}}
+{\ttfamily \#include \char`\"{}Report.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Reservation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Invoice.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_person}{Person}}
+\item 
+class \mbox{\hyperlink{class_user}{User}}
+\item 
+class \mbox{\hyperlink{class_teacher}{Teacher}}
+\item 
+class \mbox{\hyperlink{class_report_already_exists}{Report\+Already\+Exists}}
+\item 
+class \mbox{\hyperlink{class_invoice_already_exists}{Invoice\+Already\+Exists}}
+\item 
+class \mbox{\hyperlink{class_report_not_available}{Report\+Not\+Available}}
+\item 
+class \mbox{\hyperlink{class_invoice_not_available}{Invoice\+Not\+Available}}
+\item 
+class \mbox{\hyperlink{class_incorrect_month}{Incorrect\+Month}}
+\item 
+class \mbox{\hyperlink{class_already_reserved_hours}{Already\+Reserved\+Hours}}
+\item 
+class \mbox{\hyperlink{class_inside_res}{Inside\+Res}}
+\item 
+class \mbox{\hyperlink{class_end_hour_inside_res}{End\+Hour\+Inside\+Res}}
+\item 
+class \mbox{\hyperlink{class_start_hour_inside_res}{Start\+Hour\+Inside\+Res}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{_person_8h_a4278a0719e1ebe21f0a1909d29e1252b}{calculate\+End\+Hour}} (double startinghour, int duration)
+\item 
+{\footnotesize template$<$class t $>$ }\\int \mbox{\hyperlink{_person_8h_a9a4aca4680701799a6864db9f84ee9cd}{Check\+Available}} (std\+::vector$<$ t $\ast$$>$ res, double starting\+Hour, double end\+Hour, int day, int month)
+\begin{DoxyCompactList}\small\item\em Function to find out if a certain person is available at this time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_person_8h_a4278a0719e1ebe21f0a1909d29e1252b}\label{_person_8h_a4278a0719e1ebe21f0a1909d29e1252b}} 
+\index{Person.\+h@{Person.\+h}!calculate\+End\+Hour@{calculate\+End\+Hour}}
+\index{calculate\+End\+Hour@{calculate\+End\+Hour}!Person.\+h@{Person.\+h}}
+\subsubsection{\texorpdfstring{calculate\+End\+Hour()}{calculateEndHour()}}
+{\footnotesize\ttfamily double calculate\+End\+Hour (\begin{DoxyParamCaption}\item[{double}]{startinghour,  }\item[{int}]{duration }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_person_8h_a9a4aca4680701799a6864db9f84ee9cd}\label{_person_8h_a9a4aca4680701799a6864db9f84ee9cd}} 
+\index{Person.\+h@{Person.\+h}!Check\+Available@{Check\+Available}}
+\index{Check\+Available@{Check\+Available}!Person.\+h@{Person.\+h}}
+\subsubsection{\texorpdfstring{Check\+Available()}{CheckAvailable()}}
+{\footnotesize\ttfamily template$<$class t $>$ \\
+int Check\+Available (\begin{DoxyParamCaption}\item[{std\+::vector$<$ t $\ast$$>$}]{res,  }\item[{double}]{starting\+Hour,  }\item[{double}]{end\+Hour,  }\item[{int}]{day,  }\item[{int}]{month }\end{DoxyParamCaption})}
+
+
+
+Function to find out if a certain person is available at this time. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em t} & -\/ type of reservation \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em res} & -\/ the reservation of the person \\
+\hline
+{\em starting\+Hour} & -\/ the hour the new reservation starts \\
+\hline
+{\em end\+Hour} & -\/ the hour the new reservation ends \\
+\hline
+{\em day} & -\/ the day of the reservation \\
+\hline
+{\em month} & -\/ the month of the reservation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if all went as expected 
+\end{DoxyReturn}
