@@ -13,16 +13,19 @@ using namespace std;
 
 
 
-Report::Report(string userName,string teacherName,int grade, string addcomm, const vector<Reservation*> &reservs)
+Report::Report(string userName,string teacherName,const vector<Reservation*> &reservs)
 {
-	if (grade > 5 || grade < 1)
-		throw (InvalidGrade(grade));
-	name = userName;
+    int grade = (int)(ceil(reservs.size() /1.5));
+	if(grade ==0)
+	    grade++;
+	else if(grade>5)
+	    grade =5;
+    name = userName;
 	this->teacherName = teacherName;
 	this->grade = grade;
-	this->addcomm = addcomm;
 	this->reservations = reservs;
 }
+
 string Report::getName()
 {
 	return name;
@@ -32,11 +35,6 @@ string Report::getTeacherName()
 	return teacherName;
 }
 
-string Report::getAddComm()
-{
-	return addcomm;
-}
-
 int Report::getGrade()
 {
 	return grade;
@@ -44,6 +42,15 @@ int Report::getGrade()
 vector<Reservation*> Report::getLessons()
 {
 	return reservations;
+}
+string getHourFormat(double hour) {
+	string hr = to_string((int)(ceil(hour -0.5)));
+	hr += ":";
+	if((hour - floor(hour)) == 0)
+	    hr += "00";
+	else
+	    hr+= "30";
+	return hr;
 }
 
 ostream & operator <<(ostream &os,Report r)
@@ -55,39 +62,30 @@ ostream & operator <<(ostream &os,Report r)
 	for (size_t i =0; i < r.getLessons().size();i++)
 	{
 		os << " \t Date: " << r.getLessons()[i]->getDay() << "/" << r.getLessons()[i]->getMonth() << endl
-		<< " \t Period of class: " << " TO BE IMPLEMENTED" << endl << endl;
+		<< " \t Period of class: " << getHourFormat(r.getLessons()[i]->getStartingHour()) << " - " << getHourFormat(r.getLessons()[i]->getStartingHour()+r.getLessons()[i]->getDuration()) << endl << endl;
 	}
 	switch(r.getGrade())
 	{
 	case 1:
-		grade_1(os,r.getAddComm());
+		grade_1(os);
 		break;
 	case 2:
-		grade_2(os,r.getAddComm());
+		grade_2(os);
 		break;
 	case 3:
-		grade_3(os,r.getAddComm());
+		grade_3(os);
 		break;
 	case 4:
-		grade_4(os,r.getAddComm());
+		grade_4(os);
 		break;
 	case 5:
-		grade_5(os,r.getAddComm());
+		grade_5(os);
 		break;
 	default:
 		break;
 	}
 	return os;
 }
-
-
-std::ostream & operator << (std::ostream &os,const InvalidGrade &ig)
-{
-	os << "Invalid grade: " << ig.getGrade() << std::endl;
-	return os;
-}
-
-
 
 void Report::indentation(std::ofstream &outfile, int indent)
 {
@@ -122,8 +120,6 @@ void Report::storeInfo(ofstream &outfile, int indent)
 	outfile << "\"name\": " << "\""<< this->name << "\""<<  "," << endl;
 	indentation(outfile, indent);
 	outfile << "\"teacherName\": " << "\"" << this->teacherName << "\"" << "," << endl;
-	indentation(outfile, indent);
-	outfile << "\"addcomm\": " << "\"" << this->addcomm << "\""<< endl;
 	indentation(outfile, indent);
 	outfile << "\"grade\": " << this->grade <<  "," << endl;
 	indent--;
@@ -173,13 +169,6 @@ void Report::readInfo(std::ifstream &infile)
 			savingString = savingString.substr(savingString.find("teacherName") + 14);
 			savingString = savingString.substr(1, savingString.find_last_of('\"') - 1);
 			this->teacherName = savingString;
-		}
-
-		if(savingString.find("addcomm") != string::npos)
-		{
-			savingString = savingString.substr(savingString.find("addcomm") + 10);
-			savingString = savingString.substr(1, savingString.find_last_of('\"') - 1);
-			this->addcomm = savingString;
 		}
 
 		if(savingString.find("grade") != string::npos)
