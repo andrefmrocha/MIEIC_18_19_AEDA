@@ -129,6 +129,7 @@ void Report::storeInfo(ofstream &outfile, int indent)
 
 void Report::readInfo(std::ifstream &infile)
 {
+	bool flag = false;
 	string savingString;
 	while (getline(infile, savingString))
 	{
@@ -173,9 +174,15 @@ void Report::readInfo(std::ifstream &infile)
 
 		if(savingString.find("grade") != string::npos)
 		{
+			flag = true;
 			savingString = savingString.substr(savingString.find("grade") + 7);
 			savingString = savingString.substr(0, savingString.find(','));
 			this->grade = stoi(savingString);
+		}
+
+		if(flag)
+		{
+			break;
 		}
 	}
 }
