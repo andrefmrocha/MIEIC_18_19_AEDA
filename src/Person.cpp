@@ -6,7 +6,7 @@
  */
 
 #include "Person.h"
-
+#include <string>
 
 
 using namespace std;
@@ -230,6 +230,9 @@ void Teacher::loadClass(std::ifstream &inpfile)
 
 		}
 		}
+
+		getline(inpfile, savingString);
+		this->nStudents = stoi(savingString);
 
 }
 
