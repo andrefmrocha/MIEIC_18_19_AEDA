@@ -36,7 +36,7 @@ ostream & operator<<(ostream &out, Invoice inv)
 	out << "Discrimination of every use of the court by the user:" << endl;
 	for(unsigned int i = 0; i < inv.getReservs().size(); i++)
 	{
-		out << i << " - " << inv.getReservs()[i]->getDay() << "/" << inv.getReservs()[i]->getMonth() << " : " << inv.getReservs()[i]->getPrice() << endl;
+		out << i +1 << " - " << inv.getReservs()[i]->getDay() << "/" << inv.getReservs()[i]->getMonth() << " : " << inv.getReservs()[i]->getPrice() << endl;
 	}
 	out << "Final price:" << inv.getPrice();
 	return out;
