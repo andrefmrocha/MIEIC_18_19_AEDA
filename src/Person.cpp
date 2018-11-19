@@ -140,7 +140,7 @@ double calculateEndHour(double startinghour, int duration)
 ////////////////////////////////////////////////////////////////////////////
 Teacher::Teacher()
 {
-
+	nStudents=0;
 }
 
 Teacher::Teacher(string name, int age, string gender):Person(name,age,gender)
@@ -219,11 +219,11 @@ void Teacher::loadClass(std::ifstream &inpfile)
 
 		if(savingString.find("lessons") != string::npos)
 		{
-		while(getline(inpfile, savingString) && savingString.find("]") )
+		while(getline(inpfile, savingString) && (savingString.find("]") == string::npos) )
 		{
 			getline(inpfile, savingString); //linha type
 			Lesson *A = new Lesson();
-			getline(inpfile, savingString);
+			//getline(inpfile, savingString);
 			A->readInfo(inpfile);
 			lessons.push_back(A);
 			getline(inpfile, savingString); //}
@@ -456,43 +456,43 @@ void User::loadClass(std::ifstream &inpfile) {
 		}
 
 		if (savingString.find("\"reports\": ") != string::npos) {
-			while (getline(inpfile, savingString) && !savingString.find("]")) {
+			while (getline(inpfile, savingString) && (savingString.find("]") == string::npos)) {
 				Report *I = new Report();
 				I->readInfo(inpfile);
 				reports.push_back(I);
-				//getline(inpfile, savingString);
+				getline(inpfile, savingString);
+			}
+
+		}
+
+		if (savingString.find("\"reservations\": ") != string::npos) {
+
+			while (getline(inpfile, savingString) && (savingString.find("]") == string::npos)) {
+				getline(inpfile, savingString);// type
+				if (savingString.find("\"free\"") != string::npos) {
+					Free *F = new Free();
+					F->readInfo(inpfile);
+					reservations.push_back(F);
+					getline(inpfile, savingString);
+				} else if (savingString.find("\"lesson\"") != string::npos) {
+					Lesson *L = new Lesson();
+					L->readInfo(inpfile);
+					reservations.push_back(L);
+					getline(inpfile, savingString); //}
+				}
+			}
+		}
+
+
+		if (savingString.find("\"invoices\": ") != string::npos) {
+			while (getline(inpfile, savingString) && (savingString.find("]") == string::npos)) {
+				Invoice *I = new Invoice();
+				I->readInfo(inpfile);
+				invoices.push_back(I);
+				getline(inpfile, savingString);
 			}
 			flag = false;
 		}
-	}
-
-	if (savingString.find("\"reservations\": ") != string::npos) {
-
-		while (getline(inpfile, savingString) && !savingString.find("]")) {
-			//getline(inpfile, savingString);// type
-			if (savingString.find("\"free\"") != string::npos) {
-				Free *F = new Free();
-				F->readInfo(inpfile);
-				reservations.push_back(F);
-				getline(inpfile, savingString);
-			}
-			else if (savingString.find("\"lesson\"") != string::npos) {
-				Lesson *L = new Lesson();
-				L->readInfo(inpfile);
-				reservations.push_back(L);
-				getline(inpfile, savingString); //}
-			}
-		}
-	}
-
-	if (savingString.find("\"invoices\": ") != string::npos) {
-		while (getline(inpfile, savingString) && !savingString.find("]")) {
-			Invoice *I = new Invoice();
-			I->readInfo(inpfile);
-			invoices.push_back(I);
-			//getline(inpfile, savingString);
-		}
-		flag = false;
 	}
 }
 
@@ -517,15 +517,13 @@ void User::show()
 
 void User::cleanVectors()
 {
-	reservations.clear();
+	reports.clear();
 	invoices.clear();
-	invoices.resize(12);
-
 }
 
-void User::cleanReports()
+void User::cleanReservations()
 {
-	reports.clear();
+	reservations.clear();
 }
 
 /*

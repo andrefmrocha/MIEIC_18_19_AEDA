@@ -61,7 +61,7 @@ public:
 	void showReports(int month);
 	void showInvoices(int month);
 	void cleanVectors();
-	void cleanReports();
+	void cleanReservations();
 private:
 	bool isGold;
 	std::string assignedTeacher;
