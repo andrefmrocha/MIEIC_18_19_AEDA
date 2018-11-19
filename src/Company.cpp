@@ -59,6 +59,9 @@ int Company::getUser(string userName)
 
 bool Company::makeLesson(int month,int day,double startingHour,string userName,string teacherName)
 {
+	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
+		throw(InvalidDate(day,month));
+	}
 	bool flag=true;
 	size_t user_i=0;
 	size_t teacher_i=0;
@@ -94,6 +97,9 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 
 bool Company::makeFree(int month,int day,double startingHour, int duration,string username)
 {
+	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
+		throw(InvalidDate(day,month));
+	}
 	bool flag=true;
 		size_t user_i=0;
 		for(size_t j =0;j<users.size();j++)
@@ -134,6 +140,7 @@ bool Company::registerUser(string name, int age,bool isGold,string gender)
 		if (teachers[i2].getnStudents() >= teachers[i].getnStudents())
 			i2 = i;
 	}
+	teachers[i2].addStudent();
 	User newuser(name,age,gender,isGold,teachers[i2].getName());
 	users.push_back(newuser);
 	return true;
@@ -374,23 +381,25 @@ void Company::readInfo(std::ifstream &infile) {
 
 		if (savingString.find("users") != string::npos) {
 			while (getline(infile, savingString)) {
-				User u;
-				u.loadClass(infile);
-				users.push_back(u);
 				if (savingString.find(']') != string::npos) {
 					break;
 				}
+				User u;
+				u.loadClass(infile);
+				users.push_back(u);
 			}
 		}
 
 		if (savingString.find("teachers") != string::npos) {
 			while (getline(infile, savingString)) {
-				Teacher t;
-				t.loadClass(infile);
-				teachers.push_back(t);
 				if (savingString.find(']') != string::npos) {
 					break;
 				}
+				Teacher t;
+				t.loadClass(infile);
+				teachers.push_back(t);
+				getline(infile,savingString);
+
 			}
 		}
 
@@ -418,15 +427,43 @@ Company Company::operator++() {
 	++this->date;
 	if(date.getDay() == 1) {
 		for(size_t i = 0; i < users.size();i++) {
-			 /* if(date.getMonth() == 1) {
-			 * users[i].clearReservations();
-			 * users[i].clearInvoices();
-			 * }*/
-			makeUserReport(date.getMonth(),users[i].getName(),users[i].getTeacher());
-			makeUserInvoice(users[i].getName(),date.getMonth(),users[i].getReservations());
+			if(date.getMonth() == 1) {
+				users[i].cleanVectors();
+			}
+
+			makeUserReport(date.getMonth()-1,users[i].getName(),users[i].getTeacher());
+			makeUserInvoice(users[i].getName(),date.getMonth()-1,users[i].getReservations());
+			users[i].cleanReservations();
+		}
+		for(size_t i = 0; i<teachers.size();i++) {
+			teachers[i].cleanVectors();
 		}
 	}
 	return *this;
+}
+
+void Company::showUsers() {
+	for(size_t i = 0; i< users.size();i++) {
+		cout << "User no. " << i+1 << ":" << endl;
+		users[i].show();
+		cout << endl;
+	}
+}
+
+void Company::showTeachers() {
+	for(size_t i = 0; i< teachers.size();i++) {
+		cout << "Teacher no. " << i+1 << ":" << endl;
+		teachers[i].show();
+		cout << endl;
+	}
+}
+
+void Company::showCourts() {
+	for(size_t i =0; i < tennisCourts.size(); i++) {
+		cout << "Court no. " << i+1 << ":" << endl;
+		//tennisCourts[i].show();
+		cout << endl;
+	}
 }
 
 //Exception Handling
@@ -456,3 +493,6 @@ string AlreadyRegisteredTeacher::what() const
 	return "There is already a registered teacher with the name: " + this->name;
 }
 
+std::string InvalidDate::what() const {
+	return "The date given is invalid. Day " + to_string(day) + " of month " + to_string(month) + " has passed.";
+}

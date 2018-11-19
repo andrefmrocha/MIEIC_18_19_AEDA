@@ -42,6 +42,10 @@ public:
 	void indentation(std::ofstream &outfile,int identation);
 	void readInfo(std::ifstream &infile);
 	Company operator++();
+	void showUsers();
+	void showTeachers();
+	void showCourts();
+
 };
 
 class NoUserRegistered
@@ -87,6 +91,15 @@ private:
 public:
 	AlreadyRegisteredTeacher(std::string name) { this->name=name;}
 	std::string what()const;
+};
+
+class InvalidDate
+{
+	int month;
+	int day;
+public:
+	InvalidDate(int day, int month) { this->day = day, this->month = month;}
+	std::string what() const;
 };
 
 #endif /* SRC_COMPANY_H_ */
