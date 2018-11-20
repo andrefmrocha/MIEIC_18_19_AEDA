@@ -187,6 +187,9 @@ void Teacher::storeInfo(ofstream &outfile, int &indentation)
 	Person::storeInfo(outfile,indentation);
 
 	indentp(outfile,indentation);
+	outfile << "\"nStudents\": "<< "\"" << nStudents  << "\""  << "," << endl;
+
+	indentp(outfile,indentation);
 	outfile<< "\"lessons\": ";
 	outfile << "["<< endl;
 	for(size_t i= 0; i < lessons.size(); i++)
@@ -215,6 +218,14 @@ void Teacher::loadClass(std::ifstream &inpfile)
 
 	string savingString;
 
+	getline(inpfile, savingString);
+	if (savingString.find("\"nStudents\": ") != string::npos)
+	{
+		savingString = savingString.substr(savingString.find(":") + 3);
+		savingString = savingString.substr(0, savingString.find(",") - 1);
+		this->nStudents = stoi(savingString);
+	}
+
 	getline(inpfile, savingString); //lessons
 
 		if(savingString.find("lessons") != string::npos)
@@ -231,8 +242,6 @@ void Teacher::loadClass(std::ifstream &inpfile)
 		}
 		}
 
-		getline(inpfile, savingString);
-		this->nStudents = stoi(savingString);
 
 }
 
