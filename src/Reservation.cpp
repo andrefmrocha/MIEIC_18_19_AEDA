@@ -100,7 +100,8 @@ void Reservation::readInfo(std::ifstream &infile)
 	{
 		if(savingString.find("price") != string::npos)
 		{
-			this->price = stod(savingString.substr(savingString.find("price") + 8, 2));
+			savingString = savingString.substr(savingString.find("price") + 8);
+			this->price = stod(savingString.substr(0, savingString.find(',')));
 		}
 
 		if(savingString.find("duration") != string::npos)
@@ -111,10 +112,8 @@ void Reservation::readInfo(std::ifstream &infile)
 
 		if(savingString.find("month") != string::npos)
 		{
-			savingString = savingString.substr(savingString.find("month") + 8, 2);
-			if(savingString.find(',')) {
-				savingString = savingString.substr(0, 1);
-			}
+			savingString = savingString.substr(savingString.find("month") + 8);
+			savingString = savingString.substr(0, savingString.find(','));
 			this->month = stoi(savingString);
 		}
 
@@ -122,9 +121,7 @@ void Reservation::readInfo(std::ifstream &infile)
 		if(savingString.find("day") != string::npos)
 		{
 			savingString = savingString.substr(savingString.find("day") + 6, 2);
-			if(savingString.find(',')) {
-				savingString = savingString.substr(0, 1);
-			}
+			savingString = savingString.substr(0, savingString.find(','));
 			this->day = stoi(savingString);
 		}
 
@@ -132,12 +129,9 @@ void Reservation::readInfo(std::ifstream &infile)
 		if(savingString.find("startingHour") != string::npos)
 		{
 			flag = true;
-			savingString = savingString.substr(savingString.find("startingHour") + 15, 2);
-			if(savingString.find(',')) {
-				savingString = savingString.substr(0, 1);
-			}
-			cout << savingString;
-			this->startingHour = stoi(savingString);
+			savingString = savingString.substr(savingString.find("startingHour") + 15);
+			savingString = savingString.substr(0, savingString.find(','));
+			this->startingHour = stod(savingString);
 		}
 
 		if(flag)
