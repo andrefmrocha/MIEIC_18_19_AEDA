@@ -226,7 +226,8 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 switch (flagR) {
                     case 1://all teachers and Users
                     {
-                        //show teachers and user information
+                        C.showTeachers();
+                        C.showUsers();
                         break;
                     }
                     case 2: //show user
@@ -247,18 +248,26 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     	 }
 
                         cout << "Name of User: " << endl;
-                        getline(cin, name);
+                        cin>>name;
 
                         /*
                         if(flagR == 1)
                         //show user
-                        else if (flagR == 2)
-                        	//show report
+                         */
+                        if (flagR == 2)
+                        {
+                        	 cout << "Month: " << endl;
+                        	 cin>>m;
+                        	C.showReport(name,m);
+                        }
                         else if(flagR == 3)
-                        	//show invoice
-						*/
+                        {
+                        	cout << "Month: " << endl;
+                        	cin >> m;
+                        	C.showInvoice(name, m);
+                        }
 
-						break;
+                        break;
                     }
                     case 3: //show teacher
                     {
@@ -303,7 +312,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 cin >> save;
 
                 if (save == 1) {
-                    //save function
+                	ofstream outfile;
+                	outfile.open((to_string(cardValue) + ".json").c_str());
+                    C.storeInfo(outfile, 0);
                 }
                 return 0;
                 break;
