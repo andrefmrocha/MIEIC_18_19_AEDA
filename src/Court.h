@@ -26,9 +26,9 @@ public:
 	void readInfo(std::ifstream &infile);
 	int getMaxUsers()const;
 	void setMaxUsers(int users);
+	void occupied(int month, int day, double startingHour, int duration);
 private:
 	void reserveCourt(int month, int day, double startingHour, int duration);
-	void occupied(int month, int day, double startingHour, int duration);
 	Year currentYear;
 	int maxUsers;
 };
