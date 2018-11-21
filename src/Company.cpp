@@ -47,14 +47,23 @@ vector<Teacher> Company::getTeachers()
 	return teachers;
 }
 
-int Company::getUser(string userName)
+User& Company::getUser(string userName)
 {
-	for(int i = 0; i< users.size();i++)
-	{
-		if(users[i].getName() == userName)
-			return i;
-	}
-	return -1;
+	User u(userName,0,"",false,"");
+	vector<User>::iterator it = find(users.begin(),users.end(),u);
+	if(it != users.end())
+		return *it;
+	else
+		throw NoUserRegistered(userName);
+}
+
+Teacher& Company::getTeacher(std::string teacherName) {
+	Teacher t(teacherName,0,"");
+	vector<Teacher>::iterator it = find(teachers.begin(),teachers.end(),t);
+	if(it != teachers.end())
+		return *it;
+	else
+		throw NoTeacherRegistered(teacherName);
 }
 
 bool Company::makeLesson(int month,int day,double startingHour,string userName,string teacherName)
@@ -62,37 +71,26 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
 		throw(InvalidDate(day,month));
 	}
-	bool flag=true;
-	size_t user_i=0;
-	size_t teacher_i=0;
-	for(size_t j =0;j<users.size();j++)
-	{
-		if(users[j].getName() == userName)
-		{
-			flag=false;
-			user_i=j;
-		}
-	}
-	if(flag)
-		throw(NoUserRegistered(userName));
 
-	flag=true;
-	for(size_t j=0; j<teachers.size();j++)
-	{
-		if(teachers[j].getName() == teacherName)
+	try {
+		User& u = getUser(userName);
+		Teacher& t = getTeacher(teacherName);
+		for(size_t j =0; j<tennisCourts.size();j++)
 		{
-			flag=false;
-			teacher_i=j;
+			if(tennisCourts[j].reserveClass(month,day,startingHour,u,t))
+				return true;
 		}
+		return false;
 	}
-	if(flag)
-		throw(NoTeacherRegistered(teacherName));
-	for(size_t j =0; j<tennisCourts.size();j++)
+	catch(NoUserRegistered &u) {
+		cout << u.what() << endl;
+		return false;
+	}
+	catch(NoTeacherRegistered &t)
 	{
-		if(tennisCourts[j].reserveClass(month,day,startingHour,users[user_i],teachers[teacher_i]))
-			return true;
+		cout << t.what() << endl;
+		return false;
 	}
-	return false;
 }
 
 bool Company::makeFree(int month,int day,double startingHour, int duration,string username)
@@ -100,50 +98,46 @@ bool Company::makeFree(int month,int day,double startingHour, int duration,strin
 	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
 		throw(InvalidDate(day,month));
 	}
-	bool flag=true;
-		size_t user_i=0;
-		for(size_t j =0;j<users.size();j++)
+
+	try {
+		User& u = getUser(username);
+		for(size_t j =0; j<tennisCourts.size();j++)
 		{
-			if(users[j].getName() == username)
-			{
-				flag=false;
-				user_i=j;
-			}
-		}
-	if(flag)
-		throw(NoUserRegistered(username));
-	for(size_t j =0; j<tennisCourts.size();j++)
-		{
-			if(tennisCourts[j].reserveFree(month,day,startingHour,duration,users[user_i]))
+			if(tennisCourts[j].reserveFree(month,day,startingHour,duration,u))
 				return true;
 		}
 		return false;
+	}
+	catch(NoUserRegistered &u) {
+		cout << u.what() << endl;
+		return false;
+	}
 }
 
 bool Company::registerUser(string name, int age,bool isGold,string gender)
 {
 	if (age <0)
 		throw(InvalidAge(age));
-	bool flag =false;
-	for(size_t i = 0; i<users.size();i++)
-	{
-		if(users[i].getName() == name){
-			flag=true;
-			break;
+	try {
+		User& u = getUser(name);
+		throw(AlreadyRegisteredUser(name));
+	}
+	catch(NoUserRegistered &u) {
+		size_t i2=0;
+		for(size_t i = 1; i < teachers.size();i++)
+		{
+			if (teachers[i2].getnStudents() >= teachers[i].getnStudents())
+				i2 = i;
 		}
+		teachers[i2].addStudent();
+		User newuser(name,age,gender,isGold,teachers[i2].getName());
+		users.push_back(newuser);
+		return true;
 	}
-	if(flag)
-		throw (AlreadyRegisteredUser(name));
-	size_t i2=0;
-	for(size_t i = 1; i < teachers.size();i++)
-	{
-		if (teachers[i2].getnStudents() >= teachers[i].getnStudents())
-			i2 = i;
+	catch(AlreadyRegisteredUser &u) {
+		cout << u.what() << endl;
+		return false;
 	}
-	teachers[i2].addStudent();
-	User newuser(name,age,gender,isGold,teachers[i2].getName());
-	users.push_back(newuser);
-	return true;
 }
 
 
@@ -151,59 +145,49 @@ bool Company::registerTeacher(string teacherName, int age,string gender)
 {
 	if (age <0)
 		throw(InvalidAge(age));
-	bool flag =false;
-	for(size_t i =0; i<teachers.size();i++)
-	{
-		if(teachers[i].getName() == teacherName)
-			flag=true;
+	try {
+		Teacher& t = getTeacher(teacherName);
+		throw(AlreadyRegisteredTeacher(teacherName));
 	}
-	if(flag)
-		throw (AlreadyRegisteredTeacher(teacherName));
-
-	Teacher newteacher(teacherName,age,gender);
-	teachers.push_back(newteacher);
-
-	return true;
+	catch(NoTeacherRegistered &t) {
+		Teacher newteacher(teacherName,age,gender);
+		teachers.push_back(newteacher);
+		return true;
+	}
+	catch(AlreadyRegisteredTeacher &u) {
+		cout << u.what() << endl;
+		return false;
+	}
 }
 
 bool Company::makeUserReport(int month,string userName,string teacherName)
 {
-	bool flag=true;
-	size_t user_i=0;
-	size_t teacher_i=0;
-	for(size_t j =0;j<users.size();j++)
-	{
-		if(users[j].getName() == userName)
-		{
-			flag=false;
-		user_i=j;
-		}
-	}
-	if(flag)
-		throw(NoUserRegistered(userName));
-
-	flag=true;
-	for(size_t j=0; j<teachers.size();j++)
-	{
-		if(teachers[j].getName() == teacherName)
-		{
-			flag=false;
-			teacher_i=j;
-		}
-	}
-	if(flag)
-		throw(NoTeacherRegistered(teacherName));
-
-	vector<Reservation*> lessons;
-	for(size_t i =0; i< users[user_i].getReservations().size();i++) {
-		if(users[user_i].getReservations()[i]->getPrice() > 30)
-			lessons.push_back(users[user_i].getReservations()[i]);
-	}
-
 	try
 	{
-		Report* newr= new Report(userName,teacherName,lessons);
-		users[user_i].setReport(newr,month);
+	 	User& u = getUser(userName);
+	 	Teacher& t = getTeacher(teacherName);
+		vector<Reservation*> lessons;
+		for(size_t i =0; i< u.getReservations().size();i++) {
+			if(u.getReservations()[i]->getPrice() > 30)
+				lessons.push_back(u.getReservations()[i]);
+		}
+		Report* newr = new Report(userName,teacherName,lessons);
+		u.setReport(newr,month);
+	}
+	catch(NoUserRegistered &u)
+	{
+		cout << u.what() << endl;
+		return false;
+	}
+	catch(NoTeacherRegistered &t)
+	{
+		cout << t.what() << endl;
+		return false;
+	}
+	catch(IncorrectMonth &e)
+	{
+		cout << e.what() << endl;
+		return false;
 	}
 	catch (ReportAlreadyExists &r)
 	{
@@ -215,78 +199,88 @@ bool Company::makeUserReport(int month,string userName,string teacherName)
 
 bool Company::makeUserInvoice(string userName,int month, vector<Reservation *> reservs)
 {
-	bool flag=true;
-		size_t user_i=0;
-		for(size_t j =0;j<users.size();j++)
-		{
-			if(users[j].getName() == userName)
-			{
-				flag=false;
-				user_i=j;
-			}
-		}
-		if(flag)
-			throw(NoUserRegistered(userName));
-		Invoice* newinvoice = new Invoice(users[user_i].getName(),users[user_i].getTeacher(),users[user_i].getReservations());
-		try
-		{
-			users[user_i].setInvoice(newinvoice,month);
-		}
-		catch(IncorrectMonth &e)
-		{
-			cout << e.what() << endl;
-			return false;
-		}
-		catch(InvoiceAlreadyExists &e)
-		{
-			cout << e.what()<<endl;
-			return false;
-		}
-		return true;
+	try
+	{
+		User& u = getUser(userName);
+		Invoice* newinvoice = new Invoice(u.getName(),u.getTeacher(),u.getReservations());
+		u.setInvoice(newinvoice,month);
+	}
+	catch(NoUserRegistered &u)
+	{
+		cout << u.what() << endl;
+		return false;
+	}
+	catch(NoTeacherRegistered &t)
+	{
+		cout << t.what() << endl;
+		return false;
+	}
+	catch(IncorrectMonth &e)
+	{
+		cout << e.what() << endl;
+		return false;
+	}
+	catch (InvoiceAlreadyExists &i)
+	{
+		cout << i.what() << endl;
+		return false;
+	}
+	return true;
 }
 
 bool Company::showReport(string name, int month)
 {
-		int i = getUser(name);
-		if (i == -1)
-			throw(NoUserRegistered(name));
-		try
-		{
-			cout << users[i].getReport(month);
-		}
-		catch (IncorrectMonth &e)
-		{
-			cout << e.what() << endl;
-			return false;
-		}
-		catch (ReportNotAvailable &e)
-		{
-			cout << e.what() << endl;
-			return false;
-		}
-		return true;
+	User u;
+	try {
+		u = getUser(name);
+	}
+	catch(NoUserRegistered &e) {
+		cout << e.what() << endl;
+		return false;
+	}
+
+	try
+	{
+		cout << u.getReport(month);
+	}
+	catch (IncorrectMonth &e)
+	{
+		cout << e.what() << endl;
+		return false;
+	}
+	catch (ReportNotAvailable &e)
+	{
+		cout << e.what() << endl;
+		return false;
+	}
+	return true;
 }
 
 bool Company::showInvoice(string name,int month)
 {
-		int i = getUser(name);
-		if (i == -1)
-			throw(NoUserRegistered(name));
-		try
-		{
-			cout << users[i].getInvoice(month);
-		}
-		catch (IncorrectMonth &e)
-		{
-			cout << e.what() << endl;
-			return false;
-		}
-		catch (InvoiceNotAvailable &e)
-		{
-			cout << e.what() << endl;
-			return false;
-		}
-		return true;
+	User u;
+	try {
+		u = getUser(name);
+	}
+	catch(NoUserRegistered &e) {
+		cout << e.what() << endl;
+		return false;
+	}
+	try
+	{
+		cout << u.getInvoice(month) << endl;
+	}
+	catch (IncorrectMonth &e)
+	{
+		cout << e.what() << endl;
+		return false;
+	}
+	catch (InvoiceNotAvailable &e)
+	{
+		cout << e.what() << endl;
+		return false;
+	}
+	return true;
 }
 
 void Company::indentation(std::ofstream &outfile, int indent)
@@ -442,7 +436,12 @@ Company Company::operator++() {
 	return *this;
 }
 
+bool compareUser (User &u1,User &u2) {
+    return u1.getName() < u2.getName();
+}
 void Company::showUsers() {
+
+    sort(users.begin(),users.end(),compareUser);
 	for(size_t i = 0; i< users.size();i++) {
 		cout << "User no. " << i+1 << ":" << endl;
 		users[i].show();
@@ -450,7 +449,12 @@ void Company::showUsers() {
 	}
 }
 
+bool compareTeacher (Teacher &t1,Teacher &t2) {
+    return t1.getName() < t2.getName();
+}
 void Company::showTeachers() {
+
+    sort(teachers.begin(),teachers.end(),compareTeacher);
 	for(size_t i = 0; i< teachers.size();i++) {
 		cout << "Teacher no. " << i+1 << ":" << endl;
 		teachers[i].show();
@@ -458,13 +462,44 @@ void Company::showTeachers() {
 	}
 }
 
-void Company::showCourts() {
-	for(size_t i =0; i < tennisCourts.size(); i++) {
-		cout << "Court no. " << i+1 << ":" << endl;
-		//tennisCourts[i].show();
-		cout << endl;
+void Company::showTeacher(std::string teacher) {
+	try {
+		Teacher t = getTeacher(teacher);
+		t.show();
+	}
+	catch (NoTeacherRegistered &e)
+	{
+		cout << e.what() << endl;
 	}
 }
+
+void Company::showUser(std::string name) {
+	try {
+		User u = getUser(name);
+		u.show();
+	}
+	catch (NoUserRegistered &e)
+	{
+		cout << e.what() << endl;
+	}
+}
+
+void Company::showCourts() {
+	int n=0;
+	for(size_t i=0; i<tennisCourts.size();i++) {
+		try{
+			tennisCourts[i].occupied(date.getMonth(),date.getDay(),8,12);
+			n++;
+		}
+		catch(CourtReserved &c)
+		{}
+	}
+	cout << "There are " << n << " courts available for today." << endl;
+	cout << "There is a maximum of " << tennisCourts[0].getMaxUsers() << " per court." << endl;
+}
+
+
+
 
 //Exception Handling
 

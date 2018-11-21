@@ -29,7 +29,8 @@ public:
 	std::vector<Court> getCourts();
 	std::vector <User> getUsers();
 	std::vector<Teacher> getTeachers();
-	int getUser(std::string userName);
+	User& getUser(std::string userName);
+	Teacher& getTeacher(std::string teacherName);
 	bool makeLesson(int month,int day,double startingHour,std::string userName,std::string teacherName);
 	bool makeFree(int month,int day, double startingHour,int duration, std::string username);
 	bool registerUser(std::string name, int age,bool isGold,std::string gender);
@@ -45,7 +46,8 @@ public:
 	void showUsers();
 	void showTeachers();
 	void showCourts();
-
+    void showUser(std::string name);
+    void showTeacher(std::string teacher);
 };
 
 class NoUserRegistered
