@@ -8,6 +8,7 @@
 #include "Court.h"
 
 using namespace std;
+static double courtPrice = 15;
 
 Court::Court(int year):currentYear(Year(year))
 {
@@ -79,7 +80,7 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 		return false;
 	}
 	reserveCourt(m, d, sH, dur);
-	double price = 45;
+	double price = courtPrice * dur;
 	if(user.getisGold())
 	{
 		price*=0.85;
@@ -116,8 +117,12 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 		cout << "The user is not available at this time!" << endl;
 		return false;
 	}
-	double price = 15;
+	double price = courtPrice;
 	price*= dur;
+	if(user.getisGold())
+	{
+		price*=0.85;
+	}
 	reserveCourt(m, d, sH, dur);
 	Reservation * reserv = new Free(m, d, sH, price, dur);
 	user.setReservation(reserv);

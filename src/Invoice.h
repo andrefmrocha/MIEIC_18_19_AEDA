@@ -12,6 +12,7 @@
 #include <iostream>
 #include "Reservation.h"
 
+
 /**
  * Invoice of the month for the user
  */
@@ -20,6 +21,7 @@ class Invoice {
 	double totalPrice; /**< Price to pay for the month */
 	std::string name; /**< Name of the user */
 	std::string assignedTeacher; /**< Teacher assigned to the User */
+	bool isGold; /**< Does the User own a Gold Card? */
 public:
 
     /**
@@ -33,7 +35,7 @@ public:
 	 * @param teacherName - name of Teacher
 	 * @param reservs - The reservations
 	 */
-	Invoice(std::string name, std::string teacherName, std::vector<Reservation *> reservs);
+	Invoice(std::string name, std::string teacherName, std::vector<Reservation *> reservs, bool isGold);
 
 	/**
 	 * @brief Getter of the price of the month

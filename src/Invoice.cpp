@@ -8,17 +8,21 @@
 #include "Invoice.h"
 
 using namespace std;
+static double goldCard = 10;
 
-Invoice::Invoice(string name, string teacher, vector<Reservation *> reservs)
+Invoice::Invoice(string name, string teacher, vector<Reservation *> reservs, bool isGold)
 {
 	this->name = name;
 	this->assignedTeacher = teacher;
 	this->reservs  = reservs;
 	this->totalPrice = 0;
+	this->isGold = isGold;
 	for(auto i : reservs)
 	{
 		this->totalPrice+= i->getPrice();
 	}
+	if(isGold)
+		this->totalPrice+=goldCard;
 }
 
 
@@ -60,7 +64,9 @@ void Invoice::storeInfo(std::ofstream &outfile, int indent)
 	indentation(outfile, indent);
 	outfile << "{" << endl;
 	indent++;
-	indentation(outfile, indent);
+    indentation(outfile, indent);
+    outfile << "\"isGold\": " << this->isGold << "," << endl;
+    indentation(outfile, indent);
 	outfile << "\"reservs\": [" << endl;
 	indent++;
 	for(unsigned int i = 0; i < this->reservs.size(); i++)
@@ -93,6 +99,11 @@ void Invoice::readInfo(std::ifstream &infile)
 	string savingString;
 	while (getline(infile, savingString))
 	{
+	    if(savingString.find("isGold") != string::npos)
+        {
+	        savingString = savingString.substr(savingString.find("isGold") + 9,1);
+	        this->isGold = (savingString != "0");
+        }
 		if(savingString.find("reservs") != string::npos)
 		{
 			while (getline(infile, savingString))

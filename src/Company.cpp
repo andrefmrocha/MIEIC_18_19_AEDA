@@ -202,7 +202,7 @@ bool Company::makeUserInvoice(string userName,int month, vector<Reservation *> r
 	try
 	{
 		User& u = getUser(userName);
-		Invoice* newinvoice = new Invoice(u.getName(),u.getTeacher(),u.getReservations());
+		Invoice* newinvoice = new Invoice(u.getName(),u.getTeacher(),u.getReservations(), u.getisGold());
 		u.setInvoice(newinvoice,month);
 	}
 	catch(NoUserRegistered &u)
