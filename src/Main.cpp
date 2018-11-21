@@ -192,10 +192,10 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     } else if (flagR == 2) //Add Lesson
                     {
 
-                        int i = C.getUser(name);
+                        User &user = C.getUser(name);
                         //need to choose how to handle price
 
-                        if (!C.makeLesson(m, d, strH, name, C.getUsers().at(i).getTeacher()))
+                        if (!C.makeLesson(m, d, strH, name, user.getTeacher()))
                             cout << "Error adding Lesson. Try again" << endl;
 
                     }
