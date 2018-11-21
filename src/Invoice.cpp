@@ -33,6 +33,10 @@ vector<Reservation*> Invoice::getReservs()
 }
 ostream & operator<<(ostream &out, Invoice inv)
 {
+	if(inv.getReservs().empty()) {
+		out << "There were no reservations made by the user for this month." << endl;
+		//Check if user is gold  and put monthly fee
+	}
 	out << "Discrimination of every use of the court by the user:" << endl;
 	for(unsigned int i = 0; i < inv.getReservs().size(); i++)
 	{
