@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['noteacherregistered',['NoTeacherRegistered',['../class_no_teacher_registered.html#a1a79ff4c2def6524d60937297fa27ed3',1,'NoTeacherRegistered']]],
-  ['nouserregistered',['NoUserRegistered',['../class_no_user_registered.html#a928e78029870899c7dceeb95be5ed1d9',1,'NoUserRegistered']]]
+  ['person',['Person',['../class_person.html#a0397c6f89fafc12e738923f612bc41a3',1,'Person::Person()'],['../class_person.html#a19ba5bb7e92c776268b3d453b4ef55b2',1,'Person::Person(std::string name, int age, std::string gender)']]]
 ];

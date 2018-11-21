@@ -13,6 +13,7 @@ Inheritance diagram for Person\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_person_a0397c6f89fafc12e738923f612bc41a3}\label{class_person_a0397c6f89fafc12e738923f612bc41a3}} 
 \mbox{\hyperlink{class_person_a0397c6f89fafc12e738923f612bc41a3}{Person}} ()
 \begin{DoxyCompactList}\small\item\em Constructor of the class. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_person_a19ba5bb7e92c776268b3d453b4ef55b2}{Person}} (std\+::string name, int age, std\+::string gender)
@@ -33,8 +34,12 @@ virtual void \mbox{\hyperlink{class_person_a80f87df3f644706c2ad8fc8b800fdd95}{st
 \begin{DoxyCompactList}\small\item\em Store in the information of the \mbox{\hyperlink{class_person}{Person}} to a file. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_person_af07a032df8d56dddade4dc43960b536b}{load\+Class}} (std\+::ifstream \&inpfile)
 \begin{DoxyCompactList}\small\item\em Reading the information of a \mbox{\hyperlink{class_user}{User}} from a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_person_a2f1231629a6e7e8c83ada57628e80a89}\label{class_person_a2f1231629a6e7e8c83ada57628e80a89}} 
 virtual void \mbox{\hyperlink{class_person_a2f1231629a6e7e8c83ada57628e80a89}{show}} ()
 \begin{DoxyCompactList}\small\item\em Showing the information of the person on the screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_person_ae524672604b31635f981361d604bac7b}\label{class_person_ae524672604b31635f981361d604bac7b}} 
+virtual void \mbox{\hyperlink{class_person_ae524672604b31635f981361d604bac7b}{clean\+Vectors}} ()
+\begin{DoxyCompactList}\small\item\em cleaning all vectors inside the person \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_person_aa2fe338cbcf08ee5981dce811fd3a50a}{operator==}} (const \mbox{\hyperlink{class_person}{Person}} \&p1)
 \begin{DoxyCompactList}\small\item\em Comparing two People. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -43,20 +48,10 @@ bool \mbox{\hyperlink{class_person_aa2fe338cbcf08ee5981dce811fd3a50a}{operator==
 The class that stores the information of the people in the company 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_person_a0397c6f89fafc12e738923f612bc41a3}\label{class_person_a0397c6f89fafc12e738923f612bc41a3}} 
-\index{Person@{Person}!Person@{Person}}
-\index{Person@{Person}!Person@{Person}}
-\subsubsection{\texorpdfstring{Person()}{Person()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Person\+::\+Person (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Constructor of the class. 
-
 \mbox{\Hypertarget{class_person_a19ba5bb7e92c776268b3d453b4ef55b2}\label{class_person_a19ba5bb7e92c776268b3d453b4ef55b2}} 
 \index{Person@{Person}!Person@{Person}}
 \index{Person@{Person}!Person@{Person}}
-\subsubsection{\texorpdfstring{Person()}{Person()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{Person()}{Person()}}
 {\footnotesize\ttfamily Person\+::\+Person (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{int}]{age,  }\item[{std\+::string}]{gender }\end{DoxyParamCaption})}
 
 
@@ -196,20 +191,6 @@ Setter of the name of the person.
 {\em name} & -\/ name of the person \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_person_a2f1231629a6e7e8c83ada57628e80a89}\label{class_person_a2f1231629a6e7e8c83ada57628e80a89}} 
-\index{Person@{Person}!show@{show}}
-\index{show@{show}!Person@{Person}}
-\subsubsection{\texorpdfstring{show()}{show()}}
-{\footnotesize\ttfamily void Person\+::show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-
-
-Showing the information of the person on the screen. 
-
-
-
-Reimplemented in \mbox{\hyperlink{class_teacher_a3045744c4ef7e1189caac2ae9a126254}{Teacher}}, and \mbox{\hyperlink{class_user_ac8a201055d02b313721e56c4c0f6af82}{User}}.
-
 \mbox{\Hypertarget{class_person_a80f87df3f644706c2ad8fc8b800fdd95}\label{class_person_a80f87df3f644706c2ad8fc8b800fdd95}} 
 \index{Person@{Person}!store\+Info@{store\+Info}}
 \index{store\+Info@{store\+Info}!Person@{Person}}
@@ -235,5 +216,5 @@ Reimplemented in \mbox{\hyperlink{class_teacher_a2ece0d60fa7ec4aaf93333aa0be0d25
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_person_8h}{Person.\+h}}\item 
-\mbox{\hyperlink{_person_8cpp}{Person.\+cpp}}\end{DoxyCompactItemize}
+Person.\+h\item 
+Person.\+cpp\end{DoxyCompactItemize}

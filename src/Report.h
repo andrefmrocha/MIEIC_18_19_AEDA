@@ -22,8 +22,7 @@ private:
 	std::vector<Reservation*> reservations; /**< Reservations of this month */
 	std::string name;	/**< Name of the user */
 	std::string teacherName;	/**< Name of the teacher */
-	std::string addcomm;
-	int grade;
+	int grade;	/**< Grade of the user this month */
 public:
 
 	/**
@@ -31,13 +30,14 @@ public:
 	 */
     Report() {};
 
-    /**
+
+	/**
      * @brief Class Constructor
      * @param userName - name of the user
      * @param teacherName - name of the teacher
      * @param reservs - the reservations
      */
-	Report(std::string userName, std::string teacherName,int grade, std::string addcomm,const std::vector<Reservation*> &reservs);
+	Report(std::string userName, std::string teacherName,const std::vector<Reservation*> &reservs);
 
 	/**
 	 * @brief Writer of the information of the Report
@@ -45,7 +45,6 @@ public:
 	 * @param r - the report itself
 	 * @return the stream
 	 */
-	Report(std::string userName, std::string teacherName,const std::vector<Reservation*> &reservs);
 	friend std::ostream & operator <<(std::ostream & os,Report r);
 
 	/**
@@ -59,6 +58,11 @@ public:
 	 * @return the name of the teacher
 	 */
 	std::string getTeacherName();
+
+	/**
+	 * @brief getter of the Grade
+	 * @return the grade itself
+	 */
 	int getGrade();
 
 	/**

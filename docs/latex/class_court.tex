@@ -7,6 +7,7 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_court_a786e4db0ebf50a5aec5bfe0cca58b06a}\label{class_court_a786e4db0ebf50a5aec5bfe0cca58b06a}} 
 \mbox{\hyperlink{class_court_a786e4db0ebf50a5aec5bfe0cca58b06a}{Court}} ()
 \begin{DoxyCompactList}\small\item\em Class Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_court_a594463e426e762163a09290e48d1d437}{Court}} (int year)
@@ -24,27 +25,19 @@ void \mbox{\hyperlink{class_court_a2d801d3edd9d0280ef0420b131e07f2e}{read\+Info}
 int \mbox{\hyperlink{class_court_a9992ef2a5d2ee81e8cc7f24f8c917f31}{get\+Max\+Users}} () const
 \begin{DoxyCompactList}\small\item\em Getter of the Maximum of Users. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_court_ae44417638404c3caf4579104e633a2f4}{set\+Max\+Users}} (int users)
-\begin{DoxyCompactList}\small\item\em Setter of the maximum of users. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Setter of the maximum of users. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_court_abb97f1c2df77bd02e788ac7d4709eaa8}{occupied}} (int month, int day, double starting\+Hour, int duration)
+\begin{DoxyCompactList}\small\item\em Check if the \mbox{\hyperlink{class_court}{Court}} is already reserved at the given time. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 The information of each \mbox{\hyperlink{class_court}{Court}} 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_court_a786e4db0ebf50a5aec5bfe0cca58b06a}\label{class_court_a786e4db0ebf50a5aec5bfe0cca58b06a}} 
-\index{Court@{Court}!Court@{Court}}
-\index{Court@{Court}!Court@{Court}}
-\subsubsection{\texorpdfstring{Court()}{Court()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Court\+::\+Court (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Class Constructor. 
-
 \mbox{\Hypertarget{class_court_a594463e426e762163a09290e48d1d437}\label{class_court_a594463e426e762163a09290e48d1d437}} 
 \index{Court@{Court}!Court@{Court}}
 \index{Court@{Court}!Court@{Court}}
-\subsubsection{\texorpdfstring{Court()}{Court()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{Court()}{Court()}}
 {\footnotesize\ttfamily Court\+::\+Court (\begin{DoxyParamCaption}\item[{int}]{year }\end{DoxyParamCaption})}
 
 
@@ -87,6 +80,27 @@ Indenting the file.
 {\em outfile} & -\/ the file to write information \\
 \hline
 {\em indent} & -\/ current indentation \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_court_abb97f1c2df77bd02e788ac7d4709eaa8}\label{class_court_abb97f1c2df77bd02e788ac7d4709eaa8}} 
+\index{Court@{Court}!occupied@{occupied}}
+\index{occupied@{occupied}!Court@{Court}}
+\subsubsection{\texorpdfstring{occupied()}{occupied()}}
+{\footnotesize\ttfamily void Court\+::occupied (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{int}]{day,  }\item[{double}]{starting\+Hour,  }\item[{int}]{duration }\end{DoxyParamCaption})}
+
+
+
+Check if the \mbox{\hyperlink{class_court}{Court}} is already reserved at the given time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em month} & -\/ month of the reservation \\
+\hline
+{\em day} & -\/ day of the reservation \\
+\hline
+{\em starting\+Hour} & -\/ starting Hour of the reservation \\
+\hline
+{\em duration} & -\/ duration of the reservation \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_court_a2d801d3edd9d0280ef0420b131e07f2e}\label{class_court_a2d801d3edd9d0280ef0420b131e07f2e}} 
@@ -192,5 +206,5 @@ Store in the information of the \mbox{\hyperlink{class_court}{Court}} to a file.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_court_8h}{Court.\+h}}\item 
-\mbox{\hyperlink{_court_8cpp}{Court.\+cpp}}\end{DoxyCompactItemize}
+Court.\+h\item 
+Court.\+cpp\end{DoxyCompactItemize}

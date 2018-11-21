@@ -7,10 +7,14 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_company_ac97cf640176971922a434b766627774f}{Company}} (double card\+Value, int year)
+\mbox{\Hypertarget{class_company_a29937dda711b09df306ae7ca9b3d6b42}\label{class_company_a29937dda711b09df306ae7ca9b3d6b42}} 
+\mbox{\hyperlink{class_company_a29937dda711b09df306ae7ca9b3d6b42}{Company}} ()
 \begin{DoxyCompactList}\small\item\em Class Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_company_ac038a4c5e02f13a7bab9b5139990316e}{Company}} (double card\+Value, \mbox{\hyperlink{class_date}{Date}} d)
+\begin{DoxyCompactList}\small\item\em Class constructor. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_company_a837fd39a8f03c20a3ceb8617410956b7}{get\+Max\+User}} () const
-\begin{DoxyCompactList}\small\item\em Getter of the current Courts. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em getter of Maximum of users in all courts \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_company_a10770d690a59f9b4d9f84de6d0f527c9}\label{class_company_a10770d690a59f9b4d9f84de6d0f527c9}} 
 void \mbox{\hyperlink{class_company_a10770d690a59f9b4d9f84de6d0f527c9}{create\+Court}} ()
 \begin{DoxyCompactList}\small\item\em Creating a new \mbox{\hyperlink{class_court}{Court}}. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{class_court}{Court}} $>$ \mbox{\hyperlink{class_company_afa0ab125a0ba718fe2c13802fe1703be}{get\+Courts}} ()
@@ -19,8 +23,10 @@ std\+::vector$<$ \mbox{\hyperlink{class_user}{User}} $>$ \mbox{\hyperlink{class_
 \begin{DoxyCompactList}\small\item\em Getter of the current Users. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{class_teacher}{Teacher}} $>$ \mbox{\hyperlink{class_company_a000159ce012318a6edf0335447ad8bde}{get\+Teachers}} ()
 \begin{DoxyCompactList}\small\item\em Getter of the current Teachers. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{class_company_ad3fc4daf4b94e0156f05049eab8ff52d}{get\+User}} (std\+::string user\+Name)
-\begin{DoxyCompactList}\small\item\em Getting a specific user. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_user}{User}} \& \mbox{\hyperlink{class_company_a314cbc50e394b65f3b07670855029eef}{get\+User}} (std\+::string user\+Name)
+\begin{DoxyCompactList}\small\item\em Getter of a specific \mbox{\hyperlink{class_user}{User}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_teacher}{Teacher}} \& \mbox{\hyperlink{class_company_a7867ccfc2961810389f118feb827e63e}{get\+Teacher}} (std\+::string teacher\+Name)
+\begin{DoxyCompactList}\small\item\em Getter of a specific \mbox{\hyperlink{class_user}{User}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_company_a0ab3ff0ea443cc20fd1ea99e5d8725c9}{make\+Lesson}} (int month, int day, double starting\+Hour, std\+::string user\+Name, std\+::string teacher\+Name)
 \item 
 bool \mbox{\hyperlink{class_company_a56fa75dd66690eae0853a3f3278220e3}{make\+Free}} (int month, int day, double starting\+Hour, int duration, std\+::string username)
@@ -32,7 +38,7 @@ bool \mbox{\hyperlink{class_company_afd7f0c326672c6bb6a23d5921503bc0d}{register\
 \begin{DoxyItemize}
 \item Register a new \mbox{\hyperlink{class_teacher}{Teacher}} to the system. 
 \end{DoxyItemize}\end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_company_a6fe989c0c3da3db723e37f6a71378fd4}{make\+User\+Report}} (int month, std\+::string user\+Name, std\+::string teacher\+Name, int grade, std\+::string addcomm)
+bool \mbox{\hyperlink{class_company_acc2aba7c2f4149021e9b93ab423e417b}{make\+User\+Report}} (int month, std\+::string user\+Name, std\+::string teacher\+Name)
 \begin{DoxyCompactList}\small\item\em Make a \mbox{\hyperlink{class_report}{Report}} for a specific user. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_company_a0d3e4de51625c91610516fba5aac7acf}{make\+User\+Invoice}} (std\+::string user\+Name, int month, std\+::vector$<$ \mbox{\hyperlink{class_reservation}{Reservation}} $\ast$$>$ reservs)
 \begin{DoxyCompactList}\small\item\em Make an \mbox{\hyperlink{class_invoice}{Invoice}} for a specific user. \end{DoxyCompactList}\item 
@@ -42,44 +48,49 @@ bool \mbox{\hyperlink{class_company_ad3d0ab0209f13ca48a83df34564ef055}{show\+Inv
 \begin{DoxyCompactList}\small\item\em Method to show a specific \mbox{\hyperlink{class_invoice}{Invoice}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_company_ac03f62f1accf21eb445a7aa5731b1199}{store\+Info}} (std\+::ofstream \&outfile, int identation)
 \begin{DoxyCompactList}\small\item\em Store in the information of the \mbox{\hyperlink{class_company}{Company}} to a file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_company_aa2885e87763b9fa599ec4935d3ded6cc}{indent}} (std\+::ofstream \&outfile, int identation)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_company_aa8b5bbb3b2d49d13f36d4fcdfc0d20d1}{indentation}} (std\+::ofstream \&outfile, int indentation)
+\begin{DoxyCompactList}\small\item\em To indent the file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_company_a2b97cd4ed80ecab0aa92d0f9c1f81071}{read\+Info}} (std\+::ifstream \&infile)
+\begin{DoxyCompactList}\small\item\em Reads the company information of a file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_company}{Company}} \mbox{\hyperlink{class_company_a80d971b44bc73adbb2bf3317f7747414}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em The operator to go through a day and all its necessary situations. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_company_a9446ed52b7e2831b24488072d1e54cde}\label{class_company_a9446ed52b7e2831b24488072d1e54cde}} 
+void \mbox{\hyperlink{class_company_a9446ed52b7e2831b24488072d1e54cde}{show\+Users}} ()
+\begin{DoxyCompactList}\small\item\em shows all Users \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_company_a81e7a22e6ea3e09b3865d44f3d9354f3}\label{class_company_a81e7a22e6ea3e09b3865d44f3d9354f3}} 
+void \mbox{\hyperlink{class_company_a81e7a22e6ea3e09b3865d44f3d9354f3}{show\+Teachers}} ()
+\begin{DoxyCompactList}\small\item\em shows all Teachers \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_company_a1779c78bdc9a4416a482be25b71efcd0}\label{class_company_a1779c78bdc9a4416a482be25b71efcd0}} 
+void \mbox{\hyperlink{class_company_a1779c78bdc9a4416a482be25b71efcd0}{show\+Courts}} ()
+\begin{DoxyCompactList}\small\item\em shows all Courts \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_company_a664aa9b9bde35eae3a564edec73cf5b3}{show\+User}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em show a specific \mbox{\hyperlink{class_user}{User}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_company_aa64ff74648761cfe39d4a9fb0c72031f}{show\+Teacher}} (std\+::string teacher)
+\begin{DoxyCompactList}\small\item\em show a specific \mbox{\hyperlink{class_user}{User}} \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 The company itself, operation all of the rest 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_company_ac97cf640176971922a434b766627774f}\label{class_company_ac97cf640176971922a434b766627774f}} 
+\mbox{\Hypertarget{class_company_ac038a4c5e02f13a7bab9b5139990316e}\label{class_company_ac038a4c5e02f13a7bab9b5139990316e}} 
 \index{Company@{Company}!Company@{Company}}
 \index{Company@{Company}!Company@{Company}}
 \subsubsection{\texorpdfstring{Company()}{Company()}}
-{\footnotesize\ttfamily Company\+::\+Company (\begin{DoxyParamCaption}\item[{double}]{card\+Value,  }\item[{int}]{year }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Company\+::\+Company (\begin{DoxyParamCaption}\item[{double}]{card\+Value,  }\item[{\mbox{\hyperlink{class_date}{Date}}}]{d }\end{DoxyParamCaption})}
 
 
 
-Class Constructor. 
+Class constructor. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em card\+Value} & -\/ the value of the Gold Card \\
-\hline
-{\em year} & -\/ Current year \\
+{\em d} & -\/ current date \\
 \hline
 \end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{class_company_a10770d690a59f9b4d9f84de6d0f527c9}\label{class_company_a10770d690a59f9b4d9f84de6d0f527c9}} 
-\index{Company@{Company}!create\+Court@{create\+Court}}
-\index{create\+Court@{create\+Court}!Company@{Company}}
-\subsubsection{\texorpdfstring{create\+Court()}{createCourt()}}
-{\footnotesize\ttfamily void Company\+::create\+Court (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Creating a new \mbox{\hyperlink{class_court}{Court}}. 
-
 \mbox{\Hypertarget{class_company_afa0ab125a0ba718fe2c13802fe1703be}\label{class_company_afa0ab125a0ba718fe2c13802fe1703be}} 
 \index{Company@{Company}!get\+Courts@{get\+Courts}}
 \index{get\+Courts@{get\+Courts}!Company@{Company}}
@@ -101,10 +112,28 @@ vector of Courts
 
 
 
-Getter of the current Courts. 
+getter of Maximum of users in all courts 
 
 \begin{DoxyReturn}{Returns}
-number of max Users 
+maximum of users in all courts 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_company_a7867ccfc2961810389f118feb827e63e}\label{class_company_a7867ccfc2961810389f118feb827e63e}} 
+\index{Company@{Company}!get\+Teacher@{get\+Teacher}}
+\index{get\+Teacher@{get\+Teacher}!Company@{Company}}
+\subsubsection{\texorpdfstring{get\+Teacher()}{getTeacher()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_teacher}{Teacher}} \& Company\+::get\+Teacher (\begin{DoxyParamCaption}\item[{std\+::string}]{teacher\+Name }\end{DoxyParamCaption})}
+
+
+
+Getter of a specific \mbox{\hyperlink{class_user}{User}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Name} & -\/ name of the \mbox{\hyperlink{class_user}{User}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a reference to the user 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_company_a000159ce012318a6edf0335447ad8bde}\label{class_company_a000159ce012318a6edf0335447ad8bde}} 
 \index{Company@{Company}!get\+Teachers@{get\+Teachers}}
@@ -119,23 +148,23 @@ Getter of the current Teachers.
 \begin{DoxyReturn}{Returns}
 vector of Teachers 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_company_ad3fc4daf4b94e0156f05049eab8ff52d}\label{class_company_ad3fc4daf4b94e0156f05049eab8ff52d}} 
+\mbox{\Hypertarget{class_company_a314cbc50e394b65f3b07670855029eef}\label{class_company_a314cbc50e394b65f3b07670855029eef}} 
 \index{Company@{Company}!get\+User@{get\+User}}
 \index{get\+User@{get\+User}!Company@{Company}}
 \subsubsection{\texorpdfstring{get\+User()}{getUser()}}
-{\footnotesize\ttfamily int Company\+::get\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{user\+Name }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_user}{User}} \& Company\+::get\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{user\+Name }\end{DoxyParamCaption})}
 
 
 
-Getting a specific user. 
+Getter of a specific \mbox{\hyperlink{class_user}{User}}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em user\+Name} & -\/ the name of the user \\
+{\em user\+Name} & -\/ name of the \mbox{\hyperlink{class_user}{User}} \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-return the index of where he is 
+a reference to the user 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_company_a6f6a3dbf24278f5e1395d123d5812f33}\label{class_company_a6f6a3dbf24278f5e1395d123d5812f33}} 
 \index{Company@{Company}!get\+Users@{get\+Users}}
@@ -150,12 +179,23 @@ Getter of the current Users.
 \begin{DoxyReturn}{Returns}
 vector of Users 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_company_aa2885e87763b9fa599ec4935d3ded6cc}\label{class_company_aa2885e87763b9fa599ec4935d3ded6cc}} 
-\index{Company@{Company}!indent@{indent}}
-\index{indent@{indent}!Company@{Company}}
-\subsubsection{\texorpdfstring{indent()}{indent()}}
-{\footnotesize\ttfamily void Company\+::indent (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile,  }\item[{int}]{identation }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_company_aa8b5bbb3b2d49d13f36d4fcdfc0d20d1}\label{class_company_aa8b5bbb3b2d49d13f36d4fcdfc0d20d1}} 
+\index{Company@{Company}!indentation@{indentation}}
+\index{indentation@{indentation}!Company@{Company}}
+\subsubsection{\texorpdfstring{indentation()}{indentation()}}
+{\footnotesize\ttfamily void Company\+::indentation (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile,  }\item[{int}]{indentation }\end{DoxyParamCaption})}
 
+
+
+To indent the file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outfile} & -\/ where to write \\
+\hline
+{\em indentation} & -\/ current indentation \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_company_a56fa75dd66690eae0853a3f3278220e3}\label{class_company_a56fa75dd66690eae0853a3f3278220e3}} 
 \index{Company@{Company}!make\+Free@{make\+Free}}
 \index{make\+Free@{make\+Free}!Company@{Company}}
@@ -226,11 +266,11 @@ Make an \mbox{\hyperlink{class_invoice}{Invoice}} for a specific user.
 \begin{DoxyReturn}{Returns}
 if if was made sucessfuly 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_company_a6fe989c0c3da3db723e37f6a71378fd4}\label{class_company_a6fe989c0c3da3db723e37f6a71378fd4}} 
+\mbox{\Hypertarget{class_company_acc2aba7c2f4149021e9b93ab423e417b}\label{class_company_acc2aba7c2f4149021e9b93ab423e417b}} 
 \index{Company@{Company}!make\+User\+Report@{make\+User\+Report}}
 \index{make\+User\+Report@{make\+User\+Report}!Company@{Company}}
 \subsubsection{\texorpdfstring{make\+User\+Report()}{makeUserReport()}}
-{\footnotesize\ttfamily bool Company\+::make\+User\+Report (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{std\+::string}]{user\+Name,  }\item[{std\+::string}]{teacher\+Name,  }\item[{int}]{grade,  }\item[{std\+::string}]{addcomm }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool Company\+::make\+User\+Report (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{std\+::string}]{user\+Name,  }\item[{std\+::string}]{teacher\+Name }\end{DoxyParamCaption})}
 
 
 
@@ -242,10 +282,40 @@ Make a \mbox{\hyperlink{class_report}{Report}} for a specific user.
 \hline
 {\em user\+Name} & -\/ the name of the user \\
 \hline
+{\em teacher\+Name} & -\/ the name of the teacher \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 if if was made sucessfuly 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_company_a80d971b44bc73adbb2bf3317f7747414}\label{class_company_a80d971b44bc73adbb2bf3317f7747414}} 
+\index{Company@{Company}!operator++@{operator++}}
+\index{operator++@{operator++}!Company@{Company}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_company}{Company}} Company\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The operator to go through a day and all its necessary situations. 
+
+\begin{DoxyReturn}{Returns}
+the company itself 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_company_a2b97cd4ed80ecab0aa92d0f9c1f81071}\label{class_company_a2b97cd4ed80ecab0aa92d0f9c1f81071}} 
+\index{Company@{Company}!read\+Info@{read\+Info}}
+\index{read\+Info@{read\+Info}!Company@{Company}}
+\subsubsection{\texorpdfstring{read\+Info()}{readInfo()}}
+{\footnotesize\ttfamily void Company\+::read\+Info (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{infile }\end{DoxyParamCaption})}
+
+
+
+Reads the company information of a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em infile} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_company_afd7f0c326672c6bb6a23d5921503bc0d}\label{class_company_afd7f0c326672c6bb6a23d5921503bc0d}} 
 \index{Company@{Company}!register\+Teacher@{register\+Teacher}}
 \index{register\+Teacher@{register\+Teacher}!Company@{Company}}
@@ -335,6 +405,36 @@ Method to show a specific \mbox{\hyperlink{class_report}{Report}}.
 \begin{DoxyReturn}{Returns}
 if it was properly shown 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_company_aa64ff74648761cfe39d4a9fb0c72031f}\label{class_company_aa64ff74648761cfe39d4a9fb0c72031f}} 
+\index{Company@{Company}!show\+Teacher@{show\+Teacher}}
+\index{show\+Teacher@{show\+Teacher}!Company@{Company}}
+\subsubsection{\texorpdfstring{show\+Teacher()}{showTeacher()}}
+{\footnotesize\ttfamily void Company\+::show\+Teacher (\begin{DoxyParamCaption}\item[{std\+::string}]{teacher }\end{DoxyParamCaption})}
+
+
+
+show a specific \mbox{\hyperlink{class_user}{User}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ name of the \mbox{\hyperlink{class_user}{User}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_company_a664aa9b9bde35eae3a564edec73cf5b3}\label{class_company_a664aa9b9bde35eae3a564edec73cf5b3}} 
+\index{Company@{Company}!show\+User@{show\+User}}
+\index{show\+User@{show\+User}!Company@{Company}}
+\subsubsection{\texorpdfstring{show\+User()}{showUser()}}
+{\footnotesize\ttfamily void Company\+::show\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+show a specific \mbox{\hyperlink{class_user}{User}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ name of the \mbox{\hyperlink{class_user}{User}} \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_company_ac03f62f1accf21eb445a7aa5731b1199}\label{class_company_ac03f62f1accf21eb445a7aa5731b1199}} 
 \index{Company@{Company}!store\+Info@{store\+Info}}
 \index{store\+Info@{store\+Info}!Company@{Company}}
@@ -356,5 +456,5 @@ Store in the information of the \mbox{\hyperlink{class_company}{Company}} to a f
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_company_8h}{Company.\+h}}\item 
-\mbox{\hyperlink{_company_8cpp}{Company.\+cpp}}\end{DoxyCompactItemize}
+Company.\+h\item 
+Company.\+cpp\end{DoxyCompactItemize}

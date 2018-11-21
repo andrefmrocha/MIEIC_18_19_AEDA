@@ -27,7 +27,7 @@ public:
 	 * @brief Constructor of Class
 	 */
 	Reservation(){};
-	Reservation(int month,int day,double startingHour,double price,unsigned int duration);
+
 
 	/**
 	 * @brief Constructor of Class
@@ -37,7 +37,7 @@ public:
 	 * @param price - Price of the reservation
 	 * @param duration - Duration of the reservation
 	 */
-	Reservation(int month,int day,int startingHour,double price,unsigned int duration);
+	Reservation(int month,int day,double startingHour,double price,unsigned int duration);
 
 	/**
 	 * @brief Method to obtain the price of the reservation
@@ -145,9 +145,21 @@ public:
 
 class Free : public Reservation {
 public:
+
+	/**
+	 * @brief Constructor of Class
+	 */
 	Free(){};
+
+	/**
+	 * Constructor of Class
+	 * @param m - month of the reservation
+	 * @param d - day of the reservation
+	 * @param strHr - starting Hour of the reservation
+	 * @param p - price of the reservation
+	 * @param dur - duration of the reservation
+	 */
 	Free(int m,int d,double strHr,double p,unsigned int dur);
-	Free(int m,int d,int strHr,double p,unsigned int dur);
 
 	/**
 	 * @brief Method to obtain the price of the free

@@ -19,30 +19,30 @@
 class Company
 {
 private:
-	std::vector<Court> tennisCourts;
-	std::vector<User> users;
-	std::vector<Teacher> teachers;
+	std::vector<Court> tennisCourts; /**< vector with all the Courts */
+	std::vector<User> users; /**< vector with all the Users */
+	std::vector<Teacher> teachers; /**< vector with all the Users */
 	double cardValue;
-	int year;
-	Date date; // set it to static
+	int year; /**< current Year */
+	Date date; /**< Current date*/
 public:
-
 	/**
-	 * @brief Class Constructor.
-	 * @param cardValue - the value of the Gold Card
-	 * @param year - Current year
-	 */
-	Company(double cardValue,int year);
-	//tested
-
-	/**
-	 * @brief Getter of the current Courts.
-	 * @return number of max Users
+	 *
+	 * @brief Class Constructor
 	 */
     Company() {};
+
+    /**
+     * @brief Class constructor
+     * @param d - current date
+     */
 	Company(double cardValue, Date d);
+
+	/**
+	 * @brief getter of Maximum of users in all courts
+	 * @return maximum of users in all courts
+	 */
 	int getMaxUser()const;
-	//tested
 
 	/**
 	 * @brief Creating a new Court
@@ -69,7 +69,20 @@ public:
 	 * @return vector of Teachers
 	 */
 	std::vector<Teacher> getTeachers();
+
+	/**
+	 * @brief Getter of a specific User
+	 * @param userName - name of the User
+	 * @return a reference to the user
+	 */
 	User& getUser(std::string userName);
+
+
+	/**
+	 * @brief Getter of a specific User
+	 * @param userName - name of the User
+	 * @return a reference to the user
+	 */
 	Teacher& getTeacher(std::string teacherName);
 
 	/**
@@ -115,16 +128,18 @@ public:
 	 * @return if the Teacher was succesfully created
 	 */
 	bool registerTeacher(std::string teacherName,int age,std::string gender);
-	bool makeUserReport(int month,std::string userName,std::string teacherName);
-	//partially tested, needs to verify that invoice is saved properly
 
 	/**
 	 * @brief Make a Report for a specific user.
 	 * @param month - month it relates to
 	 * @param userName - the name of the user
+	 * @param teacherName - the name of the teacher
 	 * @return if if was made sucessfuly
 	 */
-	bool makeUserReport(int month,std::string userName,std::string teacherName, int grade,std::string addcomm);
+	bool makeUserReport(int month,std::string userName,std::string teacherName);
+	//partially tested, needs to verify that invoice is saved properly
+
+
 
 	/**
 	 * @brief Make an Invoice for a specific user.
@@ -162,13 +177,52 @@ public:
 	 * @param identation - current indentation
 	 */
 	void storeInfo(std::ofstream &outfile,int identation);
-	void indentation(std::ofstream &outfile,int identation);
+
+	/**
+	 * @brief To indent the file
+	 * @param outfile - where to write
+	 * @param indentation - current indentation
+	 */
+	void indentation(std::ofstream &outfile,int indentation);
+
+	/**
+	 * @brief Reads the company information of a file
+	 * @param infile
+	 */
 	void readInfo(std::ifstream &infile);
+
+	/**
+	 * @brief The operator to go through a day and all its necessary situations
+	 * @return the company itself
+	 */
 	Company operator++();
+
+	/**
+	 * @brief shows all Users
+	 */
 	void showUsers();
+
+
+	/**
+	 * @brief shows all Teachers
+	 */
 	void showTeachers();
+
+	/**
+	 * @brief shows all Courts
+	 */
 	void showCourts();
+
+	/**
+	 * @brief show a specific User
+	 * @param name - name of the User
+	 */
     void showUser(std::string name);
+
+	/**
+	 * @brief show a specific User
+	 * @param name - name of the User
+	 */
     void showTeacher(std::string teacher);
 };
 

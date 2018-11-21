@@ -34,6 +34,7 @@ public:
 	 * @param name - name of User
 	 * @param teacherName - name of Teacher
 	 * @param reservs - The reservations
+	 * @param isGold - if the user has a Gold Card
 	 */
 	Invoice(std::string name, std::string teacherName, std::vector<Reservation *> reservs, bool isGold);
 

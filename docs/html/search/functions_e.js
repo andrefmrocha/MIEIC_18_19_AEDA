@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['teacher',['Teacher',['../class_teacher.html#a0d09b151c46e2abb647a2ae40cc5510c',1,'Teacher::Teacher()'],['../class_teacher.html#adb308468e6ed8bbbffaba9cbf1ae646e',1,'Teacher::Teacher(std::string name, int age, std::string gender)']]],
-  ['thisisatest',['thisIsATest',['../_test_8cpp.html#a8f55e8e79d402096a312b77235f80ed6',1,'Test.cpp']]]
+  ['year',['Year',['../class_year.html#af5910fa97849bd9b700262477fd1fd24',1,'Year::Year()'],['../class_year.html#ac18a4f513e8ee98b352990c6f54bd663',1,'Year::Year(int year)']]]
 ];

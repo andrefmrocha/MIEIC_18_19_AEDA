@@ -283,9 +283,9 @@ bool Company::showInvoice(string name,int month)
 	return true;
 }
 
-void Company::indentation(std::ofstream &outfile, int indent)
+void Company::indentation(std::ofstream &outfile, int indentation)
 {
-    for(int i = 0; i < indent; i++)
+    for(int i = 0; i < indentation; i++)
     {
         outfile << "\t";
     }

@@ -13,12 +13,15 @@ Inheritance diagram for User\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_user_a4a0137053e591fbb79d9057dd7d2283d}\label{class_user_a4a0137053e591fbb79d9057dd7d2283d}} 
 \mbox{\hyperlink{class_user_a4a0137053e591fbb79d9057dd7d2283d}{User}} ()
 \begin{DoxyCompactList}\small\item\em Constructor of the class. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_user_a898c6748faa70dcd3d30e550be2eb768}{User}} (std\+::string name, int age, std\+::string gender, bool is\+Gold, std\+::string assigned\+Teacher)
 \begin{DoxyCompactList}\small\item\em Constructor of the class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_a1ddb4cbabc84ef92ac92bfe6f9385d39}\label{class_user_a1ddb4cbabc84ef92ac92bfe6f9385d39}} 
 void \mbox{\hyperlink{class_user_a1ddb4cbabc84ef92ac92bfe6f9385d39}{make\+Gold}} ()
 \begin{DoxyCompactList}\small\item\em Make a person have a Gold Card. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_a88a8b41f134b21aeb702c481ffee0ef4}\label{class_user_a88a8b41f134b21aeb702c481ffee0ef4}} 
 void \mbox{\hyperlink{class_user_a88a8b41f134b21aeb702c481ffee0ef4}{stop\+Gold}} ()
 \begin{DoxyCompactList}\small\item\em Stop a person from having a Gold Card. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_user_ac1af1ded379bd2fd56f96f90348520fe}{getis\+Gold}} ()
@@ -43,28 +46,29 @@ void \mbox{\hyperlink{class_user_aac5ff0f6899f3ce56d1b2d12ed557c79}{store\+Info}
 \begin{DoxyCompactList}\small\item\em Store in the information of the \mbox{\hyperlink{class_user}{User}} to a file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_user_abc12a9ca668bd860a3d6d2ae4791997d}{load\+Class}} (std\+::ifstream \&inpfile)
 \begin{DoxyCompactList}\small\item\em Reading the information of a \mbox{\hyperlink{class_user}{User}} from a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_ac8a201055d02b313721e56c4c0f6af82}\label{class_user_ac8a201055d02b313721e56c4c0f6af82}} 
 void \mbox{\hyperlink{class_user_ac8a201055d02b313721e56c4c0f6af82}{show}} ()
-\begin{DoxyCompactList}\small\item\em Showing the information of the user on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Showing the information of the user on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_user_a0fec4842d197ad4cb255f5362f38ef6e}{show\+Reports}} (int month)
+\begin{DoxyCompactList}\small\item\em show the report for the month \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_user_a134a83476c6c006c77e552f22c810ed9}{show\+Invoices}} (int month)
+\begin{DoxyCompactList}\small\item\em show the invoice for the month \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_a3ccbaec58dd37260a34dfa84496b30bd}\label{class_user_a3ccbaec58dd37260a34dfa84496b30bd}} 
+void \mbox{\hyperlink{class_user_a3ccbaec58dd37260a34dfa84496b30bd}{clean\+Vectors}} ()
+\begin{DoxyCompactList}\small\item\em cleaning all vectors inside the \mbox{\hyperlink{class_user}{User}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_ab0637e7ec103b32d040a0bc97be0f178}\label{class_user_ab0637e7ec103b32d040a0bc97be0f178}} 
+void \mbox{\hyperlink{class_user_ab0637e7ec103b32d040a0bc97be0f178}{clean\+Reservations}} ()
+\begin{DoxyCompactList}\small\item\em cleaning the Reservations \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 The users of the court 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_user_a4a0137053e591fbb79d9057dd7d2283d}\label{class_user_a4a0137053e591fbb79d9057dd7d2283d}} 
-\index{User@{User}!User@{User}}
-\index{User@{User}!User@{User}}
-\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Constructor of the class. 
-
 \mbox{\Hypertarget{class_user_a898c6748faa70dcd3d30e550be2eb768}\label{class_user_a898c6748faa70dcd3d30e550be2eb768}} 
 \index{User@{User}!User@{User}}
 \index{User@{User}!User@{User}}
-\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{User()}{User()}}
 {\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{int}]{age,  }\item[{std\+::string}]{gender,  }\item[{bool}]{is\+Gold,  }\item[{std\+::string}]{assigned\+Teacher }\end{DoxyParamCaption})}
 
 
@@ -182,16 +186,6 @@ Reading the information of a \mbox{\hyperlink{class_user}{User}} from a file.
 
 Reimplemented from \mbox{\hyperlink{class_person_af07a032df8d56dddade4dc43960b536b}{Person}}.
 
-\mbox{\Hypertarget{class_user_a1ddb4cbabc84ef92ac92bfe6f9385d39}\label{class_user_a1ddb4cbabc84ef92ac92bfe6f9385d39}} 
-\index{User@{User}!make\+Gold@{make\+Gold}}
-\index{make\+Gold@{make\+Gold}!User@{User}}
-\subsubsection{\texorpdfstring{make\+Gold()}{makeGold()}}
-{\footnotesize\ttfamily void User\+::make\+Gold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Make a person have a Gold Card. 
-
 \mbox{\Hypertarget{class_user_ad0432b83c7379ca57ed782d2929f3b8a}\label{class_user_ad0432b83c7379ca57ed782d2929f3b8a}} 
 \index{User@{User}!set\+Invoice@{set\+Invoice}}
 \index{set\+Invoice@{set\+Invoice}!User@{User}}
@@ -233,30 +227,36 @@ Setter of the reservation.
 {\em reservation} & -\/ the reservation to save \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_user_ac8a201055d02b313721e56c4c0f6af82}\label{class_user_ac8a201055d02b313721e56c4c0f6af82}} 
-\index{User@{User}!show@{show}}
-\index{show@{show}!User@{User}}
-\subsubsection{\texorpdfstring{show()}{show()}}
-{\footnotesize\ttfamily void User\+::show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_user_a134a83476c6c006c77e552f22c810ed9}\label{class_user_a134a83476c6c006c77e552f22c810ed9}} 
+\index{User@{User}!show\+Invoices@{show\+Invoices}}
+\index{show\+Invoices@{show\+Invoices}!User@{User}}
+\subsubsection{\texorpdfstring{show\+Invoices()}{showInvoices()}}
+{\footnotesize\ttfamily void User\+::show\+Invoices (\begin{DoxyParamCaption}\item[{int}]{month }\end{DoxyParamCaption})}
 
 
 
-Showing the information of the user on the screen. 
+show the invoice for the month 
+
+
+\begin{DoxyParams}{Parameters}
+{\em month} & -\/ month of the invoice \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_user_a0fec4842d197ad4cb255f5362f38ef6e}\label{class_user_a0fec4842d197ad4cb255f5362f38ef6e}} 
+\index{User@{User}!show\+Reports@{show\+Reports}}
+\index{show\+Reports@{show\+Reports}!User@{User}}
+\subsubsection{\texorpdfstring{show\+Reports()}{showReports()}}
+{\footnotesize\ttfamily void User\+::show\+Reports (\begin{DoxyParamCaption}\item[{int}]{month }\end{DoxyParamCaption})}
 
 
 
-Reimplemented from \mbox{\hyperlink{class_person_a2f1231629a6e7e8c83ada57628e80a89}{Person}}.
-
-\mbox{\Hypertarget{class_user_a88a8b41f134b21aeb702c481ffee0ef4}\label{class_user_a88a8b41f134b21aeb702c481ffee0ef4}} 
-\index{User@{User}!stop\+Gold@{stop\+Gold}}
-\index{stop\+Gold@{stop\+Gold}!User@{User}}
-\subsubsection{\texorpdfstring{stop\+Gold()}{stopGold()}}
-{\footnotesize\ttfamily void User\+::stop\+Gold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+show the report for the month 
 
 
-
-Stop a person from having a Gold Card. 
-
+\begin{DoxyParams}{Parameters}
+{\em month} & -\/ month of the report \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_user_aac5ff0f6899f3ce56d1b2d12ed557c79}\label{class_user_aac5ff0f6899f3ce56d1b2d12ed557c79}} 
 \index{User@{User}!store\+Info@{store\+Info}}
 \index{store\+Info@{store\+Info}!User@{User}}
@@ -282,5 +282,5 @@ Reimplemented from \mbox{\hyperlink{class_person_a80f87df3f644706c2ad8fc8b800fdd
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_person_8h}{Person.\+h}}\item 
-\mbox{\hyperlink{_person_8cpp}{Person.\+cpp}}\end{DoxyCompactItemize}
+Person.\+h\item 
+Person.\+cpp\end{DoxyCompactItemize}

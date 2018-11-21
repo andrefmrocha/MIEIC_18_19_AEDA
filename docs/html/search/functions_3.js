@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['endhourinsideres',['EndHourInsideRes',['../class_end_hour_inside_res.html#af2162a2e870bf25d64f773089def5ec2',1,'EndHourInsideRes']]]
+  ['free',['Free',['../class_free.html#a4a847fee0a934284fc4581282706e885',1,'Free::Free()'],['../class_free.html#afe1bb925d237595d9fd75fb2e7772314',1,'Free::Free(int m, int d, double strHr, double p, unsigned int dur)']]]
 ];

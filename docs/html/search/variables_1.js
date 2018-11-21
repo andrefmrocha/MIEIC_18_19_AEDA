@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['month',['month',['../class_report_not_available.html#a11686bc53e58de31838b14e6a23ec0c6',1,'ReportNotAvailable::month()'],['../class_invoice_not_available.html#a35029f0aa54b16c927f45adbac81f427',1,'InvoiceNotAvailable::month()']]]
+  ['price',['price',['../class_reservation.html#a82e197bd30e7949ee9b8616ee4eacf83',1,'Reservation']]]
 ];

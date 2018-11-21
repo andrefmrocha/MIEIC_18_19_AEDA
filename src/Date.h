@@ -60,8 +60,23 @@ public:
 	 * @param infile - file to read the information from
 	 */
 	void readInfo(std::ifstream &infile);
+
+	/**
+	 * @brief Getter for the day
+	 * @return the actual day
+	 */
 	unsigned int getDay();
+
+	/**
+	 * @brief Getter for the month
+	 * @return the actual month
+	 */
 	unsigned int getMonth();
+
+	/**
+	 * @brief Getter for the year
+	 * @return the actual year
+	 */
 	unsigned int getYear();
 
 };

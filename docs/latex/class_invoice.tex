@@ -7,9 +7,10 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_invoice_a25d6ad261479340ac3775e21f03eef90}\label{class_invoice_a25d6ad261479340ac3775e21f03eef90}} 
 \mbox{\hyperlink{class_invoice_a25d6ad261479340ac3775e21f03eef90}{Invoice}} ()
 \begin{DoxyCompactList}\small\item\em Class Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_invoice_a332d51ff2cf16d52178fa61ddc69f017}{Invoice}} (std\+::string name, std\+::string teacher\+Name, std\+::vector$<$ \mbox{\hyperlink{class_reservation}{Reservation}} $\ast$$>$ reservs)
+\mbox{\hyperlink{class_invoice_a6db408ae47f1a40911c51b769b428034}{Invoice}} (std\+::string name, std\+::string teacher\+Name, std\+::vector$<$ \mbox{\hyperlink{class_reservation}{Reservation}} $\ast$$>$ reservs, bool is\+Gold)
 \begin{DoxyCompactList}\small\item\em Class Constructor. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_invoice_a049d93832eedd6c40a0b5a686771bdb6}{get\+Price}} () const
 \begin{DoxyCompactList}\small\item\em Getter of the price of the month. \end{DoxyCompactList}\item 
@@ -32,21 +33,11 @@ std\+::ostream \& \mbox{\hyperlink{class_invoice_a1ff3da2cc7abd9df37b2936772ce9f
 \mbox{\hyperlink{class_invoice}{Invoice}} of the month for the user 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_invoice_a25d6ad261479340ac3775e21f03eef90}\label{class_invoice_a25d6ad261479340ac3775e21f03eef90}} 
+\mbox{\Hypertarget{class_invoice_a6db408ae47f1a40911c51b769b428034}\label{class_invoice_a6db408ae47f1a40911c51b769b428034}} 
 \index{Invoice@{Invoice}!Invoice@{Invoice}}
 \index{Invoice@{Invoice}!Invoice@{Invoice}}
-\subsubsection{\texorpdfstring{Invoice()}{Invoice()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Invoice\+::\+Invoice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Class Constructor. 
-
-\mbox{\Hypertarget{class_invoice_a332d51ff2cf16d52178fa61ddc69f017}\label{class_invoice_a332d51ff2cf16d52178fa61ddc69f017}} 
-\index{Invoice@{Invoice}!Invoice@{Invoice}}
-\index{Invoice@{Invoice}!Invoice@{Invoice}}
-\subsubsection{\texorpdfstring{Invoice()}{Invoice()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Invoice\+::\+Invoice (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string}]{teacher\+Name,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_reservation}{Reservation}} $\ast$$>$}]{reservs }\end{DoxyParamCaption})}
+\subsubsection{\texorpdfstring{Invoice()}{Invoice()}}
+{\footnotesize\ttfamily Invoice\+::\+Invoice (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string}]{teacher\+Name,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_reservation}{Reservation}} $\ast$$>$}]{reservs,  }\item[{bool}]{is\+Gold }\end{DoxyParamCaption})}
 
 
 
@@ -59,6 +50,8 @@ Class Constructor.
 {\em teacher\+Name} & -\/ name of \mbox{\hyperlink{class_teacher}{Teacher}} \\
 \hline
 {\em reservs} & -\/ The reservations \\
+\hline
+{\em is\+Gold} & -\/ if the user has a Gold Card \\
 \hline
 \end{DoxyParams}
 
@@ -166,5 +159,5 @@ the stream itself
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_invoice_8h}{Invoice.\+h}}\item 
-\mbox{\hyperlink{_invoice_8cpp}{Invoice.\+cpp}}\end{DoxyCompactItemize}
+Invoice.\+h\item 
+Invoice.\+cpp\end{DoxyCompactItemize}

@@ -13,6 +13,7 @@ Inheritance diagram for Teacher\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_teacher_a0d09b151c46e2abb647a2ae40cc5510c}\label{class_teacher_a0d09b151c46e2abb647a2ae40cc5510c}} 
 \mbox{\hyperlink{class_teacher_a0d09b151c46e2abb647a2ae40cc5510c}{Teacher}} ()
 \begin{DoxyCompactList}\small\item\em Constructor of the Class. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_teacher_adb308468e6ed8bbbffaba9cbf1ae646e}{Teacher}} (std\+::string name, int age, std\+::string gender)
@@ -23,34 +24,29 @@ std\+::vector$<$ \mbox{\hyperlink{class_lesson}{Lesson}} $\ast$ $>$ \mbox{\hyper
 \begin{DoxyCompactList}\small\item\em Getter of the lessons. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_teacher_a2ece0d60fa7ec4aaf93333aa0be0d25f}{store\+Info}} (std\+::ofstream \&outfile, int \&indentation)
 \begin{DoxyCompactList}\small\item\em Store in the information of the \mbox{\hyperlink{class_user}{User}} to a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_teacher_afd85dc703e8ddad28e298c1dcc697ee4}\label{class_teacher_afd85dc703e8ddad28e298c1dcc697ee4}} 
 void \mbox{\hyperlink{class_teacher_afd85dc703e8ddad28e298c1dcc697ee4}{add\+Student}} ()
 \begin{DoxyCompactList}\small\item\em Adding Students to the teacher. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_teacher_ae2e2666d5c8eceb29d6650d7b15958b1}{getn\+Students}} ()
 \begin{DoxyCompactList}\small\item\em Getter of the number of students. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_teacher_a1f204644af41c43ff3bd0582393062fa}{load\+Class}} (std\+::ifstream \&inpfile)
 \begin{DoxyCompactList}\small\item\em Reading the information of a \mbox{\hyperlink{class_user}{User}} from a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_teacher_a3045744c4ef7e1189caac2ae9a126254}\label{class_teacher_a3045744c4ef7e1189caac2ae9a126254}} 
 void \mbox{\hyperlink{class_teacher_a3045744c4ef7e1189caac2ae9a126254}{show}} ()
-\begin{DoxyCompactList}\small\item\em Showing the information of the user on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Showing the information of the user on the screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_teacher_ad8093070d9bf4c7663e4b7727576ab7a}\label{class_teacher_ad8093070d9bf4c7663e4b7727576ab7a}} 
+void \mbox{\hyperlink{class_teacher_ad8093070d9bf4c7663e4b7727576ab7a}{clean\+Vectors}} ()
+\begin{DoxyCompactList}\small\item\em Cleaning all the vectors of the \mbox{\hyperlink{class_teacher}{Teacher}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 The Teachers that give classes 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_teacher_a0d09b151c46e2abb647a2ae40cc5510c}\label{class_teacher_a0d09b151c46e2abb647a2ae40cc5510c}} 
-\index{Teacher@{Teacher}!Teacher@{Teacher}}
-\index{Teacher@{Teacher}!Teacher@{Teacher}}
-\subsubsection{\texorpdfstring{Teacher()}{Teacher()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Teacher\+::\+Teacher (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Constructor of the Class. 
-
 \mbox{\Hypertarget{class_teacher_adb308468e6ed8bbbffaba9cbf1ae646e}\label{class_teacher_adb308468e6ed8bbbffaba9cbf1ae646e}} 
 \index{Teacher@{Teacher}!Teacher@{Teacher}}
 \index{Teacher@{Teacher}!Teacher@{Teacher}}
-\subsubsection{\texorpdfstring{Teacher()}{Teacher()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{Teacher()}{Teacher()}}
 {\footnotesize\ttfamily Teacher\+::\+Teacher (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{int}]{age,  }\item[{std\+::string}]{gender }\end{DoxyParamCaption})}
 
 
@@ -69,16 +65,6 @@ Constructor of the Class.
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{class_teacher_afd85dc703e8ddad28e298c1dcc697ee4}\label{class_teacher_afd85dc703e8ddad28e298c1dcc697ee4}} 
-\index{Teacher@{Teacher}!add\+Student@{add\+Student}}
-\index{add\+Student@{add\+Student}!Teacher@{Teacher}}
-\subsubsection{\texorpdfstring{add\+Student()}{addStudent()}}
-{\footnotesize\ttfamily void Teacher\+::add\+Student (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Adding Students to the teacher. 
-
 \mbox{\Hypertarget{class_teacher_a7782ce22f7e2313d89bceaeacec18dfb}\label{class_teacher_a7782ce22f7e2313d89bceaeacec18dfb}} 
 \index{Teacher@{Teacher}!get\+Lessons@{get\+Lessons}}
 \index{get\+Lessons@{get\+Lessons}!Teacher@{Teacher}}
@@ -139,20 +125,6 @@ Setter of a lesson.
 {\em lesson} & -\/ lesson to save \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_teacher_a3045744c4ef7e1189caac2ae9a126254}\label{class_teacher_a3045744c4ef7e1189caac2ae9a126254}} 
-\index{Teacher@{Teacher}!show@{show}}
-\index{show@{show}!Teacher@{Teacher}}
-\subsubsection{\texorpdfstring{show()}{show()}}
-{\footnotesize\ttfamily void Teacher\+::show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-
-
-Showing the information of the user on the screen. 
-
-
-
-Reimplemented from \mbox{\hyperlink{class_person_a2f1231629a6e7e8c83ada57628e80a89}{Person}}.
-
 \mbox{\Hypertarget{class_teacher_a2ece0d60fa7ec4aaf93333aa0be0d25f}\label{class_teacher_a2ece0d60fa7ec4aaf93333aa0be0d25f}} 
 \index{Teacher@{Teacher}!store\+Info@{store\+Info}}
 \index{store\+Info@{store\+Info}!Teacher@{Teacher}}
@@ -178,5 +150,5 @@ Reimplemented from \mbox{\hyperlink{class_person_a80f87df3f644706c2ad8fc8b800fdd
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_person_8h}{Person.\+h}}\item 
-\mbox{\hyperlink{_person_8cpp}{Person.\+cpp}}\end{DoxyCompactItemize}
+Person.\+h\item 
+Person.\+cpp\end{DoxyCompactItemize}
