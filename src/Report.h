@@ -12,26 +12,95 @@
 #include <string>
 #include <vector>
 #include "Reservation.h"
+/**
+ * Report of how the user did during this last month
+ */
 #include <math.h>
 
 class Report{
 private:
-	std::vector<Reservation*> reservations;
-	std::string name;
-	std::string teacherName;
+	std::vector<Reservation*> reservations; /**< Reservations of this month */
+	std::string name;	/**< Name of the user */
+	std::string teacherName;	/**< Name of the teacher */
+	std::string addcomm;
 	int grade;
 public:
+
+	/**
+	 * @brief Class Constructor
+	 */
     Report() {};
+
+    /**
+     * @brief Class Constructor
+     * @param userName - name of the user
+     * @param teacherName - name of the teacher
+     * @param reservs - the reservations
+     */
+	Report(std::string userName, std::string teacherName,int grade, std::string addcomm,const std::vector<Reservation*> &reservs);
+
+	/**
+	 * @brief Writer of the information of the Report
+	 * @param os - the stream
+	 * @param r - the report itself
+	 * @return the stream
+	 */
 	Report(std::string userName, std::string teacherName,const std::vector<Reservation*> &reservs);
 	friend std::ostream & operator <<(std::ostream & os,Report r);
+
+	/**
+	 * @brief Getter of the name of the User
+	 * @return the name of the User
+	 */
 	std::string getName();
+
+	/**
+	 * @brief Getter of the name of the teacher
+	 * @return the name of the teacher
+	 */
 	std::string getTeacherName();
 	int getGrade();
+
+	/**
+	 * @brief Getter of the name of the Lessons
+	 * @return the vector of reservations
+	 */
 	std::vector<Reservation*> getLessons();
+
+	/**
+	 * @brief Indenting the file
+	 * @param outfile - the file to write information
+	 * @param indent - current indentation
+	 */
 	void indentation(std::ofstream &outfile, int indent);
+
+	/**
+	 * @brief Store in the information of the report to a file
+	 * @param outfile - the file to write information
+	 * @param indent - current indentation
+	 */
 	void readInfo(std::ifstream &infile);
+
+	/**
+	 * @brief Reading the information of a Report from a file
+	 * @param infile - file to read the information from
+	 */
 	void storeInfo(std::ofstream &outfile, int indent);
 
+};
+
+/**
+ * When the grade is not valid
+ */
+
+class InvalidGrade
+{
+private:
+	int grade;
+public:
+	InvalidGrade(int grade) {this->grade = grade;}
+	int getGrade() const { return grade;}
+	friend std::ostream & operator<<(std::ostream &os,const InvalidGrade &ig);
 };
 
 #endif /* SRC_REPORT_H_ */
