@@ -197,7 +197,7 @@ bool Company::makeUserReport(int month,string userName,string teacherName)
 	return true;
 }
 
-bool Company::makeUserInvoice(string userName,int month, vector<Reservation *> reservs)
+bool Company::makeUserInvoice(string userName,int month)
 {
 	try
 	{
@@ -426,7 +426,7 @@ Company Company::operator++() {
 			}
 
 			makeUserReport(date.getMonth()-1,users[i].getName(),users[i].getTeacher());
-			makeUserInvoice(users[i].getName(),date.getMonth()-1,users[i].getReservations());
+			makeUserInvoice(users[i].getName(),date.getMonth()-1);
 			users[i].cleanReservations();
 		}
 		for(size_t i = 0; i<teachers.size();i++) {
