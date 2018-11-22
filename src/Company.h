@@ -145,12 +145,11 @@ public:
 	 * @brief Make an Invoice for a specific user.
 	 * @param userName -  month it relates to
 	 * @param month - the name of the user
-	 * @param reservs - the reservations for that user
 	 * @return if if was made sucessfuly
 	 */
 
 	//partially tested, needs to verify that invoice is saved properly
-	bool makeUserInvoice(std::string userName, int month, std::vector<Reservation *> reservs);
+	bool makeUserInvoice(std::string userName, int month);
 
 	/**
 	 * @brief Method to show a specific Report.

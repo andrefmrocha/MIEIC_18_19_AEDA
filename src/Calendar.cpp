@@ -22,9 +22,9 @@ Year::Year(int year)
 		if(i == 2)
 		{
 			if(isLeapYear)
-				this->months.push_back(Month(i, 28));
-			else
 				this->months.push_back(Month(i, 29));
+			else
+				this->months.push_back(Month(i, 28));
 		}
 		else
 		{
@@ -49,7 +49,7 @@ Month& Year::getMonth(int month)
 Month::Month(int month, int days)
 {
 	this->month = month;
-	for(int i = 0;  i < days + 1; i++)
+	for(int i = 0;  i < days; i++)
 	{
 		this->days.push_back(Day(pair<int, int> (8, 20)));
 	}

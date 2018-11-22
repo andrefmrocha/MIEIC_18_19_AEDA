@@ -40,11 +40,12 @@ ostream & operator<<(ostream &out, Invoice inv)
 	if(inv.getReservs().empty()) {
 		out << "There were no reservations made by the user for this month." << endl;
 		//Check if user is gold  and put monthly fee
-	}
-	out << "Discrimination of every use of the court by the user:" << endl;
-	for(unsigned int i = 0; i < inv.getReservs().size(); i++)
-	{
-		out << i +1 << " - " << inv.getReservs()[i]->getDay() << "/" << inv.getReservs()[i]->getMonth() << " : " << inv.getReservs()[i]->getPrice() << endl;
+	} else{
+		out << "Discrimination of every use of the court by the user:" << endl;
+		for(unsigned int i = 0; i < inv.getReservs().size(); i++)
+		{
+			out << i +1 << " - " << inv.getReservs()[i]->getDay() << "/" << inv.getReservs()[i]->getMonth() << " : " << inv.getReservs()[i]->getPrice() << endl;
+		}
 	}
 	out << "Final price:" << inv.getPrice();
 	return out;
@@ -133,7 +134,7 @@ void Invoice::readInfo(std::ifstream &infile)
 		{
 			savingString = savingString.substr(savingString.find("totalPrice") + 12);
 			savingString = savingString.substr(0, savingString.find(','));
-			this->totalPrice = stoi(savingString);
+			this->totalPrice = stod(savingString);
 		}
 
 		if(savingString.find("name") != string::npos)
@@ -148,6 +149,7 @@ void Invoice::readInfo(std::ifstream &infile)
 			savingString = savingString.substr(savingString.find("assignedTeacher") + 18);
 			savingString = savingString.substr(1, savingString.find_last_of('\"') - 1);
 			this->assignedTeacher = savingString;
+			break;
 		}
 	}
 }
