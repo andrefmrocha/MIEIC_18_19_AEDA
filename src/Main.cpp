@@ -83,8 +83,6 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
     int age;
     bool isGold;
     int m, d, strH;
-    //double price;
-    //duration -- unsigned int --problem?
     int duration;
     int save;
 
