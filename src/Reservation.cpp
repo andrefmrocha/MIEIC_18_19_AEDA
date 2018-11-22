@@ -76,15 +76,15 @@ void Reservation::indent(std::ofstream &outfile, int indent)
 
 void Reservation::storeInfo(std::ofstream &outfile, int indent)
 {
-	Reservation::indent(outfile, indent);
+	Reservation::indent(outfile, indent); // Saves the price
 	outfile << "\"price\": " << this->price << "," << endl;
-	Reservation::indent(outfile, indent);
+	Reservation::indent(outfile, indent); // Saves the duration
 	outfile << "\"duration\": " << this->duration<< "," << endl;
-	Reservation::indent(outfile, indent);
+	Reservation::indent(outfile, indent); // Saves the month
 	outfile << "\"month\": " << this->month << "," << endl;
-	Reservation::indent(outfile, indent);
+	Reservation::indent(outfile, indent); // Saves the day
 	outfile << "\"day\": " << this->day << "," << endl;
-	Reservation::indent(outfile, indent);
+	Reservation::indent(outfile, indent); // Saves the Starting Hour
 	outfile << "\"startingHour\": " << this->startingHour << endl;
 	indent--;
 	Reservation::indent(outfile, indent);
@@ -97,19 +97,19 @@ void Reservation::readInfo(std::ifstream &infile)
 	string savingString;
 	bool flag = false;
 	while (getline(infile, savingString))
-	{
+	{ 	// Reads the price
 		if(savingString.find("price") != string::npos)
 		{
 			savingString = savingString.substr(savingString.find("price") + 8);
 			this->price = stod(savingString.substr(0, savingString.find(',')));
 		}
-
+		// Reads the duration
 		if(savingString.find("duration") != string::npos)
 		{
 			this->duration = (unsigned  int) stoul(savingString.substr(savingString.find("duration") + 11, 1));
 		}
 
-
+		// Reads the month
 		if(savingString.find("month") != string::npos)
 		{
 			savingString = savingString.substr(savingString.find("month") + 8);
@@ -117,7 +117,7 @@ void Reservation::readInfo(std::ifstream &infile)
 			this->month = stoi(savingString);
 		}
 
-
+		// Reads the day
 		if(savingString.find("day") != string::npos)
 		{
 			savingString = savingString.substr(savingString.find("day") + 6, 2);
@@ -125,7 +125,7 @@ void Reservation::readInfo(std::ifstream &infile)
 			this->day = stoi(savingString);
 		}
 
-
+		// Reads the Starting Hour
 		if(savingString.find("startingHour") != string::npos)
 		{
 			flag = true;
@@ -173,7 +173,7 @@ void Free::storeInfo(std::ofstream &outfile, int indent)
     Reservation::indent(outfile, indent);
     outfile << "{" << endl;
     indent++;
-    Reservation::indent(outfile, indent);
+    Reservation::indent(outfile, indent); // Stores if it's a free before saving the information
     outfile << "\"type\": " << "\"free\", " << endl;
     Reservation::storeInfo(outfile, indent);
 }
@@ -188,7 +188,7 @@ void Lesson::storeInfo(std::ofstream &outfile, int indent)
     Reservation::indent(outfile, indent);
     outfile << "{" << endl;
     indent++;
-    Reservation::indent(outfile, indent);
+    Reservation::indent(outfile, indent); // Stores if it's a lesson before saving the information
     outfile << "\"type\": " << "\"lesson\", " << endl;
     Reservation::storeInfo(outfile, indent);
 }

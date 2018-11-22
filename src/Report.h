@@ -91,6 +91,11 @@ public:
 	 */
 	void storeInfo(std::ofstream &outfile, int indent);
 
+	/**
+	 * @brief get the format of the Hour as wanted
+	 * @param hour - the actual time
+	 * @return the hour
+	 */
 	std::string getHourFormat(double hour);
 };
 

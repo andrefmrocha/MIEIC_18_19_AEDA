@@ -20,13 +20,14 @@
 using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The first load of the Company
 int MainIntro() {
     cout << "-------------Tenis Company---------------" << endl;
     cout << "                                         " << endl;
     cout << "Choose option:                           " << endl;
     cout << "                                         " << endl;
-    cout << "1.New Company                           " << endl;
-    cout << "2.Load Company                            " << endl;
+    cout << "1.New Company                           " << endl; // Creating a new one
+    cout << "2.Load Company                            " << endl; // Or loading another from a file
     cout << "3.Exit                                   " << endl;
     cout << "------------------------------------------" << endl;
 
@@ -46,19 +47,19 @@ int MainIntro() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+// Constant Menu shown after each operation
 int Menu(const int cardValue) {
     cout << "-------------Company" << cardValue << "---------------" << endl;
     cout << "                                         " << endl;
     cout << "Choose option:                           " << endl;
     cout << "                                         " << endl;
-    cout << "1.Add Person                             " << endl;
-    cout << "2.Add Reservation                        " << endl;
-    cout << "3.Add Court                              " << endl;
-    cout << "4.Show Person                            " << endl;
-    cout << "5.Show Courts                            " << endl;
-    cout << "6.Increment day                          " << endl;
-    cout << "7.Exit                                   " << endl;
+    cout << "1.Add Person                             " << endl; // Adds a new Person
+    cout << "2.Add Reservation                        " << endl; // Adds a new Reservation
+    cout << "3.Add Court                              " << endl; // Adds a new Court
+    cout << "4.Show Person                            " << endl; // Shows a person or all people of a class
+    cout << "5.Show Courts                            " << endl; // Shows courts information
+    cout << "6.Increment day                          " << endl; // Increments the day
+    cout << "7.Exit                                   " << endl; // Exit
     cout << "-----------------------------------------" << endl;
 
     int flag;
@@ -111,7 +112,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     cin >> flagP;
                 }
                 /////////////////////////////////////////////////////////////
-                if (flagP == 1)
+                if (flagP == 1) // If there's no Teachers, there can't be Users
                 {
                 	 if (C.getTeachers().empty()) {
                  cout << "Can't added Users. Company needs teachers first."      << endl;
@@ -136,12 +137,12 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                         cin >> isGold;
 
-
+                        //Finally register the User
                         if (!(C.registerUser(name, age, isGold, gender)))
                             cout << "Error adding User. Try again" << endl;
 
                     } else if (flagP == 2) //Add Teacher
-                    {
+                    { // Or the Teacher
                         if (!(C.registerTeacher(name, age, gender)))
                             cout << "Error adding User. Try again" << endl;
                     }
@@ -154,7 +155,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 ///////////////////////////////////////////////////////////////
                 int flagR;
 
-                cout << "1.Add Free class" << endl;
+                cout << "1.Add Free class" << endl; // Add different Reservations
                 cout << "2.Add Lesson" << endl;
                 cout << "3.Go back" << endl;
 
@@ -171,7 +172,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 if (flagR != 3) //Add Lesson or Free Class
                 {
 
-                    cout << "Month: " << endl;
+                    cout << "Month: " << endl; //Gets the information for the reservations
                     cin >> m;
                     cout << "Day: " << endl;
                     cin >> d;
@@ -183,10 +184,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                     if (flagR == 1) //Add Free Class
                     {
-                        //need to choose how to handle price
                         cout << "Duration: " << endl;
                         cin >> duration;
-                        //necessary to handle value entered in duration
+                        //Tries to make the reservation
                         if (!C.makeFree(m, d, strH, duration, name))
                             cout << "Error adding Free class. Try again" << endl;
 
@@ -194,8 +194,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     {
 
                         User &user = C.getUser(name);
-                        //need to choose how to handle price
-
+                        // Tries to make the reservation
                         if (!C.makeLesson(m, d, strH, name, user.getTeacher()))
                             cout << "Error adding Lesson. Try again" << endl;
 
@@ -204,16 +203,16 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                 break;
             }
-            case 3: //add court
+            case 3: //Adds the Courts
             {
             	C.createCourt();
             	break;
             }
-            case 4: //show person
+            case 4: //Shows the person
             {
                 ///////////////////////////////////////////////////////////////
                 int flagR;
-
+                //Chooses what information he wants
                 cout << "1.Show all Teachers and Users" << endl;
                 cout << "2.Show User (information/report/invoice/schedule)" << endl;
                 cout << "3.Show Teacher (information/schedule)" << endl;
@@ -333,7 +332,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 ++C;
                 break;
             }
-            case 7: {
+            case 7: { // Does the user want to save the information?
                 cout << "Save and exit? " << endl;
                 cout << "1.Yes 0.No" << endl;
                 cin >> save;
@@ -370,7 +369,7 @@ int main() {
         	int cardValue = 1;
         	ifstream infile;
         	infile.open((to_string(cardValue) + ".json").c_str());
-        	while(infile.is_open())
+        	while(infile.is_open()) // Checks which name can be used for the Json file
         	{
         		cardValue++;
         		infile.close();
@@ -379,7 +378,7 @@ int main() {
         	}
 
         	while(flag)
-        	{
+        	{ // Asks for the current date
             cout << "Please enter date (day month year): " << endl;
             cin >> day;
             cin >> month;
@@ -387,7 +386,7 @@ int main() {
 
             try {
                 Date F(day, month, year);
-                D = F;
+                D = F; // Checks if it is a possible date
 
             } catch (BadDate &e) {
                 cout << e.what() << endl;

@@ -49,6 +49,7 @@ Month& Year::getMonth(int month)
 Month::Month(int month, int days)
 {
 	this->month = month;
+	// Pushes all the Days into the month
 	for(int i = 0;  i < days; i++)
 	{
 		this->days.push_back(Day(pair<int, int> (8, 20)));
@@ -73,8 +74,10 @@ void Month::setMonth(int month)
 
 Day::Day(pair<int, int> workingHours)
 {
+	// Prepares the hours the vector of booleans to be pushes
 	int hours = workingHours.second - workingHours.first;
 	hours*=2;
+	//Pushes all the booleans into the vector
 	for(int i = 0;  i < hours; i++)
 	{
 		this->schedule.push_back(false);
@@ -84,16 +87,18 @@ Day::Day(pair<int, int> workingHours)
 
 bool Day::checkSchedule(double startingHours, int duration) const
 {
+	// Checks if the court is open
 	if(startingHours < this->startingHour)
 	{
 		cout << "The court is not open at this time!" << endl;
 		return false;
 	}
 	startingHours -= this->startingHour;
+	// Since the duration of each is half an hour, it is necessary to calculate the starting Hour
 	startingHours *= 2;
 	for(int i = startingHours; i < (startingHours+duration); i++)
 	{
-		if(this->schedule[i] == true)
+		if(this->schedule[i] == true) // If any of the times is occupied, it returns false
 		{
 			return false;
 		}
@@ -105,6 +110,7 @@ void Day::setSchedule(double startingHours, int duration)
 {
 	startingHours -= this->startingHour;
 	startingHours*=2;
+	// The vector is filled with true values
 	for(int i = startingHours; i < (startingHours+duration); i++)
 	{
 		this->schedule[i] = true;

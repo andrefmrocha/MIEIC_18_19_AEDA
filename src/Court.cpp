@@ -20,6 +20,7 @@ Court::Court() {}
 
 void Court::occupied(int month, int day, double startingHour, int duration)
 {
+    // Checks the schedule for the specified month
 	if(!this->currentYear.getMonth(month).getDay(day).checkSchedule(startingHour, duration))
 	{
 		throw(CourtReserved(month, day, startingHour));
@@ -52,9 +53,10 @@ void Court::setMaxUsers(int users)
 
 bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 {
+    // Classes take 1 hour, so duration = 2
 	int dur = 2;
 	try{
-		occupied(m, d, sH, dur);
+		occupied(m, d, sH, dur); // Check if it's available
 	}
 	catch (CourtReserved& court)
 	{
@@ -62,7 +64,7 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 		return false;
 	}
 	try
-	{
+	{   // Checks if the User is available
 		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur),d,m);
 	}
 	catch(AlreadyReservedHours &e)
@@ -72,6 +74,7 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 	}
 	try
 	{
+	    //Checks if the Teacher is available
 		CheckAvailable(teacher.getLessons(),sH, calculateEndHour(sH, dur),d,m);
 	}
 	catch(AlreadyReservedHours &e)
@@ -79,29 +82,29 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 		cout << "This user's teacher is not available at this time!" << endl;
 		return false;
 	}
-	reserveCourt(m, d, sH, dur);
+	reserveCourt(m, d, sH, dur); // Reserves the court
 	double price = courtPrice * dur;
-	if(user.getisGold())
+	if(user.getisGold()) // Calculates the price of the lesson, checking if the User is Gold or not
 	{
 		price*=0.85;
 	}
 
 	Reservation * lesson = new Lesson(m, d, sH, price, dur);
 	Lesson* teacherLesson = new Lesson(m, d, sH, price, dur);
-	user.setReservation(lesson);
-	teacher.setLesson(teacherLesson);
+	user.setReservation(lesson); // Saves the reservation in the User
+	teacher.setLesson(teacherLesson); // Saves the reservation in the Teacher
 	return true;
 }
 
 bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 {
-	if(dur > 4 )
+	if(dur > 4 ) //Checks if the reservation is too big
 	{
 		cout << "You cannot reserve the court for more than 2 hours!" << endl;
 		return false;
 	}
 	try{
-		occupied(m, d, sH, dur);
+		occupied(m, d, sH, dur); // Checks if the Court is reserveds
 	}
 	catch (CourtReserved& court)
 	{
@@ -109,7 +112,7 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 		return false;
 	}
 	try
-	{
+	{ // Checks if the user is available
 		CheckAvailable(user.getReservations(),sH, calculateEndHour(sH, dur),d,m);
 	}
 	catch(AlreadyReservedHours &e)
@@ -118,14 +121,14 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 		return false;
 	}
 	double price = courtPrice;
-	price*= dur;
+	price*= dur; // Calculates the price of the reservation
 	if(user.getisGold())
 	{
 		price*=0.85;
 	}
-	reserveCourt(m, d, sH, dur);
+	reserveCourt(m, d, sH, dur); // Reserves the Court
 	Reservation * reserv = new Free(m, d, sH, price, dur);
-	user.setReservation(reserv);
+	user.setReservation(reserv); // Saves the reservation on the user
 	return true;
 }
 
@@ -134,19 +137,19 @@ void Court::storeInfo(ofstream &outfile, int indentation)
     indent(outfile, indentation);
 	outfile << "{ " << endl;
 	indent(outfile, indentation);
-	outfile << "\"maxUsers\": "<< this->maxUsers <<"," << endl;
+	outfile << "\"maxUsers\": "<< this->maxUsers <<"," << endl; // Saves the maxUserss
 	indent(outfile, indentation);
-	outfile<< "\"months\": [" << endl;
+	outfile<< "\"months\": [" << endl; // Saves the information of each month
 	indentation++;
 	for(unsigned int i = 1; i < 13; i++)
 	{
 		indent(outfile,indentation);
 		outfile << "{ " << endl;
 		indentation++;
-		indent(outfile, indentation);
+		indent(outfile, indentation); // Saves which month it is
 		outfile << "\"month\": " << to_string(this->currentYear.getMonth(i).getMonth()) << "," << endl;
 		indent(outfile,indentation);
-		outfile << " \"days\": [" << endl;
+		outfile << " \"days\": [" << endl; //Saves all the days of the month
 		indentation++;
 		for(unsigned j = 1; j < this->currentYear.getMonth(i).getNoDays(); j++)
 		{
@@ -155,10 +158,10 @@ void Court::storeInfo(ofstream &outfile, int indentation)
 			indent(outfile,indentation);
 			outfile << "{" << endl;
 			indentation++;
-			indent(outfile,indentation);
+			indent(outfile,indentation); // Saves the startingHour
 			outfile << "\"startingHour\": " << this->currentYear.getMonth(i).getDay(j).getSH() << "," << endl;
 			indent(outfile,indentation);
-			outfile << "\"schedule\": [";
+			outfile << "\"schedule\": ["; // Saves the vector of each day
 			indentation++;
 //			vector<bool>::iterator z = this->currentYear.getMonth(i).getDay(j).getSchedule().begin();
 
@@ -190,7 +193,7 @@ void Court::storeInfo(ofstream &outfile, int indentation)
 		outfile << "]" << endl;
 		indentation--;
 		indent(outfile,indentation);
-		if(i+1 == 13)
+		if(i+1 == 13) // Checks when there are no more months to save
 		{
 			outfile<< "}" << endl;
 		}
@@ -221,14 +224,14 @@ void Court::readInfo(std::ifstream &infile)
 	string savingString;
 	while (getline(infile, savingString))
 	{
-		if(savingString.find("maxUsers") != string::npos)
+		if(savingString.find("maxUsers") != string::npos) // Reads the maxUsers
 		{
 			this->maxUsers = stoi(savingString.substr(savingString.find("maxUsers") + 11,1));
 		}
 		if (savingString.find('{') != string::npos)
 			continue;
-		if (savingString.find("months") != string::npos)
-			break;
+		if (savingString.find("months") != string::npos) // When it finds the months, it goes
+			break;                                       // into a different cycle
 	}
 	Year year;
 	vector<Month> months;
@@ -241,9 +244,9 @@ void Court::readInfo(std::ifstream &infile)
 		bool flag;
 		while (getline(infile, savingString))
 		{
-			if (savingString.find("\"month\":") != string::npos)
+			if (savingString.find("\"month\":") != string::npos) // Starts saving a month
 			{
-				monthCounter++;
+				monthCounter++; // Adds another month to the Counter
 				flag = true;
 				savingString = savingString.substr(
 						savingString.find("\"month\":") + 9, 2);
@@ -254,13 +257,13 @@ void Court::readInfo(std::ifstream &infile)
 				savingMonth.setMonth(stoi(savingString));
 				continue;
 			}
-			else if (savingString.find("\"days\"") != string::npos)
+			else if (savingString.find("\"days\"") != string::npos) // Starts getting all the days
 			{
 				days.clear();
 				while (getline(infile, savingString))
 				{
 					Day savingDay;
-					vector<bool> savingSchedule;
+					vector<bool> savingSchedule; // Saves the startingHour
 					if (savingString.find("\"startingHour\"") != string::npos)
 					{
 						savingString = savingString.substr(savingString.find("\"startingHour\"") + 16);
@@ -269,7 +272,7 @@ void Court::readInfo(std::ifstream &infile)
 							savingString = savingString.substr(0, 1);
 						}
 						savingDay.setSH(stoi(savingString));
-					}
+					} // Gets the vector of the schedule
 					else if (savingString.find("\"schedule\"")!= string::npos)
 					{
 						savingString = savingString.substr(savingString.find("\"schedule\"") + 13);
@@ -303,12 +306,12 @@ void Court::readInfo(std::ifstream &infile)
 					}
 				}
 			}
-			if (flag) {
+			if (flag) { // Checks the days vector is ready
 				flag = false;
 				savingMonth.setDays(days);
-				months.push_back(savingMonth);
+				months.push_back(savingMonth); //Saves another month
 			}
-			if(monthCounter == 12)
+			if(monthCounter == 12) // If 12 months are already stored it stops
 			{
 				break;
 			}
