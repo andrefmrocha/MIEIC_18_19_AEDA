@@ -345,12 +345,19 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 cout << "1.Yes 0.No" << endl;
                 cin >> save;
 
-                if (save == 1) {
+                if(C.getCourts().size() == 0)
+                {
+                	cout << "Company cant be saved without courts assigned to it"<< endl;
+                }
+                else if (save == 1) {
                 	ofstream outfile;
                 	outfile.open((to_string(cardValue) + ".json").c_str());
                     C.storeInfo(outfile, 0);
+                    return 0;
                 }
-                return 0;
+                else if (save == 0)
+                	return 0;
+
                 break;
 
             }
