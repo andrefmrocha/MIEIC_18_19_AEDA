@@ -17,7 +17,7 @@ Date::Date() {
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year)
 {
-    if(month > 12 || day > (int)floor((double)this->month/8)%2+ 30)
+    if(month > 12 || day > (month + (int)floor((double)month/8))%2+ 30)
     {
 		throw(BadDate());
     }
