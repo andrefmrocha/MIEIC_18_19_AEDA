@@ -123,8 +123,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                 if (flagP != 3) //Add User or Teacher
                 {
+                    cin.ignore();
                     cout << "Name: " << endl;
-                    cin>> name;
+                    getline(cin, name);
                     cout << "Age: " << endl;
                     cin >> age;
                     cout << "Gender" << endl;
@@ -252,9 +253,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     		 cout << "Error...Try again: " << endl;
                     		 cin >> flagR;
                     	 }
-
+                        cin.ignore();
                         cout << "Name of User: " << endl;
-                        cin>>name;
+                        getline(cin, name);
 
 
                         if(flagR == 1)
@@ -277,8 +278,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     }
                     case 3: //show teacher
                     {
+                        cin.ignore();
                         cout << "Name of Teacher: " << endl;
-                        cin>>name;
+                        getline(cin, name);
                         C.showTeacher(name);
 
                         break;
