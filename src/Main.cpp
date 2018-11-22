@@ -83,7 +83,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
     int age;
     bool isGold;
     int m, d, strH;
-    int duration;
+    double duration;
     int save;
 
     int flagMenu = 0;
@@ -177,8 +177,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     cin >> d;
                     cout << "Starting Hour: " << endl;
                     cin >> strH;
+                    cin.ignore();
                     cout << "Name of User: " << endl;
-                    cin >> name;
+                    getline(cin,name);
 
                     if (flagR == 1) //Add Free Class
                     {
@@ -214,8 +215,8 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 int flagR;
 
                 cout << "1.Show all Teachers and Users" << endl;
-                cout << "2.Show User" << endl;
-                cout << "3.Show Teacher" << endl;
+                cout << "2.Show User (information/report/invoice/schedule)" << endl;
+                cout << "3.Show Teacher (information/schedule)" << endl;
                 cout << "4.Go back" << endl;
 
                 cin >> flagR;
@@ -239,9 +240,17 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     {
                     	int flagR;
 
+
                     	cout << "1.Show Information" << endl;
+                    	cout << endl;
+                    	cout << "----------------------------------------------"<< endl;
+                    	cout << "Consult invoice or report of specific month" << endl;
+                     	cout << "----------------------------------------------"<< endl;
                     	cout << "2.Show Report" << endl;
-                    	cout << "3.Show Invoice" << endl;
+                        cout << "3.Show Invoice" << endl;
+                        cout << "----------------------------------------------"<< endl;
+                        cout << endl;
+                    	cout << "4.Show Schedule" << endl;
 
                     	cin >> flagR;
 
@@ -271,15 +280,40 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                         	cin >> m;
                         	C.showInvoice(name, m);
                         }
+                        else if(flagR == 4)
+                        {
+                        	C.showUserReservations(name);
+                        }
 
                         break;
                     }
                     case 3: //show teacher
                     {
-                        cin.ignore();
-                        cout << "Name of Teacher: " << endl;
-                        getline(cin, name);
+                    	int flagR;
+
+                    	cout << "1.Show Information" << endl;
+                    	cout << "2.Show Schedule" << endl;
+
+                    	cin >> flagR;
+
+                    	while (flagR != 1 && flagR != 2) {
+                    		cin.clear();
+                    		cin.ignore(1000, '\n');
+                    		cout << "Error...Try again: " << endl;
+                    		cin >> flagR;
+                    	}
+                    	cin.ignore();
+                    	cout << "Name of User: " << endl;
+                    	getline(cin, name);
+
+                    	if(flagR ==1)
+                    	{
                         C.showTeacher(name);
+                    	}
+                    	else if(flagR == 2)
+                    	{
+                    		C.showTeacherLessons(name);
+                    	}
 
                         break;
                     }
@@ -322,8 +356,6 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
 int main() {
 
-    int cardValue = 1;
-
     unsigned int year, day, month;
     ////////////////////////////////////
 
@@ -334,6 +366,17 @@ int main() {
         {
         	bool flag = true;
         	Date D;
+
+        	int cardValue = 1;
+        	ifstream infile;
+        	infile.open((to_string(cardValue) + ".json").c_str());
+        	while(infile.is_open())
+        	{
+        		cardValue++;
+        		infile.close();
+        		infile.open((to_string(cardValue) + ".json").c_str());
+
+        	}
 
         	while(flag)
         	{
@@ -355,7 +398,6 @@ int main() {
           	}
 
             Company C(cardValue, D);
-            cardValue++;
 
             DevelopCompany(C, cardValue);
 
