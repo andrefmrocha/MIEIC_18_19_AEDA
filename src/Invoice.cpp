@@ -134,7 +134,7 @@ void Invoice::readInfo(std::ifstream &infile)
 		{
 			savingString = savingString.substr(savingString.find("totalPrice") + 12);
 			savingString = savingString.substr(0, savingString.find(','));
-			this->totalPrice = stoi(savingString);
+			this->totalPrice = stod(savingString);
 		}
 
 		if(savingString.find("name") != string::npos)
@@ -149,6 +149,7 @@ void Invoice::readInfo(std::ifstream &infile)
 			savingString = savingString.substr(savingString.find("assignedTeacher") + 18);
 			savingString = savingString.substr(1, savingString.find_last_of('\"') - 1);
 			this->assignedTeacher = savingString;
+			break;
 		}
 	}
 }
