@@ -498,6 +498,36 @@ void Company::showCourts() {
 	cout << "There is a maximum of " << tennisCourts[0].getMaxUsers() << " per court." << endl;
 }
 
+void Company::showUserReservations(std::string name) {
+	try {
+		User u = getUser(name);
+		vector <Reservation*> reservations = u.getReservations();
+		for(size_t i =0;i<reservations.size(); i++) {
+			cout << "Reservation number " << i+1 << ": " << endl;
+			reservations[i]->show();
+		}
+	}
+	catch (NoUserRegistered &e)
+	{
+		cout << e.what() << endl;
+	}
+}
+
+void Company::showTeacherLessons(std::string teacher) {
+	try {
+		Teacher t = getTeacher(teacher);
+		vector <Lesson*> lessons = t.getLessons();
+		for(size_t i =0;i<lessons.size(); i++) {
+			cout << "Lesson number " << i+1 << ": " << endl;
+			lessons[i]->show();
+		}
+	}
+	catch (NoTeacherRegistered &e)
+	{
+		cout << e.what() << endl;
+	}
+}
+
 
 
 

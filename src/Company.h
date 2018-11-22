@@ -223,6 +223,10 @@ public:
 	 * @param name - name of the User
 	 */
     void showTeacher(std::string teacher);
+
+    void showUserReservations (std::string name);
+
+    void showTeacherLessons (std::string teacher);
 };
 
 /**
