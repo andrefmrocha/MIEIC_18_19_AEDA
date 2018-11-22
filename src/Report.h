@@ -15,7 +15,7 @@
 /**
  * Report of how the user did during this last month
  */
-#include <math.h>
+//#include <math.h>
 
 class Report{
 private:
@@ -91,6 +91,7 @@ public:
 	 */
 	void storeInfo(std::ofstream &outfile, int indent);
 
+	std::string getHourFormat(double hour);
 };
 
 /**

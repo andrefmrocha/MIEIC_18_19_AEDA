@@ -141,7 +141,7 @@ void Reservation::readInfo(std::ifstream &infile)
 	}
 }
 
-string getHourFormat(double hour) {
+string Reservation::getHourFormat(double hour) {
 	string hr = to_string((int)(ceil(hour -0.5)));
 	hr += ":";
 	if((hour - floor(hour)) == 0)

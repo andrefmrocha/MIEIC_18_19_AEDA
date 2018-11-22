@@ -43,7 +43,8 @@ vector<Reservation*> Report::getLessons()
 {
 	return reservations;
 }
-string getHourFormat(double hour) {
+
+string Report::getHourFormat(double hour) {
 	string hr = to_string((int)(ceil(hour -0.5)));
 	hr += ":";
 	if((hour - floor(hour)) == 0)
@@ -62,7 +63,7 @@ ostream & operator <<(ostream &os,Report r)
 	for (size_t i =0; i < r.getLessons().size();i++)
 	{
 		os << " \t Date: " << r.getLessons()[i]->getDay() << "/" << r.getLessons()[i]->getMonth() << endl
-		<< " \t Period of class: " << getHourFormat(r.getLessons()[i]->getStartingHour()) << " - " << getHourFormat(r.getLessons()[i]->getStartingHour()+r.getLessons()[i]->getDuration()) << endl << endl;
+		<< " \t Period of class: " << r.getHourFormat(r.getLessons()[i]->getStartingHour()) << " - " << r.getHourFormat(r.getLessons()[i]->getStartingHour()+r.getLessons()[i]->getDuration()) << endl << endl;
 	}
 	switch(r.getGrade())
 	{

@@ -9,7 +9,7 @@
 #define SRC_RESERVATION_H_
 
 #include <fstream>
-
+#include <math.h>
 /**
  * The reservation of a court, to be stored on the people that will be on that court
  */
@@ -98,6 +98,8 @@ public:
 	virtual void readInfo(std::ifstream &infile);
 
 	void show();
+
+	std::string getHourFormat(double hour);
 };
 
 /**
