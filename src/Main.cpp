@@ -54,7 +54,9 @@ int Menu(const int cardValue) {
     cout << "                                         " << endl;
     cout << "1.Add Person                             " << endl;
     cout << "2.Add Reservation                        " << endl;
-    cout << "3.Show Person                            " << endl;
+    cout << "3.Add Court                              " << endl;
+    cout << "4.Show Person                            " << endl;
+    cout << "5.Show Courts                            " << endl;
     cout << "6.Increment day                          " << endl;
     cout << "7.Exit                                   " << endl;
     cout << "-----------------------------------------" << endl;
@@ -121,7 +123,6 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                 if (flagP != 3) //Add User or Teacher
                 {
-
                     cout << "Name: " << endl;
                     cin>> name;
                     cout << "Age: " << endl;
@@ -203,7 +204,12 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                 break;
             }
-            case 3: //show person
+            case 3: //add court
+            {
+            	C.createCourt();
+            	break;
+            }
+            case 4: //show person
             {
                 ///////////////////////////////////////////////////////////////
                 int flagR;
@@ -250,10 +256,10 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                         cout << "Name of User: " << endl;
                         cin>>name;
 
-                        /*
+
                         if(flagR == 1)
-                        //show user
-                         */
+                        	C.showUser(name);
+
                         if (flagR == 2)
                         {
                         	 cout << "Month: " << endl;
@@ -272,9 +278,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     case 3: //show teacher
                     {
                         cout << "Name of Teacher: " << endl;
-                        getline(cin, name);
+                        cin>>name;
+                        C.showTeacher(name);
 
-                        //show teacher
                         break;
                     }
                     case 4: //go back
@@ -285,22 +291,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                 break;
             }
-
-            case 4: //show report
+            case 5: //show courts
             {
-                cout << "Name of user: " << endl;
-                getline(cin, name);
-                cout << "Month of report? (1 to 12)" << endl;
-                cin >> m;
-                //call function to show report
-            }
-            case 5: // show invoice
-            {
-                cout << "Name of user: " << endl;
-                getline(cin, name);
-                cout << "Month of invoice? (1 to 12)" << endl;
-                cin >> m;
-                //call function to show invoices
+            	C.showCourts();
             }
             case 6: {
                 ++C;
