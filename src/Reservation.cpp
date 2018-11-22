@@ -141,6 +141,23 @@ void Reservation::readInfo(std::ifstream &infile)
 	}
 }
 
+string getHourFormat(double hour) {
+	string hr = to_string((int)(ceil(hour -0.5)));
+	hr += ":";
+	if((hour - floor(hour)) == 0)
+		hr += "00";
+	else
+		hr+= "30";
+	return hr;
+}
+
+void Reservation::show() {
+	cout << "Month: " << to_string(getMonth()) << endl;
+	cout << "Day: " << to_string(getDay()) << endl;
+	cout << "Period of class: " << getHourFormat(getStartingHour()) << " - " << getHourFormat(getStartingHour()+getDuration()) << endl;
+	cout << "Price: " << to_string(getPrice()) << endl;
+}
+
 void Free::readInfo(std::ifstream &infile)
 {
 	Reservation::readInfo(infile);
@@ -161,6 +178,11 @@ void Free::storeInfo(std::ofstream &outfile, int indent)
     Reservation::storeInfo(outfile, indent);
 }
 
+void Free::show() {
+	cout << "Free mode: " << endl;
+	Reservation::show();
+}
+
 void Lesson::storeInfo(std::ofstream &outfile, int indent)
 {
     Reservation::indent(outfile, indent);
@@ -169,4 +191,9 @@ void Lesson::storeInfo(std::ofstream &outfile, int indent)
     Reservation::indent(outfile, indent);
     outfile << "\"type\": " << "\"lesson\", " << endl;
     Reservation::storeInfo(outfile, indent);
+}
+
+void Lesson::show() {
+	cout << "Lesson : " << endl;
+	Reservation::show();
 }

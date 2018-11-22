@@ -96,6 +96,8 @@ public:
 	 * @param infile - file to read the information from
 	 */
 	virtual void readInfo(std::ifstream &infile);
+
+	void show();
 };
 
 /**
@@ -141,6 +143,8 @@ public:
 	 * @param infile - file to read the information from
 	 */
 	void readInfo(std::ifstream &infile);
+
+	void show();
 };
 
 class Free : public Reservation {
@@ -181,6 +185,8 @@ public:
 	 * @param infile - file to read the information from
 	 */
 	void readInfo(std::ifstream &infile);
+
+	void show();
 };
 
 
