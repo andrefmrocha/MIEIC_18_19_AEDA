@@ -72,11 +72,11 @@ void Person::storeInfo(ofstream &outfile, int &indentation)
 	indentp(outfile,indentation);
 	outfile << "{" << endl;
 	indentation++;
-	indentp(outfile,indentation);
+	indentp(outfile,indentation); // Saves the name of person
 	outfile << "\"name\": " << "\"" << name<<  "\"" << "," <<  endl;
-	indentp(outfile,indentation);
+	indentp(outfile,indentation); // Saves their age
 	outfile << "\"age\": "<< "\"" << age  << "\"" << "," <<  endl;
-	indentp(outfile,indentation);
+	indentp(outfile,indentation); // Saves their gender
 	outfile << "\"gender\": "<< "\"" << gender  << "\""  << "," << endl;
 }
 
@@ -96,19 +96,19 @@ void Person::loadClass(std::ifstream &inpfile)
 			continue;
 		else
 		{
-			if(savingString.find("\"name\": ") != string::npos)
+			if(savingString.find("\"name\": ") != string::npos) //Reads their name
 			{
 				savingString = savingString.substr(savingString.find(":")+3);
 				savingString = savingString.substr(0, savingString.find(",")-1);
 				this->name =savingString;
 			}
-			if(savingString.find("\"age\"") != string::npos)
+			if(savingString.find("\"age\"") != string::npos) //Reads their age
 			{
 				savingString = savingString.substr(savingString.find(":")+3);
 				savingString = savingString.substr(0, savingString.find(",")-1);
 				this->age= stoi(savingString);
 			}
-			if(savingString.find("\"gender\": ") != string::npos)
+			if(savingString.find("\"gender\": ") != string::npos) //Reads their gender
 			{
 				savingString = savingString.substr(savingString.find(":")+3);
 				savingString = savingString.substr(0, savingString.find(",")-1);
@@ -160,7 +160,7 @@ void Teacher::setLesson(Lesson* lesson)
 
 	duration = lesson->getDuration();
 	startingHour = lesson->getStartingHour();
-
+	// Calculates if it's possible to reserve the Teacher at that time
 	endHour = calculateEndHour(startingHour, duration);
 
 	this->lessons.push_back(lesson);
@@ -185,11 +185,11 @@ void Teacher::storeInfo(ofstream &outfile, int &indentation)
 {
 	Person::storeInfo(outfile,indentation);
 
-	indentp(outfile,indentation);
+	indentp(outfile,indentation); // Stores the number of Students
 	outfile << "\"nStudents\": "<< "\"" << nStudents  << "\""  << "," << endl;
 
 	indentp(outfile,indentation);
-	outfile<< "\"lessons\": ";
+	outfile<< "\"lessons\": "; // Saves its lessons
 	outfile << "["<< endl;
 	for(size_t i= 0; i < lessons.size(); i++)
 	{
@@ -217,7 +217,7 @@ void Teacher::loadClass(std::ifstream &inpfile)
 
 	string savingString;
 
-	getline(inpfile, savingString);
+	getline(inpfile, savingString); // Reads the number of Students
 	if (savingString.find("\"nStudents\": ") != string::npos)
 	{
 		savingString = savingString.substr(savingString.find(":") + 3);
@@ -226,12 +226,12 @@ void Teacher::loadClass(std::ifstream &inpfile)
 	}
 
 	getline(inpfile, savingString); //lessons
-
+		// Gets their lessons
 		if(savingString.find("lessons") != string::npos)
 		{
 		while(getline(inpfile, savingString) && (savingString.find("]") == string::npos) )
 		{
-			getline(inpfile, savingString); //linha type
+			getline(inpfile, savingString);
 			Lesson *A = new Lesson();
 			//getline(inpfile, savingString);
 			A->readInfo(inpfile);
@@ -291,10 +291,10 @@ bool User::getisGold()
 
 Report User::getReport(int month)
 {
-	if(month > 12)
+	if(month > 12) // Checks if it's a possible month
 		throw(IncorrectMonth());
 
-	if(reports.at(month -1) == 0)
+	if(reports.at(month -1) == 0) // Checks if there's no report available
 	{
 		throw(ReportNotAvailable(month));
 	}
@@ -304,10 +304,10 @@ Report User::getReport(int month)
 
 Invoice User::getInvoice(int month)
 {
-	if(month > 12)
+	if(month > 12) // Checks if it's a possible month
 			throw(IncorrectMonth());
 
-		if(invoices.at(month -1) == 0)
+		if(invoices.at(month -1) == 0) // Checks if there's no invoice available
 		{
 			throw(InvoiceNotAvailable(month));
 		}
@@ -317,10 +317,10 @@ Invoice User::getInvoice(int month)
 
 void User::setReport(Report* report, int month)
 {
-	if(month > 12)
+	if(month > 12) // Checks if it's a possible month
 			throw(IncorrectMonth());
 
-	if(reports.at(month-1)!=0)
+	if(reports.at(month-1)!=0) //Checks if there's a report already there
 	{
 		throw(ReportAlreadyExists(month));
 	}
@@ -332,10 +332,10 @@ void User::setReport(Report* report, int month)
 
 void User::setInvoice(Invoice* invoice, int month)
 {
-	if(month > 12)
+	if(month > 12) // Checks if it's a possible month
 				throw(IncorrectMonth());
 
-		if(invoices.at(month-1)!=0)
+		if(invoices.at(month-1)!=0) //Checks if there's an invoice already there
 		{
 			throw(InvoiceAlreadyExists(month));
 		}
@@ -358,8 +358,8 @@ void User::setReservation(Reservation* reservation)
 	duration = reservation->getDuration();
 	startingHour = reservation->getStartingHour();
 
-	endHour = calculateEndHour(startingHour, duration);
-
+	endHour = calculateEndHour(startingHour, duration); //Calculates the final Hour
+	// Checks if the user is available at that time
 	if(CheckAvailable(reservations,startingHour,endHour, reservation->getDay(), reservation->getMonth())==0)
 		reservations.push_back(reservation);
 }
@@ -383,13 +383,13 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 {
 	Person::storeInfo(outfile, indentation);
 
-	indentp(outfile,indentation);
+	indentp(outfile,indentation); // Saves if the User is gold
 	outfile << "\"isGold\": "<< "\""<< isGold << "\""<< "," << endl;
-	indentp(outfile,indentation);
+	indentp(outfile,indentation); // Saves the assigned Teacher
 	outfile << "\"assigned Teacher\": "<< "\""<< assignedTeacher <<"\"" << "," <<  endl;
 	indentp(outfile,indentation);
 
-	outfile<< "\"reports\": ";
+	outfile<< "\"reports\": "; // Saves all the reports
 	outfile << "["<< endl;
 	int in=indentation+1;
 	for(size_t i =0; i < reports.size(); i++)
@@ -405,7 +405,7 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 	outfile << "]"<<","<<endl;
 
 	indentp(outfile,indentation);
-	outfile<< "\"reservations\": ";
+	outfile<< "\"reservations\": "; // Saves the reservations
 	outfile << "["<< endl;
 	for(size_t i =0; i < reservations.size(); i++)
 	{
@@ -420,7 +420,7 @@ void User::storeInfo(ofstream &outfile, int &indentation)
 	outfile << "]"<< ","<<endl;
 
 	indentp(outfile,indentation);
-	outfile<< "\"invoices\": ";
+	outfile<< "\"invoices\": "; // Saves the invoices
 	outfile << "["<< endl;
 	for(size_t i =0; i < invoices.size(); i++)
 	{
@@ -448,7 +448,7 @@ void User::loadClass(std::ifstream &inpfile) {
 	bool flag = true;
 	string savingString;
 
-	while (getline(inpfile, savingString) && flag) {
+	while (getline(inpfile, savingString) && flag) { //Reads if the User is gold
 		if (savingString.find("\"isGold\": ") != string::npos) {
 			savingString = savingString.substr(savingString.find(":") + 3);
 			savingString = savingString.substr(0, savingString.find(",") - 1);
@@ -459,13 +459,13 @@ void User::loadClass(std::ifstream &inpfile) {
 			else
 				this->isGold = false;
 		}
-
+		//Saves the assigned Teacher
 		if (savingString.find("\"assigned Teacher\": ") != string::npos) {
 			savingString = savingString.substr(savingString.find(":") + 3);
 			savingString = savingString.substr(0, savingString.find(",") - 1);
 			this->assignedTeacher = savingString;
 		}
-
+		//Saves the reports
 		if (savingString.find("\"reports\": ") != string::npos) {
 			while (getline(inpfile, savingString) && (savingString.find("]") == string::npos)) {
 				Report *I = new Report();
@@ -475,7 +475,7 @@ void User::loadClass(std::ifstream &inpfile) {
 			}
 
 		}
-
+		//Saves the reservations
 		if (savingString.find("\"reservations\": ") != string::npos) {
 
 			while (getline(inpfile, savingString) && (savingString.find("]") == string::npos)) {
@@ -494,7 +494,7 @@ void User::loadClass(std::ifstream &inpfile) {
 			}
 		}
 
-
+		//Saves all the invoices
 		if (savingString.find("\"invoices\": ") != string::npos) {
 			while (getline(inpfile, savingString) && (savingString.find("]") == string::npos)) {
 				Invoice *I = new Invoice();

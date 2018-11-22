@@ -40,7 +40,7 @@ bool \mbox{\hyperlink{class_company_afd7f0c326672c6bb6a23d5921503bc0d}{register\
 \end{DoxyItemize}\end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_company_acc2aba7c2f4149021e9b93ab423e417b}{make\+User\+Report}} (int month, std\+::string user\+Name, std\+::string teacher\+Name)
 \begin{DoxyCompactList}\small\item\em Make a \mbox{\hyperlink{class_report}{Report}} for a specific user. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_company_a0d3e4de51625c91610516fba5aac7acf}{make\+User\+Invoice}} (std\+::string user\+Name, int month, std\+::vector$<$ \mbox{\hyperlink{class_reservation}{Reservation}} $\ast$$>$ reservs)
+bool \mbox{\hyperlink{class_company_a955b07492e04edd5ed83f695ee362ab4}{make\+User\+Invoice}} (std\+::string user\+Name, int month)
 \begin{DoxyCompactList}\small\item\em Make an \mbox{\hyperlink{class_invoice}{Invoice}} for a specific user. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_company_a2c00c88b245aef0e0e52864b585f8f6b}{show\+Report}} (std\+::string name, int month)
 \begin{DoxyCompactList}\small\item\em Method to show a specific \mbox{\hyperlink{class_report}{Report}}. \end{DoxyCompactList}\item 
@@ -66,7 +66,11 @@ void \mbox{\hyperlink{class_company_a1779c78bdc9a4416a482be25b71efcd0}{show\+Cou
 void \mbox{\hyperlink{class_company_a664aa9b9bde35eae3a564edec73cf5b3}{show\+User}} (std\+::string name)
 \begin{DoxyCompactList}\small\item\em show a specific \mbox{\hyperlink{class_user}{User}} \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_company_aa64ff74648761cfe39d4a9fb0c72031f}{show\+Teacher}} (std\+::string teacher)
-\begin{DoxyCompactList}\small\item\em show a specific \mbox{\hyperlink{class_user}{User}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em show a specific \mbox{\hyperlink{class_user}{User}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_company_a428b70dbf9acd5edb34ee131ff1f8613}{show\+User\+Reservations}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Show the Reservations of a specific user. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_company_aef95f2feab286505091c38db23cd1c90}{show\+Teacher\+Lessons}} (std\+::string teacher)
+\begin{DoxyCompactList}\small\item\em Shows the lessons of the \mbox{\hyperlink{class_teacher}{Teacher}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -244,11 +248,11 @@ Reserving the \mbox{\hyperlink{class_court}{Court}}, \mbox{\hyperlink{class_user
 \begin{DoxyReturn}{Returns}
 if it was successful created 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_company_a0d3e4de51625c91610516fba5aac7acf}\label{class_company_a0d3e4de51625c91610516fba5aac7acf}} 
+\mbox{\Hypertarget{class_company_a955b07492e04edd5ed83f695ee362ab4}\label{class_company_a955b07492e04edd5ed83f695ee362ab4}} 
 \index{Company@{Company}!make\+User\+Invoice@{make\+User\+Invoice}}
 \index{make\+User\+Invoice@{make\+User\+Invoice}!Company@{Company}}
 \subsubsection{\texorpdfstring{make\+User\+Invoice()}{makeUserInvoice()}}
-{\footnotesize\ttfamily bool Company\+::make\+User\+Invoice (\begin{DoxyParamCaption}\item[{std\+::string}]{user\+Name,  }\item[{int}]{month,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_reservation}{Reservation}} $\ast$$>$}]{reservs }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool Company\+::make\+User\+Invoice (\begin{DoxyParamCaption}\item[{std\+::string}]{user\+Name,  }\item[{int}]{month }\end{DoxyParamCaption})}
 
 
 
@@ -259,8 +263,6 @@ Make an \mbox{\hyperlink{class_invoice}{Invoice}} for a specific user.
 {\em user\+Name} & -\/ month it relates to \\
 \hline
 {\em month} & -\/ the name of the user \\
-\hline
-{\em reservs} & -\/ the reservations for that user \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -420,6 +422,21 @@ show a specific \mbox{\hyperlink{class_user}{User}}
 {\em name} & -\/ name of the \mbox{\hyperlink{class_user}{User}} \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_company_aef95f2feab286505091c38db23cd1c90}\label{class_company_aef95f2feab286505091c38db23cd1c90}} 
+\index{Company@{Company}!show\+Teacher\+Lessons@{show\+Teacher\+Lessons}}
+\index{show\+Teacher\+Lessons@{show\+Teacher\+Lessons}!Company@{Company}}
+\subsubsection{\texorpdfstring{show\+Teacher\+Lessons()}{showTeacherLessons()}}
+{\footnotesize\ttfamily void Company\+::show\+Teacher\+Lessons (\begin{DoxyParamCaption}\item[{std\+::string}]{teacher }\end{DoxyParamCaption})}
+
+
+
+Shows the lessons of the \mbox{\hyperlink{class_teacher}{Teacher}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em teacher} & -\/ name of the \mbox{\hyperlink{class_teacher}{Teacher}} \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_company_a664aa9b9bde35eae3a564edec73cf5b3}\label{class_company_a664aa9b9bde35eae3a564edec73cf5b3}} 
 \index{Company@{Company}!show\+User@{show\+User}}
 \index{show\+User@{show\+User}!Company@{Company}}
@@ -433,6 +450,21 @@ show a specific \mbox{\hyperlink{class_user}{User}}
 
 \begin{DoxyParams}{Parameters}
 {\em name} & -\/ name of the \mbox{\hyperlink{class_user}{User}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_company_a428b70dbf9acd5edb34ee131ff1f8613}\label{class_company_a428b70dbf9acd5edb34ee131ff1f8613}} 
+\index{Company@{Company}!show\+User\+Reservations@{show\+User\+Reservations}}
+\index{show\+User\+Reservations@{show\+User\+Reservations}!Company@{Company}}
+\subsubsection{\texorpdfstring{show\+User\+Reservations()}{showUserReservations()}}
+{\footnotesize\ttfamily void Company\+::show\+User\+Reservations (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Show the Reservations of a specific user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ Name of the \mbox{\hyperlink{class_user}{User}} \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_company_ac03f62f1accf21eb445a7aa5731b1199}\label{class_company_ac03f62f1accf21eb445a7aa5731b1199}} 

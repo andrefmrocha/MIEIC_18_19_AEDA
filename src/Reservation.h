@@ -97,8 +97,17 @@ public:
 	 */
 	virtual void readInfo(std::ifstream &infile);
 
+
+	/**
+	 * @brief Showing the information of the Reservation
+	 */
 	void show();
 
+	/**
+	 * @brief get the format of the Hour as wanted
+	 * @param hour - the actual time
+	 * @return the hour
+	 */
 	std::string getHourFormat(double hour);
 };
 
@@ -146,6 +155,9 @@ public:
 	 */
 	void readInfo(std::ifstream &infile);
 
+	/**
+	 * @brief Show the information of the Lesson
+	 */
 	void show();
 };
 
@@ -188,6 +200,9 @@ public:
 	 */
 	void readInfo(std::ifstream &infile);
 
+	/**
+	 * @brief Show the information of the Free
+	 */
 	void show();
 };
 

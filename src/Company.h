@@ -224,8 +224,16 @@ public:
 	 */
     void showTeacher(std::string teacher);
 
+    /**
+     * @brief Show the Reservations of a specific user
+     * @param name - Name of the User
+     */
     void showUserReservations (std::string name);
 
+    /**
+     * @brief Shows the lessons of the Teacher
+     * @param teacher - name of the Teacher
+     */
     void showTeacherLessons (std::string teacher);
 };
 

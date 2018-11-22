@@ -18,6 +18,7 @@ Company::Company(double cardValue, Date d)
 int Company::getMaxUser() const
 {
 	int maxusers=0;
+	// The number of max Users is calculated
 	for(size_t i =0; i < tennisCourts.size();i++)
 	{
 		maxusers+=tennisCourts[i].getMaxUsers();
@@ -27,6 +28,7 @@ int Company::getMaxUser() const
 
 void Company::createCourt()
 {
+	// Creates a new Court and saves it
 	Court newcourt(year);
 	tennisCourts.push_back(newcourt);
 
@@ -50,6 +52,7 @@ vector<Teacher> Company::getTeachers()
 User& Company::getUser(string userName)
 {
 	User u(userName,0,"",false,"");
+	// Finds the User
 	vector<User>::iterator it = find(users.begin(),users.end(),u);
 	if(it != users.end())
 		return *it;
@@ -59,6 +62,7 @@ User& Company::getUser(string userName)
 
 Teacher& Company::getTeacher(std::string teacherName) {
 	Teacher t(teacherName,0,"");
+	//Finds the teacher
 	vector<Teacher>::iterator it = find(teachers.begin(),teachers.end(),t);
 	if(it != teachers.end())
 		return *it;
@@ -68,25 +72,26 @@ Teacher& Company::getTeacher(std::string teacherName) {
 
 bool Company::makeLesson(int month,int day,double startingHour,string userName,string teacherName)
 {
+	// Checks if its a possible date
 	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
 		throw(InvalidDate(day,month));
 	}
 
 	try {
-		User& u = getUser(userName);
-		Teacher& t = getTeacher(teacherName);
-		for(size_t j =0; j<tennisCourts.size();j++)
+		User& u = getUser(userName); // Gets the user
+		Teacher& t = getTeacher(teacherName); //Gets the teacher
+		for(size_t j =0; j<tennisCourts.size();j++) // Finds the first court where it can reserve the Class
 		{
 			if(tennisCourts[j].reserveClass(month,day,startingHour,u,t))
 				return true;
 		}
 		return false;
 	}
-	catch(NoUserRegistered &u) {
+	catch(NoUserRegistered &u) { // If the user doesn't exist
 		cout << u.what() << endl;
 		return false;
 	}
-	catch(NoTeacherRegistered &t)
+	catch(NoTeacherRegistered &t) // If the teacher doesn't exist
 	{
 		cout << t.what() << endl;
 		return false;
@@ -95,20 +100,21 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 
 bool Company::makeFree(int month,int day,double startingHour, int duration,string username)
 {
+	// Checks if its a possible date
 	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
 		throw(InvalidDate(day,month));
 	}
 
 	try {
-		User& u = getUser(username);
-		for(size_t j =0; j<tennisCourts.size();j++)
+		User& u = getUser(username); // Gets the user
+		for(size_t j =0; j<tennisCourts.size();j++) //Reserves the first available court
 		{
 			if(tennisCourts[j].reserveFree(month,day,startingHour,duration,u))
 				return true;
 		}
 		return false;
 	}
-	catch(NoUserRegistered &u) {
+	catch(NoUserRegistered &u) { //Checks if the user is registered
 		cout << u.what() << endl;
 		return false;
 	}
@@ -116,16 +122,16 @@ bool Company::makeFree(int month,int day,double startingHour, int duration,strin
 
 bool Company::registerUser(string name, int age,bool isGold,string gender)
 {
-	if (age <0)
+	if (age <0) //Checks if it's a possible age
 		throw(InvalidAge(age));
 	try {
-		User& u = getUser(name);
+		User& u = getUser(name); //Checks if there's a user already registered
 		throw(AlreadyRegisteredUser(name));
 	}
 	catch(NoUserRegistered &u) {
 		size_t i2=0;
 		for(size_t i = 1; i < teachers.size();i++)
-		{
+		{ //Adds a teacher to the student
 			if (teachers[i2].getnStudents() >= teachers[i].getnStudents())
 				i2 = i;
 		}
@@ -143,10 +149,10 @@ bool Company::registerUser(string name, int age,bool isGold,string gender)
 
 bool Company::registerTeacher(string teacherName, int age,string gender)
 {
-	if (age <0)
+	if (age <0) //Checks if it's a possible age
 		throw(InvalidAge(age));
 	try {
-		Teacher& t = getTeacher(teacherName);
+		Teacher& t = getTeacher(teacherName); //Checks for a teacher with that name
 		throw(AlreadyRegisteredTeacher(teacherName));
 	}
 	catch(NoTeacherRegistered &t) {
@@ -164,9 +170,9 @@ bool Company::makeUserReport(int month,string userName,string teacherName)
 {
 	try
 	{
-	 	User& u = getUser(userName);
-	 	Teacher& t = getTeacher(teacherName);
-		vector<Reservation*> lessons;
+	 	User& u = getUser(userName); //Gets the User
+	 	Teacher& t = getTeacher(teacherName); //Gets the Teacher
+		vector<Reservation*> lessons; //Makes the vector with only the lessons
 		for(size_t i =0; i< u.getReservations().size();i++) {
 			if(u.getReservations()[i]->getPrice() > 30)
 				lessons.push_back(u.getReservations()[i]);
@@ -174,22 +180,22 @@ bool Company::makeUserReport(int month,string userName,string teacherName)
 		Report* newr = new Report(userName,teacherName,lessons);
 		u.setReport(newr,month);
 	}
-	catch(NoUserRegistered &u)
+	catch(NoUserRegistered &u) //Checks if the user doesn't exist
 	{
 		cout << u.what() << endl;
 		return false;
 	}
-	catch(NoTeacherRegistered &t)
+	catch(NoTeacherRegistered &t) //Checks if the teacher doesn't exist
 	{
 		cout << t.what() << endl;
 		return false;
 	}
-	catch(IncorrectMonth &e)
+	catch(IncorrectMonth &e) //Checks if the month exists
 	{
 		cout << e.what() << endl;
 		return false;
 	}
-	catch (ReportAlreadyExists &r)
+	catch (ReportAlreadyExists &r) //Checks if there's already report for that day
 	{
 		cout << r.what() << endl;
 		return false;
@@ -201,26 +207,27 @@ bool Company::makeUserInvoice(string userName,int month)
 {
 	try
 	{
-		User& u = getUser(userName);
+		User& u = getUser(userName); // Gets the user
+		// Makes the invoice and saves it
 		Invoice* newinvoice = new Invoice(u.getName(),u.getTeacher(),u.getReservations(), u.getisGold());
 		u.setInvoice(newinvoice,month);
 	}
-	catch(NoUserRegistered &u)
+	catch(NoUserRegistered &u) //Checks if the user exists
 	{
 		cout << u.what() << endl;
 		return false;
 	}
-	catch(NoTeacherRegistered &t)
+	catch(NoTeacherRegistered &t) //Checks if the teacher exists
 	{
 		cout << t.what() << endl;
 		return false;
 	}
-	catch(IncorrectMonth &e)
+	catch(IncorrectMonth &e) //Checks if the month doesn't exist
 	{
 		cout << e.what() << endl;
 		return false;
 	}
-	catch (InvoiceAlreadyExists &i)
+	catch (InvoiceAlreadyExists &i) //Checks if the invoice exists
 	{
 		cout << i.what() << endl;
 		return false;
@@ -232,23 +239,23 @@ bool Company::showReport(string name, int month)
 {
 	User u;
 	try {
-		u = getUser(name);
+		u = getUser(name); //Gets the user
 	}
-	catch(NoUserRegistered &e) {
+	catch(NoUserRegistered &e) { //Checks if the user doesn't exist
 		cout << e.what() << endl;
 		return false;
 	}
 
 	try
 	{
-		cout << u.getReport(month);
+		cout << u.getReport(month); //Gets the report based on the month
 	}
-	catch (IncorrectMonth &e)
+	catch (IncorrectMonth &e) //Checks if the month is possible
 	{
 		cout << e.what() << endl;
 		return false;
 	}
-	catch (ReportNotAvailable &e)
+	catch (ReportNotAvailable &e) //Checks if the report is available
 	{
 		cout << e.what() << endl;
 		return false;
@@ -260,22 +267,22 @@ bool Company::showInvoice(string name,int month)
 {
 	User u;
 	try {
-		u = getUser(name);
+		u = getUser(name); //Gets the user
 	}
-	catch(NoUserRegistered &e) {
+	catch(NoUserRegistered &e) { //Checks if the user exists
 		cout << e.what() << endl;
 		return false;
 	}
 	try
 	{
-		cout << u.getInvoice(month) << endl;
+		cout << u.getInvoice(month) << endl; //Gets the invoice
 	}
-	catch (IncorrectMonth &e)
+	catch (IncorrectMonth &e) //Checks if the month exists
 	{
 		cout << e.what() << endl;
 		return false;
 	}
-	catch (InvoiceNotAvailable &e)
+	catch (InvoiceNotAvailable &e) //Checks if the invoice is available
 	{
 		cout << e.what() << endl;
 		return false;
@@ -295,7 +302,7 @@ void Company::storeInfo(std::ofstream &outfile, int indent) {
 	indentation(outfile, indent);
 	outfile << "{" << endl;
 	indent++;
-	indentation(outfile, indent);
+	indentation(outfile, indent); //Stores the tennis courts
 	outfile << "\"tennisCourts\": [" << endl;
 	indent++;
 	for(unsigned int i = 0; i < this->tennisCourts.size(); i++)
@@ -311,7 +318,7 @@ void Company::storeInfo(std::ofstream &outfile, int indent) {
 	indent--;
 	indentation(outfile, indent);
 	outfile << "]," << endl;
-	indentation(outfile, indent);
+	indentation(outfile, indent); //Saves the users in the company
 	outfile << "\"users\": [" << endl;
 	indent++;
 	for(unsigned int i = 0; i < this->users.size(); i++)
@@ -329,7 +336,7 @@ void Company::storeInfo(std::ofstream &outfile, int indent) {
 	indent--;
 	indentation(outfile, indent);
 	outfile << "]," << endl;
-	indentation(outfile, indent);
+	indentation(outfile, indent); //Saves the teachers in the company
 	outfile << "\"teachers\": [" << endl;
 	indent++;
 	for(unsigned int i = 0; i < this->teachers.size(); i++)
@@ -347,9 +354,9 @@ void Company::storeInfo(std::ofstream &outfile, int indent) {
 	indent--;
 	indentation(outfile, indent);
 	outfile << "]," << endl;
-	indentation(outfile, indent);
+	indentation(outfile, indent); //Saves value of the card
 	outfile << "\"cardValue\": " << this->cardValue <<  "," << endl;
-	indentation(outfile, indent);
+	indentation(outfile, indent); //Saves the date information
 	outfile << "\"Date\": " << endl;
 	indent++;
 	date.storeInfo(outfile,indent);
@@ -361,7 +368,7 @@ void Company::storeInfo(std::ofstream &outfile, int indent) {
 
 void Company::readInfo(std::ifstream &infile) {
 	string savingString;
-	while (getline(infile, savingString)) {
+	while (getline(infile, savingString)) { //Gets all the tennis courts
 		if (savingString.find("tennisCourts") != string::npos) {
 			while (getline(infile, savingString)) {
 				Court c;
@@ -372,7 +379,7 @@ void Company::readInfo(std::ifstream &infile) {
 				}
 			}
 		}
-
+        //Gets all the users info
 		if (savingString.find("users") != string::npos) {
 			while (getline(infile, savingString)) {
 				if (savingString.find(']') != string::npos) {
@@ -383,7 +390,7 @@ void Company::readInfo(std::ifstream &infile) {
 				users.push_back(u);
 			}
 		}
-
+        //Gets all the teachers info
 		if (savingString.find("teachers") != string::npos) {
 			while (getline(infile, savingString)) {
 				if (savingString.find(']') != string::npos) {
@@ -396,19 +403,19 @@ void Company::readInfo(std::ifstream &infile) {
 
 			}
 		}
-
+        //Gets the card Value
 		if (savingString.find("cardValue") != string::npos) {
 			savingString = savingString.substr(savingString.find("cardValue") + 11);
 			savingString = savingString.substr(0, savingString.find(','));
 			this->cardValue = stod(savingString);
 		}
-
+        //Gets the year info
 		if (savingString.find("year") != string::npos) {
 			savingString = savingString.substr(savingString.find("year") + 7);
 			savingString = savingString.substr(0, savingString.find_last_of(','));
 			this->year = stoi(savingString);
 		}
-
+        //Gets the Date info
 		if (savingString.find("Date") != string::npos) {
 			Date d;
 			d.readInfo(infile);
@@ -418,8 +425,8 @@ void Company::readInfo(std::ifstream &infile) {
 }
 
 Company Company::operator++() {
-	++this->date;
-	if(date.getDay() == 1) {
+	++this->date; //Increments the date
+	if(date.getDay() == 1) { //Checks if the date changes month and year in order to do Invoices and Reports
 		for(size_t i = 0; i < users.size();i++) {
 			if(date.getMonth() == 1) {
 				users[i].cleanVectors();
@@ -436,10 +443,10 @@ Company Company::operator++() {
 	return *this;
 }
 
-bool compareUser (User &u1,User &u2) {
+bool compareUser (User &u1,User &u2) { //Compares 2 users
     return u1.getName() < u2.getName();
 }
-void Company::showUsers() {
+void Company::showUsers() { //Shows all users
 
     sort(users.begin(),users.end(),compareUser);
 	for(size_t i = 0; i< users.size();i++) {
@@ -449,10 +456,10 @@ void Company::showUsers() {
 	}
 }
 
-bool compareTeacher (Teacher &t1,Teacher &t2) {
+bool compareTeacher (Teacher &t1,Teacher &t2) { //Compares 2 teachers
     return t1.getName() < t2.getName();
 }
-void Company::showTeachers() {
+void Company::showTeachers() { //Shows all teachers
 
     sort(teachers.begin(),teachers.end(),compareTeacher);
 	for(size_t i = 0; i< teachers.size();i++) {
@@ -464,10 +471,10 @@ void Company::showTeachers() {
 
 void Company::showTeacher(std::string teacher) {
 	try {
-		Teacher t = getTeacher(teacher);
+		Teacher t = getTeacher(teacher); //Gets a specific teacher
 		t.show();
 	}
-	catch (NoTeacherRegistered &e)
+	catch (NoTeacherRegistered &e) //Checks if the teacher exists
 	{
 		cout << e.what() << endl;
 	}
@@ -475,17 +482,17 @@ void Company::showTeacher(std::string teacher) {
 
 void Company::showUser(std::string name) {
 	try {
-		User u = getUser(name);
+		User u = getUser(name); //Gets a specific user
 		u.show();
 	}
-	catch (NoUserRegistered &e)
+	catch (NoUserRegistered &e) //Checks if the user exists
 	{
 		cout << e.what() << endl;
 	}
 }
 
 void Company::showCourts() {
-	int n=0;
+	int n=0; //Checks for all available courts at a given day
 	for(size_t i=0; i<tennisCourts.size();i++) {
 		try{
 			tennisCourts[i].occupied(date.getMonth(),date.getDay(),8,12);

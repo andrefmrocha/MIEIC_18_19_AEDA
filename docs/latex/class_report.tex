@@ -25,7 +25,9 @@ void \mbox{\hyperlink{class_report_a67a10004cf149f202015d55a14efe6c1}{indentatio
 void \mbox{\hyperlink{class_report_ad36785f4f4531404a6464c6d5ce5a69b}{read\+Info}} (std\+::ifstream \&infile)
 \begin{DoxyCompactList}\small\item\em Store in the information of the report to a file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_report_a47faf2023bd07e59ab0296e8d0b2d512}{store\+Info}} (std\+::ofstream \&outfile, int indent)
-\begin{DoxyCompactList}\small\item\em Reading the information of a \mbox{\hyperlink{class_report}{Report}} from a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Reading the information of a \mbox{\hyperlink{class_report}{Report}} from a file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_report_ac47731e5f3f0f22574223a2a9e5688b5}{get\+Hour\+Format}} (double hour)
+\begin{DoxyCompactList}\small\item\em get the format of the Hour as wanted \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -71,6 +73,24 @@ getter of the Grade
 
 \begin{DoxyReturn}{Returns}
 the grade itself 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_report_ac47731e5f3f0f22574223a2a9e5688b5}\label{class_report_ac47731e5f3f0f22574223a2a9e5688b5}} 
+\index{Report@{Report}!get\+Hour\+Format@{get\+Hour\+Format}}
+\index{get\+Hour\+Format@{get\+Hour\+Format}!Report@{Report}}
+\subsubsection{\texorpdfstring{get\+Hour\+Format()}{getHourFormat()}}
+{\footnotesize\ttfamily string Report\+::get\+Hour\+Format (\begin{DoxyParamCaption}\item[{double}]{hour }\end{DoxyParamCaption})}
+
+
+
+get the format of the Hour as wanted 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hour} & -\/ the actual time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the hour 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_report_a2915547d50dfefb1eae33f12ed0942d8}\label{class_report_a2915547d50dfefb1eae33f12ed0942d8}} 
 \index{Report@{Report}!get\+Lessons@{get\+Lessons}}

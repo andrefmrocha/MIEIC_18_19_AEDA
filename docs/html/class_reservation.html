@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tennis Courts: Reservation Class Reference</title>
+<title>AEDA Project: Reservation Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Tennis Courts
+   <div id="projectname">AEDA Project
    </div>
+   <div id="projectbrief">Managing System for a Tennis Court Company</div>
   </td>
  </tr>
  </tbody>
@@ -118,6 +119,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acff32024a350c2156af9f74522c59b7b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reservation.html#acff32024a350c2156af9f74522c59b7b">readInfo</a> (std::ifstream &amp;infile)</td></tr>
 <tr class="memdesc:acff32024a350c2156af9f74522c59b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reading the information of a <a class="el" href="class_reservation.html">Reservation</a> from a file.  <a href="#acff32024a350c2156af9f74522c59b7b">More...</a><br /></td></tr>
 <tr class="separator:acff32024a350c2156af9f74522c59b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16fb0d030a178a997adef3f439665723"><td class="memItemLeft" align="right" valign="top"><a id="a16fb0d030a178a997adef3f439665723"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reservation.html#a16fb0d030a178a997adef3f439665723">show</a> ()</td></tr>
+<tr class="memdesc:a16fb0d030a178a997adef3f439665723"><td class="mdescLeft">&#160;</td><td class="mdescRight">Showing the information of the <a class="el" href="class_reservation.html">Reservation</a>. <br /></td></tr>
+<tr class="separator:a16fb0d030a178a997adef3f439665723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36aa0b30371103b07aa331b33e6109d1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reservation.html#a36aa0b30371103b07aa331b33e6109d1">getHourFormat</a> (double hour)</td></tr>
+<tr class="memdesc:a36aa0b30371103b07aa331b33e6109d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the format of the Hour as wanted  <a href="#a36aa0b30371103b07aa331b33e6109d1">More...</a><br /></td></tr>
+<tr class="separator:a36aa0b30371103b07aa331b33e6109d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -225,6 +233,33 @@ Protected Attributes</h2></td></tr>
 
 <p>Method to obtain the duration of the reservation. </p>
 <dl class="section return"><dt>Returns</dt><dd>Duration of the reservation </dd></dl>
+
+</div>
+</div>
+<a id="a36aa0b30371103b07aa331b33e6109d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36aa0b30371103b07aa331b33e6109d1">&#9670;&nbsp;</a></span>getHourFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Reservation::getHourFormat </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>hour</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the format of the Hour as wanted </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hour</td><td>- the actual time </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the hour </dd></dl>
 
 </div>
 </div>
