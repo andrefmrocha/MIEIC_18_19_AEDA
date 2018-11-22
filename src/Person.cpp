@@ -163,7 +163,6 @@ void Teacher::setLesson(Lesson* lesson)
 
 	endHour = calculateEndHour(startingHour, duration);
 
-//	if(CheckAvailable(lessons,startingHour,endHour)==0)
 	this->lessons.push_back(lesson);
 }
 
@@ -537,19 +536,6 @@ void User::cleanReservations()
 {
 	reservations.clear();
 }
-
-/*
-void User::showReports(int month)
-{
-	reports.at(month-1)->showReport();
-}
-
-void User::showInvoices(int month)
-{
-	invoices.at(month-1)->showReport();
-}
-*/
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////

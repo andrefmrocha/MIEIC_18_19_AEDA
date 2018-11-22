@@ -223,18 +223,6 @@ public:
 	 */
 	void show();
 
-	/**
-	 * @brief show the report for the month
-	 * @param month - month of the report
-	 */
-	void showReports(int month);
-
-
-	/**
-	 * @brief show the invoice for the month
-	 * @param month - month of the invoice
-	 */
-	void showInvoices(int month);
 
 	/**
 	 * @brief cleaning all vectors inside the User

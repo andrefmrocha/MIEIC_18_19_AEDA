@@ -21,14 +21,14 @@ using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int MainIntro() {
-    cout << "-------------Tenis Company---------------" << endl;
+    cout << "-------------Tenis Company-----------------" << endl;
     cout << "                                         " << endl;
     cout << "Choose option:                           " << endl;
     cout << "                                         " << endl;
     cout << "1.New Company                           " << endl;
     cout << "2.Load Company                            " << endl;
     cout << "3.Exit                                   " << endl;
-    cout << "------------------------------------------" << endl;
+    cout << "--------------------------------------------" << endl;
 
     int flag;
     cin >> flag;
@@ -48,7 +48,7 @@ int MainIntro() {
 
 
 int Menu(const int cardValue) {
-    cout << "-------------Company" << cardValue << "---------------" << endl;
+    cout << "-------------Company" << cardValue << "-----------------------" << endl;
     cout << "                                         " << endl;
     cout << "Choose option:                           " << endl;
     cout << "                                         " << endl;
@@ -59,7 +59,7 @@ int Menu(const int cardValue) {
     cout << "5.Show Courts                            " << endl;
     cout << "6.Increment day                          " << endl;
     cout << "7.Exit                                   " << endl;
-    cout << "-----------------------------------------" << endl;
+	cout << "----------------------------------------------"<< endl;
 
     int flag;
     cin >> flag;
@@ -98,9 +98,11 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 /////////////////////////////////////////////////////////////
                 int flagP;
 
+            	cout << "----------------------------------------------"<< endl;
                 cout << "1.Add User" << endl;
                 cout << "2.Add Teacher" << endl;
                 cout << "3.Go back" << endl;
+            	cout << "----------------------------------------------"<< endl;
 
                 cin >> flagP;
 
@@ -154,9 +156,11 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 ///////////////////////////////////////////////////////////////
                 int flagR;
 
+            	cout << "----------------------------------------------"<< endl;
                 cout << "1.Add Free class" << endl;
                 cout << "2.Add Lesson" << endl;
                 cout << "3.Go back" << endl;
+            	cout << "----------------------------------------------"<< endl;
 
                 cin >> flagR;
 
@@ -214,10 +218,12 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 ///////////////////////////////////////////////////////////////
                 int flagR;
 
+            	cout << "----------------------------------------------"<< endl;
                 cout << "1.Show all Teachers and Users" << endl;
                 cout << "2.Show User (information/report/invoice/schedule)" << endl;
                 cout << "3.Show Teacher (information/schedule)" << endl;
                 cout << "4.Go back" << endl;
+            	cout << "----------------------------------------------"<< endl;
 
                 cin >> flagR;
 
@@ -240,7 +246,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     {
                     	int flagR;
 
-
+                    	cout << "----------------------------------------------"<< endl;
                     	cout << "1.Show Information" << endl;
                     	cout << endl;
                     	cout << "----------------------------------------------"<< endl;
@@ -251,6 +257,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                         cout << "----------------------------------------------"<< endl;
                         cout << endl;
                     	cout << "4.Show Schedule" << endl;
+                    	cout << "----------------------------------------------"<< endl;
 
                     	cin >> flagR;
 
