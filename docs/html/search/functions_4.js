@@ -6,6 +6,7 @@ var searchData=
   ['getduration',['getDuration',['../class_reservation.html#a9d91ef1230af46952cb5422ae769bfa1',1,'Reservation']]],
   ['getgender',['getGender',['../class_person.html#a66e13299dd684b80e7f8a9303c751ad5',1,'Person']]],
   ['getgrade',['getGrade',['../class_report.html#a56fcac206c401ebc51d35fbe907ad729',1,'Report']]],
+  ['gethourformat',['getHourFormat',['../class_report.html#ac47731e5f3f0f22574223a2a9e5688b5',1,'Report::getHourFormat()'],['../class_reservation.html#a36aa0b30371103b07aa331b33e6109d1',1,'Reservation::getHourFormat()']]],
   ['getinvoice',['getInvoice',['../class_user.html#a4fafb4511574972c6e7801f2bb6a638b',1,'User']]],
   ['getinvoices',['getInvoices',['../class_user.html#aeb297e5cd248e1e2c0ae3540cbedcca8',1,'User']]],
   ['getisgold',['getisGold',['../class_user.html#ac1af1ded379bd2fd56f96f90348520fe',1,'User']]],
