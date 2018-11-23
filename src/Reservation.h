@@ -101,7 +101,7 @@ public:
 	/**
 	 * @brief Showing the information of the Reservation
 	 */
-	void show();
+	virtual void show();
 
 	/**
 	 * @brief get the format of the Hour as wanted
