@@ -142,19 +142,22 @@ void Reservation::readInfo(std::ifstream &infile)
 }
 
 string Reservation::getHourFormat(double hour) {
-	string hr = to_string((int)(ceil(hour -0.5)));
+
+	string hr = to_string((int)floor(hour));
 	hr += ":";
 	if((hour - floor(hour)) == 0)
 		hr += "00";
 	else
 		hr+= "30";
+
 	return hr;
 }
 
 void Reservation::show() {
 	cout << "Month: " << to_string(getMonth()) << endl;
 	cout << "Day: " << to_string(getDay()) << endl;
-	cout << "Period of class: " << getHourFormat(getStartingHour()) << " - " << getHourFormat(getStartingHour()+getDuration()) << endl;
+	double final;
+	cout << "Period of class: " << getHourFormat(getStartingHour()) << " - " << getHourFormat(getStartingHour()+((double)(getDuration())*0.5))<< endl;
 	cout << "Price: " << to_string(getPrice()) << endl;
 }
 

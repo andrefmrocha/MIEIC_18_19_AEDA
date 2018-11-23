@@ -68,7 +68,7 @@ int Menu(const int cardValue) {
     while (flag != 1 && flag != 2 && flag != 3 && flag != 4 && flag != 5 && flag != 6 && flag != 7) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "Error...Try again: " << endl;
+        cout << " Error...Try again: " << endl;
         cin >> flag;
     }
 
@@ -84,7 +84,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
     int age;
     bool isGold;
     int m, d, strH;
-    double duration;
+    float duration;
     int save;
 
     int flagMenu = 0;
@@ -117,7 +117,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 if (flagP == 1) // If there's no Teachers, there can't be Users
                 {
                 	 if (C.getTeachers().empty()) {
-                 cout << "Can't added Users. Company needs teachers first."      << endl;
+                 cout << " Can't added Users. Company needs teachers first."      << endl;
                  break;
                 	 }
                 }
@@ -141,12 +141,12 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                         //Finally register the User
                         if (!(C.registerUser(name, age, isGold, gender)))
-                            cout << "Error adding User. Try again" << endl;
+                            cout << " Error adding User. Try again" << endl;
 
                     } else if (flagP == 2) //Add Teacher
                     { // Or the Teacher
                         if (!(C.registerTeacher(name, age, gender)))
-                            cout << "Error adding User. Try again" << endl;
+                            cout << " Error adding User. Try again" << endl;
                     }
                 }
 
@@ -168,7 +168,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                 while (flagR != 1 && flagR != 2 && flagR != 3) {
                     cin.clear();
                     cin.ignore(1000, '\n');
-                    cout << "Error...Try again: " << endl;
+                    cout << " Error...Try again: " << endl;
                     cin >> flagR;
                 }
                 ///////////////////////////////////////////////////////////////
@@ -186,13 +186,21 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                     cout << "Name of User: " << endl;
                     getline(cin,name);
 
+                    if(C.getCourts().empty())
+                    {
+                    	cout << "Try again... No courts added to the company" << endl;
+                    	break;
+                    }
+
                     if (flagR == 1) //Add Free Class
                     {
-                        cout << "Duration: " << endl;
+                        cout << "Duration" << endl;
+                        cout << "(write the number of periods of half an hour)" << endl;
+                        cout << "1h --> 2; 2h30 --> 5" << endl;
                         cin >> duration;
                         //Tries to make the reservation
                         if (!C.makeFree(m, d, strH, duration, name))
-                            cout << "Error adding Free class. Try again" << endl;
+                            cout << " Error adding Free class. Try again" << endl;
 
                     } else if (flagR == 2) //Add Lesson
                     {
@@ -200,7 +208,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
                         User &user = C.getUser(name);
                         // Tries to make the reservation
                         if (!C.makeLesson(m, d, strH, name, user.getTeacher()))
-                            cout << "Error adding Lesson. Try again" << endl;
+                            cout << " Error adding Lesson. Try again" << endl;
 
                     }
                 }
