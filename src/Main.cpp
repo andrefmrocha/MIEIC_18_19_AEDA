@@ -194,7 +194,9 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                     if (flagR == 1) //Add Free Class
                     {
-                        cout << "Duration: " << endl;
+                        cout << "Duration" << endl;
+                        cout << "(write the number of periods of half an hour)" << endl;
+                        cout << "1h --> 2; 2h30 --> 5" << endl;
                         cin >> duration;
                         //Tries to make the reservation
                         if (!C.makeFree(m, d, strH, duration, name))
