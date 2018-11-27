@@ -235,6 +235,7 @@ public:
      * @param teacher - name of the Teacher
      */
     void showTeacherLessons (std::string teacher);
+    void showDate();
 };
 
 /**

@@ -535,6 +535,10 @@ void Company::showTeacherLessons(std::string teacher) {
 	}
 }
 
+void Company::showDate()
+{
+	cout << date.getDay() << "-" << date.getMonth() << "-"<< date.getYear() << endl;
+}
 
 
 

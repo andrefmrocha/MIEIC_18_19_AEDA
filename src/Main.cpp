@@ -48,9 +48,9 @@ int MainIntro() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Constant Menu shown after each operation
-int Menu(const int cardValue) {
-    cout << "-------------Company" << cardValue << "-----------------------" << endl;
-    cout << "                                         " << endl;
+int Menu(const int cardValue,Company &C) {
+    cout << "-------------Company " << cardValue << "-----------------------" << endl;
+    cout << "           "; C.showDate();
     cout << "Choose option:                           " << endl;
     cout << "                                         " << endl;
     cout << "1.Add Person                             " << endl; // Adds a new Person
@@ -91,7 +91,8 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
     while (true) {
 
-        flagMenu = Menu(cardValue);
+
+        flagMenu = Menu(cardValue, C);
 
         switch (flagMenu) {
             case 1: //Add Person
