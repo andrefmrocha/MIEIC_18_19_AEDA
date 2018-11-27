@@ -194,6 +194,14 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
 
                     if (flagR == 1) //Add Free Class
                     {
+                    	int n;
+                    	cout << "How many players? "<< endl;
+                    	cin >> n;
+                    	if(n > 4)
+                    	{
+                    		cout << "The court can't support that many people" << endl;
+                    		break;
+                    	}
                         cout << "Duration" << endl;
                         cout << "(write the number of periods of half an hour)" << endl;
                         cout << "1h --> 2; 2h30 --> 5" << endl;
