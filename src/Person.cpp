@@ -296,7 +296,7 @@ Report User::getReport(int month)
 {
 	if(month > 12) // Checks if it's a possible month
 		throw(IncorrectMonth());
-	cout << reports.size() << endl;
+
 	if(reports.at(month -1) == 0) // Checks if there's no report available
 	{
 		throw(ReportNotAvailable(month));

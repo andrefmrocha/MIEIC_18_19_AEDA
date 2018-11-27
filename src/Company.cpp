@@ -102,7 +102,13 @@ bool Company::makeFree(int month,int day,double startingHour, int duration,strin
 {
 	// Checks if its a possible date
 	if(month < date.getMonth() || (month == date.getMonth() && day < date.getDay())) {
-		return false;
+		cout << "Invalid date. " << endl;
+	    return false;
+	}
+
+	if(duration > 4) {
+	    cout << "Duration exceeds allowed period. " << endl;
+	    return false;
 	}
 
 	try {
@@ -172,12 +178,7 @@ bool Company::makeUserReport(int month,string userName,string teacherName)
 	{
 	 	User& u = getUser(userName); //Gets the User
 	 	Teacher& t = getTeacher(teacherName); //Gets the Teacher
-		vector<Reservation*> lessons; //Makes the vector with only the lessons
-		for(size_t i =0; i< u.getReservations().size();i++) {
-			if(u.getReservations()[i]->getPrice() > 30)
-				lessons.push_back(u.getReservations()[i]);
-		}
-		Report* newr = new Report(userName,teacherName,lessons);
+		Report* newr = new Report(userName,teacherName,u.getReservations());
 		u.setReport(newr,month);
 	}
 	catch(NoUserRegistered &u) //Checks if the user doesn't exist
@@ -248,7 +249,7 @@ bool Company::showReport(string name, int month)
 
 	try
 	{
-		cout << u.getReport(month); //Gets the report based on the month
+		cout << u.getReport(month) << endl; //Gets the report based on the month
 	}
 	catch (IncorrectMonth &e) //Checks if the month is possible
 	{
@@ -473,6 +474,7 @@ void Company::showTeacher(std::string teacher) {
 	try {
 		Teacher t = getTeacher(teacher); //Gets a specific teacher
 		t.show();
+		cout << endl;
 	}
 	catch (NoTeacherRegistered &e) //Checks if the teacher exists
 	{
@@ -484,6 +486,7 @@ void Company::showUser(std::string name) {
 	try {
 		User u = getUser(name); //Gets a specific user
 		u.show();
+		cout << endl;
 	}
 	catch (NoUserRegistered &e) //Checks if the user exists
 	{
@@ -503,6 +506,7 @@ void Company::showCourts() {
 	}
 	cout << "There are still " << n << " totally empty courts for today." << endl;
 	cout << "There is a maximum of " << tennisCourts[0].getMaxUsers() << " per court." << endl;
+	cout << endl;
 }
 
 void Company::showUserReservations(std::string name) {
@@ -512,6 +516,7 @@ void Company::showUserReservations(std::string name) {
 		for(size_t i =0;i<reservations.size(); i++) {
 			cout << "Reservation number " << i+1 << ": " << endl;
 			reservations[i]->show();
+			cout << endl;
 		}
 	}
 	catch (NoUserRegistered &e)
@@ -527,6 +532,7 @@ void Company::showTeacherLessons(std::string teacher) {
 		for(size_t i =0;i<lessons.size(); i++) {
 			cout << "Lesson number " << i+1 << ": " << endl;
 			lessons[i]->show();
+			cout << endl;
 		}
 	}
 	catch (NoTeacherRegistered &e)
@@ -537,7 +543,7 @@ void Company::showTeacherLessons(std::string teacher) {
 
 void Company::showDate()
 {
-	cout << date.getDay() << "-" << date.getMonth() << "-"<< date.getYear() << endl;
+	cout << date.getDay() << "-" << date.getMonth() << "-"<< date.getYear() << endl << endl;
 }
 
 
