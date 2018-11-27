@@ -74,7 +74,7 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 {
 	// Checks if its a possible date
 	if(month < date.getMonth() || (month == date.getMonth() && day < date.getDay())) {
-		throw(InvalidDate(day,month));
+		return false;
 	}
 
 	try {
@@ -101,8 +101,8 @@ bool Company::makeLesson(int month,int day,double startingHour,string userName,s
 bool Company::makeFree(int month,int day,double startingHour, int duration,string username)
 {
 	// Checks if its a possible date
-	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
-		throw(InvalidDate(day,month));
+	if(month < date.getMonth() || (month == date.getMonth() && day < date.getDay())) {
+		return false;
 	}
 
 	try {
