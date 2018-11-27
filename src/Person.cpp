@@ -82,6 +82,8 @@ void Person::storeInfo(ofstream &outfile, int &indentation)
 
 bool Person::operator == (const Person & p1)
 {
+	string name = this->getName();
+	string p1_name = p1.getName();
 	return this->getName() == p1.getName();
 }
 
@@ -262,7 +264,8 @@ void Teacher::cleanVectors()
 ////////////////////////////////////////////////////////////////////////////
 User::User()
 {
-
+	reports.resize(12);
+	invoices.resize(12);
 }
 
 
@@ -293,7 +296,7 @@ Report User::getReport(int month)
 {
 	if(month > 12) // Checks if it's a possible month
 		throw(IncorrectMonth());
-
+	cout << reports.size() << endl;
 	if(reports.at(month -1) == 0) // Checks if there's no report available
 	{
 		throw(ReportNotAvailable(month));
