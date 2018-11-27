@@ -58,6 +58,7 @@ Month::Month(int month, int days)
 
 Day& Month::getDay(int day)
 {
+	Day day1 = this->days[day - 1];
 	return this->days[day - 1];
 }
 
@@ -90,7 +91,6 @@ bool Day::checkSchedule(double startingHours, int duration) const
 	// Checks if the court is open
 	if(startingHours < this->startingHour)
 	{
-		cout << "The court is not open at this time!" << endl;
 		return false;
 	}
 	startingHours -= this->startingHour;
