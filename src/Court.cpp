@@ -35,8 +35,8 @@ CourtReserved::CourtReserved(int month, int day, double sH)
 }
 
 string CourtReserved::what()const{
-	return "The court is not available on the day " + to_string(this->day) + "of the month " + to_string(this->month) + " at "
-			+ to_string(this->startingHour);
+	return "The court is not available on the day " + to_string(this->day) + " of the month " + to_string(this->month) + " at "
+			+ to_string(this->startingHour) + '\n';
 
 }
 
@@ -60,7 +60,6 @@ bool Court::reserveClass(int m, int d, double sH, User &user, Teacher &teacher)
 	}
 	catch (CourtReserved& court)
 	{
-		cout << court.what();
 		return false;
 	}
 	try
@@ -108,7 +107,6 @@ bool Court::reserveFree(int m, int d, double sH, int dur, User &user)
 	}
 	catch (CourtReserved& court)
 	{
-		cout << court.what();
 		return false;
 	}
 	try
@@ -260,10 +258,10 @@ void Court::readInfo(std::ifstream &infile)
 			else if (savingString.find("\"days\"") != string::npos) // Starts getting all the days
 			{
 				days.clear();
+				vector<bool> savingSchedule; // Saves the startingHour
 				while (getline(infile, savingString))
 				{
 					Day savingDay;
-					vector<bool> savingSchedule; // Saves the startingHour
 					if (savingString.find("\"startingHour\"") != string::npos)
 					{
 						savingString = savingString.substr(savingString.find("\"startingHour\"") + 16);
@@ -275,6 +273,7 @@ void Court::readInfo(std::ifstream &infile)
 					} // Gets the vector of the schedule
 					else if (savingString.find("\"schedule\"")!= string::npos)
 					{
+						savingSchedule.clear();
 						savingString = savingString.substr(savingString.find("\"schedule\"") + 13);
 						for (auto i : savingString)
 						{
