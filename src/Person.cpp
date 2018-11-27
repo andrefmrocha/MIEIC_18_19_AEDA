@@ -532,7 +532,9 @@ void User::show()
 void User::cleanVectors()
 {
 	reports.clear();
+	reports.resize(12);
 	invoices.clear();
+	invoices.resize(12);
 }
 
 void User::cleanReservations()
