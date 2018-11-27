@@ -355,6 +355,7 @@ int DevelopCompany(Company &C, unsigned int cardValue) {
             case 5: //show courts
             {
             	C.showCourts();
+            	break;
             }
             case 6: {
                 ++C;

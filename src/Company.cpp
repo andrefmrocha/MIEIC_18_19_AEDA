@@ -501,7 +501,7 @@ void Company::showCourts() {
 		catch(CourtReserved &c)
 		{}
 	}
-	cout << "There are " << n << " courts available for today." << endl;
+	cout << "There are still " << n << " totally empty courts for today." << endl;
 	cout << "There is a maximum of " << tennisCourts[0].getMaxUsers() << " per court." << endl;
 }
 
