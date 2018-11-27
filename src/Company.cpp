@@ -73,7 +73,7 @@ Teacher& Company::getTeacher(std::string teacherName) {
 bool Company::makeLesson(int month,int day,double startingHour,string userName,string teacherName)
 {
 	// Checks if its a possible date
-	if(month < date.getMonth() || (month >= date.getMonth() && day < date.getDay())) {
+	if(month < date.getMonth() || (month == date.getMonth() && day < date.getDay())) {
 		throw(InvalidDate(day,month));
 	}
 
